@@ -1,1 +1,1 @@
-bot: python autonomia.py
+bot: python3 autonomia.py

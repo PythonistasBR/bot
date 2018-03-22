@@ -1,0 +1,9 @@
+aiohttp==2.3.10
+async-timeout==2.0.1
+chardet==3.0.4
+idna==2.6
+idna-ssl==1.0.1
+multidict==4.1.0
+telepot==12.6
+urllib3==1.22
+yarl==1.1.1

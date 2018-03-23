@@ -1,6 +1,6 @@
 import os
 import sys
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, ConversationHandler
+from telegram.ext import Updater, CommandHandler, RegexHandler
 
 __API_TOKEN = os.environ.get("TELEGRAM_API_TOKEN", "")
 __CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "")
@@ -32,7 +32,7 @@ def cmd_replace(bot, update):
 def main():
     updater = Updater(__API_TOKEN)
     dp = updater.dispatcher
-    command_handler = dp.add_handler(CommandHandler("all", cmd_all))
+    dp.add_handler(CommandHandler("all", cmd_all))
     dp.add_handler(RegexHandler(r"HB|[[hH].nr.qu.[\s]*[bB].st.s", cmd_replace))
     updater.start_polling()
     updater.idle()

@@ -18,6 +18,7 @@ def cmd_all(bot, update):
     admins = [item.user.mention_markdown() for item in admins]
     update.message.reply_markdown(' '.join(admins))
 
+
 def cmd_me(bot, update, args):
     """
     get the first_name of the user and create a /me IRC style
@@ -26,9 +27,9 @@ def cmd_me(bot, update, args):
     """
     message = ' '.join(args)
     print(update.message.from_user.first_name)
-    update.message.reply_text(update.message.from_user.first_name + \
-        " " + message)
-    
+    update.message.reply_text(update.message.from_user.first_name + " " + message)
+
+
 def cmd_replace(bot, update):
     """
     bot and replace are default shit from telegram.ext don't touch
@@ -47,7 +48,9 @@ def main():
     dp = updater.dispatcher
     dp.add_handler(CommandHandler("all", cmd_all))
     dp.add_handler(CommandHandler("me", cmd_me, pass_args=True))
-    dp.add_handler(RegexHandler(r".*\b([Hh][Bb]|[[hH].nr.qu.[\s]*[bB].st.s)\b.*", cmd_replace))
+    dp.add_handler(
+        RegexHandler(r".*\b([Hh][Bb]|[[hH].nr.qu.[\s]*[bB].st.s)\b.*", cmd_replace)
+    )
     updater.start_polling()
     updater.idle()
 

@@ -29,7 +29,7 @@ def cmd_replace(bot, update):
     with the Get Sticker Id Bot. Send the sticker and it will output the id
     """
     update.message.reply_text("Hmmmm, vc quis dizer Larissa?")
-    update.message.send_sticker("CAADAQADCwADgGntCPaKda9GXFZ3Ag")
+    update.message.reply_sticker("CAADAQADCwADgGntCPaKda9GXFZ3Ag")
 
 
 def main():

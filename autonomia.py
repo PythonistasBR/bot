@@ -33,7 +33,7 @@ def main():
     updater = Updater(__API_TOKEN)
     dp = updater.dispatcher
     dp.add_handler(CommandHandler("all", cmd_all))
-    dp.add_handler(RegexHandler(r"HB|[[hH].nr.qu.[\s]*[bB].st.s", cmd_replace))
+    dp.add_handler(RegexHandler(r".*\b([Hh][Bb]|[[hH].nr.qu.[\s]*[bB].st.s)\b.*", cmd_replace))
     updater.start_polling()
     updater.idle()
 

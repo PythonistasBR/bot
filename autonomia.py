@@ -18,20 +18,22 @@ def cmd_all(bot, update):
     admins = [item.user.mention_markdown() for item in admins]
     update.message.reply_markdown(' '.join(admins))
 
+
 def cmd_replace(bot, update):
-	"""
-	bot and replace are default shit from telegram.ext don't touch
-	
-	this method will suggest different words based on patterns defined on the handler
-	TODO: get a parameter with the replacement ID
-	"""
-	update.message.reply_text("Hmmmm, vc quis dizer Larissa?")
+    """
+    bot and replace are default shit from telegram.ext don't touch
+
+    this method will suggest different words based on patterns defined on the handler
+    TODO: get a parameter with the replacement ID
+    """
+    update.message.reply_text("Hmmmm, vc quis dizer Larissa?")
+
 
 def main():
     updater = Updater(__API_TOKEN)
     dp = updater.dispatcher
     command_handler = dp.add_handler(CommandHandler("all", cmd_all))
-	dp.add_handler(RegexHandler(r"HB|[[hH].nr.qu.[\s]*[bB].st.s", cmd_replace))
+    dp.add_handler(RegexHandler(r"HB|[[hH].nr.qu.[\s]*[bB].st.s", cmd_replace))
     updater.start_polling()
     updater.idle()
 

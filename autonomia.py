@@ -26,8 +26,8 @@ def cmd_me(bot, update, args):
     we must use from_user instead
     """
     message = ' '.join(args)
-    print(update.message.from_user.first_name)
-    update.message.reply_text(update.message.from_user.first_name + " " + message)
+    update.message.reply_text('__{name} {msg}__'.format(
+        name=update.message.from_user.first_name, msg=message))
 
 
 def cmd_replace(bot, update):

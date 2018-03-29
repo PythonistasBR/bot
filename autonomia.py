@@ -28,7 +28,7 @@ import sys
 from telegram.ext import Updater
 
 from core import get_handlers
-import basic_features
+import basic_features  # noqa
 
 
 __API_TOKEN = os.environ.get("TELEGRAM_API_TOKEN", "")

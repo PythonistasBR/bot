@@ -1,6 +1,3 @@
-from functools import wraps
-
-
 HANDLERS = []
 
 

@@ -1,4 +1,4 @@
-from telegram.ext import Updater, CommandHandler, RegexHandler
+from telegram.ext import CommandHandler, RegexHandler
 
 from core import bot_handler
 

@@ -7,14 +7,53 @@ from core import bot_handler
 
 
 CHOICES, VOTING = range(2)
-poll = {'question': '', 'choices': [], 'votes': defaultdict(int), 'total': 0}
+
+
+class Poll:
+
+    def __init__(self, question):
+        self.question = question
+        self.total = 0
+        self.choices = []
+        self.votes = defaultdict(int)
+
+    def add_choice(self, text):
+        self.choices.append(text)
+
+    def vote(self, choice):
+        self.votes[choice] += 1
+        self.total += 1
+
+    def result(self):
+        """
+        Compute the partial/final result of the poll
+        :return: tuple - (winner, number_of_votes, percentage)
+        """
+        winner_id, number_of_votes = max(self.votes.items(), key=operator.itemgetter(1))
+        winner = self.choices[winner_id]
+        percentage = (number_of_votes / self.total) * 100
+        return winner, number_of_votes, percentage
+
+    def choices_as_str(self):
+        return '\n'.join(
+            f'{i}. {choice} {self.votes[i]}' for i, choice in enumerate(self.choices)
+        )
+
+    def as_str(self, show_winner=False):
+        choices_results = self.choices_as_str()
+        out = f'{self.question}\n{choices_results}'
+        if show_winner:
+            winner, number_of_votes, percentage = self.result()
+            out += f'\nWinner: {winner} - {number_of_votes}({percentage:.2f}%)'
+        return out
+
+    def __str__(self):
+        return self.as_str()
 
 
 def poll_new(bot, update, args):
     question = ' '.join(args)
-    poll.update(
-        {'question': question, 'choices': [], 'votes': defaultdict(int), 'total': 0}
-    )
+    bot.poll = Poll(question)
     update.message.reply_text(
         f"Starting new poll.\n"
         f"Question: {question}\n"
@@ -26,13 +65,12 @@ def poll_new(bot, update, args):
 
 def poll_choice(bot, update, args):
     choice = ' '.join(args)
-    poll['choices'].append(choice)
+    bot.poll.add_choice(choice)
     return CHOICES
 
 
 def poll_start_voting(bot, update):
-    poll_text = _format_poll()
-    update.message.reply_text(f"{poll_text}\nChoose an option: /v <choice_id>")
+    update.message.reply_text(f"{bot.poll}\nChoose an option: /v <choice_id>")
     return VOTING
 
 
@@ -40,29 +78,28 @@ def poll_vote(bot, update, args):
     try:
         choice = int(' '.join(args))
     except ValueError:
-        choices = _format_choices()
+        choices = bot.poll.choices_as_str()
         update.message.reply_text(f"Invalid option, please choose:\n{choices}")
     else:
-        poll['votes'][choice] += 1
-        poll['total'] += 1
+        bot.poll.vote(choice)
     return VOTING
 
 
 def poll_result(bot, update):
-    update.message.reply_text(_format_result())
+    update.message.reply_text(bot.poll.as_str(show_winner=True))
     return VOTING
 
 
 def poll_finish(bot, update):
-    result = _format_result()
+    result = bot.poll.as_str(show_winner=True)
     update.message.reply_text(f'Poll finished!\n{result}')
-    poll.update({'question': '', 'choices': [], 'votes': {}, 'total': 0})
+    bot.poll = None
     return ConversationHandler.END
 
 
 def poll_cancel(bot, update):
     update.message.reply_text('Poll cancelled!')
-    poll.update({'question': '', 'choices': [], 'votes': {}, 'total': 0})
+    bot.poll = None
     return ConversationHandler.END
 
 
@@ -80,29 +117,3 @@ def poll_factory():
         CommandHandler("poll_result", poll_result),
     ]
     return ConversationHandler(entry_points, states, fallbacks)
-
-
-def _format_choices():
-    return '\n'.join(f'{i}. {choice} ' for i, choice in enumerate(poll['choices']))
-
-
-def _format_poll():
-    question = poll['question']
-    choices = _format_choices()
-    return f'{question}\n{choices}'
-
-
-def _format_result():
-    question = poll['question']
-    votes = poll['votes']
-    choices_results = '\n'.join(
-        f'{i}. {choice} {votes[i]}' for i, choice in enumerate(poll['choices'])
-    )
-    winner_id, count_votes = max(votes.items(), key=operator.itemgetter(1))
-    winner = poll['choices'][winner_id]
-    percentage = (count_votes / poll['total']) * 100
-    return (
-        f'{question}\n'
-        f'{choices_results}\n'
-        f'Winner: {winner} - {count_votes}({percentage:.2f}%)'
-    )

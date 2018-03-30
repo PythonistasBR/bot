@@ -22,26 +22,20 @@
 # OTHER DEALINGS IN THE SOFTWARE.
 
 import logging
-import os
 import sys
 
 from telegram.ext import Updater
 
 from core import get_handlers, autodiscovery
+from settings import APPS, API_TOKEN
 
-
-__API_TOKEN = os.environ.get("TELEGRAM_API_TOKEN", "")
-logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
-)
 logger = logging.getLogger(__name__)
-APPS = ['basic']
 
 
 def main():
-    updater = Updater(__API_TOKEN)
-    dp = updater.dispatcher
+    updater = Updater(API_TOKEN)
     autodiscovery(APPS)
+    dp = updater.dispatcher
     for handler in get_handlers():
         dp.add_handler(handler)
     updater.start_polling()
@@ -49,6 +43,7 @@ def main():
 
 
 if __name__ == "__main__":
-    if not __API_TOKEN:
+    if not API_TOKEN:
+        logger.critical('Telegram API Token is missing(TELEGRAM_API_TOKEN)')
         sys.exit(1)
     main()

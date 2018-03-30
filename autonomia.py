@@ -27,22 +27,21 @@ import sys
 
 from telegram.ext import Updater
 
-from core import get_handlers
-import basic_features  # noqa
+from core import get_handlers, autodiscovery
 
 
 __API_TOKEN = os.environ.get("TELEGRAM_API_TOKEN", "")
-__CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "")
-
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
 )
 logger = logging.getLogger(__name__)
+APPS = ['basic']
 
 
 def main():
     updater = Updater(__API_TOKEN)
     dp = updater.dispatcher
+    autodiscovery(APPS)
     for handler in get_handlers():
         dp.add_handler(handler)
     updater.start_polling()
@@ -50,6 +49,6 @@ def main():
 
 
 if __name__ == "__main__":
-    if not __CHAT_ID or not __API_TOKEN:
+    if not __API_TOKEN:
         sys.exit(1)
     main()

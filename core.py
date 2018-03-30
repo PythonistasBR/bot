@@ -1,4 +1,19 @@
+import logging
+from importlib import import_module
+
+
+logger = logging.getLogger(__name__)
+
 HANDLERS = []
+
+
+def autodiscovery(apps):
+    for app in apps:
+        module = '{}_features'.format(app)
+        try:
+            import_module(module)
+        except Exception:
+            logger.error('Something went wrong importing: %s', module, exc_info=1)
 
 
 def bot_handler(handle_factory):

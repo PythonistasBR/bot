@@ -30,7 +30,7 @@ def poll_choice(bot, update, args):
 
 def poll_start_voting(bot, update):
     poll_text = _format_poll()
-    update.message.reply_text(f"{poll_text}\n" f"Choose an option: /v <choice_id>")
+    update.message.reply_text(f"{poll_text}\nChoose an option: /v <choice_id>")
     return VOTING
 
 

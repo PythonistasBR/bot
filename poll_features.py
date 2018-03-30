@@ -12,7 +12,9 @@ poll = {'question': '', 'choices': [], 'votes': defaultdict(int), 'total': 0}
 
 def poll_new(bot, update, args):
     question = ' '.join(args)
-    poll.update({'question': '', 'choices': [], 'votes': defaultdict(int), 'total': 0})
+    poll.update(
+        {'question': question, 'choices': [], 'votes': defaultdict(int), 'total': 0}
+    )
     update.message.reply_text(
         f"Starting new poll.\n"
         f"Question: {question}\n"

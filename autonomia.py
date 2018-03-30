@@ -32,12 +32,19 @@ from settings import APPS, API_TOKEN
 logger = logging.getLogger(__name__)
 
 
+def error(bot, update, error):
+    """Log Errors caused by Updates."""
+    logger.warning('Update "%s" caused error "%s"', update, error)
+
+
 def main():
     updater = Updater(API_TOKEN)
     autodiscovery(APPS)
     dp = updater.dispatcher
     for handler in get_handlers():
         dp.add_handler(handler)
+    # log all errors
+    dp.add_error_handler(error)
     updater.start_polling()
     updater.idle()
 

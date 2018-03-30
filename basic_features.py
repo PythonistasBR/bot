@@ -1,3 +1,4 @@
+from urllib import parse
 from telegram.ext import CommandHandler, RegexHandler
 
 from core import bot_handler
@@ -55,3 +56,16 @@ def cmd_replace(bot, update):
 @bot_handler
 def larissa_factory():
     return RegexHandler(r".*\b([Hh][Bb]|[[hH].nr.qu.[\s]*[bB].st.s)\b.*", cmd_replace)
+
+
+def cmd_aurelio(bot, update, args):
+    """
+    Teach you how to find something on the internet
+    """
+    message = parse.quote(' '.join(args))
+    update.message.reply_markdown(f'Tenta ai, http://lmgtfy.com/?q={message}')
+
+
+@bot_handler
+def aurelio_factory():
+    return CommandHandler("aurelio", cmd_aurelio, pass_args=True)

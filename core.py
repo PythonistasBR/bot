@@ -8,7 +8,7 @@ HANDLERS = []
 
 def autodiscovery(apps):
     for app in apps:
-        module = '{}_features'.format(app)
+        module = f'{app}_features'
         try:
             import_module(module)
         except Exception:

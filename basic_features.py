@@ -31,9 +31,8 @@ def cmd_me(bot, update, args):
     we must use from_user instead
     """
     message = ' '.join(args)
-    update.message.reply_markdown(
-        '_{name} {msg}_'.format(name=update.message.from_user.first_name, msg=message)
-    )
+    name = update.message.from_user.first_name
+    update.message.reply_markdown(f'_{name} {message}_')
 
 
 @bot_handler

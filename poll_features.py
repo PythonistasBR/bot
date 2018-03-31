@@ -151,13 +151,15 @@ def poll_cancel(bot, update):
 def poll_factory():
     entry_points = [CommandHandler('poll_new', poll_new, pass_args=True)]
     states = {
-        CHOICES: [CommandHandler('poll_choice', poll_choice, pass_args=True)],
-        VOTING: [CommandHandler('v', poll_vote, pass_args=True)],
+        CHOICES: [
+            CommandHandler('poll_choice', poll_choice, pass_args=True),
+            CommandHandler("poll_voting", poll_start_voting),
+        ],
+        VOTING: [
+            CommandHandler('v', poll_vote, pass_args=True),
+            CommandHandler("poll_finish", poll_finish),
+            CommandHandler("poll_result", poll_result),
+        ],
     }
-    fallbacks = [
-        CommandHandler("poll_cancel", poll_cancel),
-        CommandHandler("poll_voting", poll_start_voting),
-        CommandHandler("poll_finish", poll_finish),
-        CommandHandler("poll_result", poll_result),
-    ]
+    fallbacks = [CommandHandler("poll_cancel", poll_cancel)]
     return ConversationHandler(entry_points, states, fallbacks, per_user=False)

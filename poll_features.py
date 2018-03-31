@@ -1,5 +1,5 @@
 import operator
-from collections import defaultdict
+from collections import Counter
 
 from telegram.ext import CommandHandler, ConversationHandler
 
@@ -8,13 +8,17 @@ from core import bot_handler
 CHOICES, VOTING = range(2)
 
 
+class AlreadyVotedError(Exception):
+    pass
+
+
 class Poll:
 
     def __init__(self, question):
         self.question = question
         self.total = 0
         self.choices = []
-        self.votes = defaultdict(int)
+        self.votes = {}
 
     def add_choice(self, text):
         if text in self.choices:
@@ -22,12 +26,22 @@ class Poll:
 
         self.choices.append(text)
 
-    def vote(self, choice):
+    def vote(self, user, choice):
         if choice < 0 or choice >= len(self.choices):
             raise ValueError(f'Invalid choice')
 
-        self.votes[choice] += 1
-        self.total += 1
+        if user in self.votes:
+            if choice == self.votes[user]:
+                raise AlreadyVotedError('You already voted on this choice')
+
+            self.votes[user] = choice
+        else:
+            self.votes[user] = choice
+            self.total += 1
+
+    @property
+    def votes_count(self):
+        return Counter(self.votes.values())
 
     def result(self):
         """
@@ -37,15 +51,19 @@ class Poll:
         if not len(self.votes):
             return None, 0, 0
 
-        winner_id, number_of_votes = max(self.votes.items(), key=operator.itemgetter(1))
+        winner_id, number_of_votes = max(
+            self.votes_count.items(), key=operator.itemgetter(1)
+        )
         winner = self.choices[winner_id]
+        percentage = 0
         if self.total:
             percentage = (number_of_votes / self.total) * 100
         return winner, number_of_votes, percentage
 
     def choices_as_str(self):
         return '\n'.join(
-            f'{i}. {choice} {self.votes[i]}' for i, choice in enumerate(self.choices)
+            f'{i}. {choice} {self.votes_count[i]}'
+            for i, choice in enumerate(self.choices)
         )
 
     def as_str(self, show_winner=False):
@@ -102,10 +120,12 @@ def poll_start_voting(bot, update):
 def poll_vote(bot, update, args):
     try:
         choice = int(' '.join(args))
-        bot.poll.vote(choice)
+        bot.poll.vote(update.message.from_user, choice)
     except ValueError:
         choices = bot.poll.choices_as_str()
         update.message.reply_text(f"Invalid option, please choose:\n{choices}")
+    except AlreadyVotedError as e:
+        update.message.reply_text(str(e))
     return VOTING
 
 

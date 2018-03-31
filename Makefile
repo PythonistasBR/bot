@@ -1,7 +1,7 @@
 help:
 	@echo "Usage: make command"
 	@echo "run           - Run autonomia bot"
-	@echo "fmt           - Format code using Black"
+	@echo "fmt           - Format code using iSort and Black"
 	@echo "lint          - Run flake8"
 	@echo "install-dev   - Install all dependencies"
 	@echo "install       - Install only prod dependencies"
@@ -11,6 +11,7 @@ run:
 	@pipenv run python autonomia.py
 
 fmt:
+	@pipenv run isort -rc .
 	@pipenv run black .
 
 lint:

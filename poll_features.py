@@ -1,10 +1,9 @@
-from collections import defaultdict
 import operator
+from collections import defaultdict
 
-from telegram.ext import ConversationHandler, CommandHandler
+from telegram.ext import CommandHandler, ConversationHandler
 
 from core import bot_handler
-
 
 CHOICES, VOTING = range(2)
 

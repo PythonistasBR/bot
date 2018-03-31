@@ -1,6 +1,5 @@
-import os
 import logging
-
+import os
 
 API_TOKEN = os.environ.get("TELEGRAM_API_TOKEN", "")
 LOG_LEVEL = os.environ.get("LOG_LEVEL", "INFO")

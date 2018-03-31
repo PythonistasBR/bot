@@ -26,8 +26,8 @@ import sys
 
 from telegram.ext import Updater
 
-from core import get_handlers, autodiscovery
-from settings import APPS, API_TOKEN
+from core import autodiscovery, get_handlers
+from settings import API_TOKEN, APPS
 
 logger = logging.getLogger(__name__)
 

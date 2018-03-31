@@ -18,6 +18,9 @@ class Poll:
         self.votes = defaultdict(int)
 
     def add_choice(self, text):
+        if text in self.choices:
+            raise ValueError(f'{text} was already added')
+
         self.choices.append(text)
 
     def vote(self, choice):
@@ -29,9 +32,13 @@ class Poll:
         Compute the partial/final result of the poll
         :return: tuple - (winner, number_of_votes, percentage)
         """
+        if not len(self.votes):
+            return None, 0, 0
+
         winner_id, number_of_votes = max(self.votes.items(), key=operator.itemgetter(1))
         winner = self.choices[winner_id]
-        percentage = (number_of_votes / self.total) * 100
+        if self.total:
+            percentage = (number_of_votes / self.total) * 100
         return winner, number_of_votes, percentage
 
     def choices_as_str(self):
@@ -41,10 +48,11 @@ class Poll:
 
     def as_str(self, show_winner=False):
         choices_results = self.choices_as_str()
-        out = f'{self.question}\n{choices_results}'
+        out = f'Question: {self.question}\n{choices_results}'
         if show_winner:
             winner, number_of_votes, percentage = self.result()
-            out += f'\nWinner: {winner} - {number_of_votes}({percentage:.2f}%)'
+            if winner:
+                out += f'\nWinner: {winner} - {number_of_votes}({percentage:.2f}%)'
         return out
 
     def __str__(self):
@@ -53,6 +61,10 @@ class Poll:
 
 def poll_new(bot, update, args):
     question = ' '.join(args)
+    if not question:
+        update.message.reply_text(f"Use: /poll_new <text>")
+        return
+
     bot.poll = Poll(question)
     update.message.reply_text(
         f"Starting new poll.\n"
@@ -65,11 +77,22 @@ def poll_new(bot, update, args):
 
 def poll_choice(bot, update, args):
     choice = ' '.join(args)
-    bot.poll.add_choice(choice)
+    if not choice:
+        update.message.reply_text(f"Use: /poll_choice <text>")
+        return CHOICES
+
+    try:
+        bot.poll.add_choice(choice)
+    except ValueError as e:
+        update.message.reply_text(str(e))
     return CHOICES
 
 
 def poll_start_voting(bot, update):
+    if len(bot.poll.choices) < 2:
+        update.message.reply_text(f"Please, add at least 2 choices")
+        return CHOICES
+
     update.message.reply_text(f"{bot.poll}\nChoose an option: /v <choice_id>")
     return VOTING
 

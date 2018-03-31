@@ -24,6 +24,9 @@ class Poll:
         self.choices.append(text)
 
     def vote(self, choice):
+        if choice < 0 or choice >= len(self.choices):
+            raise ValueError(f'Invalid choice')
+
         self.votes[choice] += 1
         self.total += 1
 
@@ -100,11 +103,10 @@ def poll_start_voting(bot, update):
 def poll_vote(bot, update, args):
     try:
         choice = int(' '.join(args))
+        bot.poll.vote(choice)
     except ValueError:
         choices = bot.poll.choices_as_str()
         update.message.reply_text(f"Invalid option, please choose:\n{choices}")
-    else:
-        bot.poll.vote(choice)
     return VOTING
 
 

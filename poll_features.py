@@ -66,17 +66,13 @@ class Poll:
             for i, choice in enumerate(self.choices)
         )
 
-    def as_str(self, show_winner=False):
+    def __str__(self):
         choices_results = self.choices_as_str()
         out = f'Question: {self.question}\n{choices_results}'
-        if show_winner:
-            winner, number_of_votes, percentage = self.result()
-            if winner:
-                out += f'\nWinner: {winner} - {number_of_votes}({percentage:.2f}%)'
+        winner, number_of_votes, percentage = self.result()
+        if winner and number_of_votes and percentage:
+            out += f'\nWinner: {winner} - {number_of_votes}({percentage:.2f}%)'
         return out
-
-    def __str__(self):
-        return self.as_str()
 
 
 def poll_new(bot, update, args):
@@ -130,13 +126,12 @@ def poll_vote(bot, update, args):
 
 
 def poll_result(bot, update):
-    update.message.reply_text(bot.poll.as_str(show_winner=True))
+    update.message.reply_text(str(bot.poll))
     return VOTING
 
 
 def poll_finish(bot, update):
-    result = bot.poll.as_str(show_winner=True)
-    update.message.reply_text(f'Poll finished!\n{result}')
+    update.message.reply_text(f'Poll finished!\n{bot.poll}')
     bot.poll = None
     return ConversationHandler.END
 

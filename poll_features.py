@@ -116,4 +116,4 @@ def poll_factory():
         CommandHandler("poll_finish", poll_finish),
         CommandHandler("poll_result", poll_result),
     ]
-    return ConversationHandler(entry_points, states, fallbacks)
+    return ConversationHandler(entry_points, states, fallbacks, per_user=False)

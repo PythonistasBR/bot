@@ -11,7 +11,7 @@ run:
 	@pipenv run python autonomia.py
 
 fmt:
-	@pipenv run isort -rc .
+	@pipenv run isort -rc --atomic .
 	@pipenv run black .
 
 lint:

@@ -1,4 +1,5 @@
 from urllib import parse
+
 from telegram.ext import CommandHandler, RegexHandler
 
 from core import bot_handler
@@ -30,9 +31,8 @@ def cmd_me(bot, update, args):
     we must use from_user instead
     """
     message = ' '.join(args)
-    update.message.reply_markdown(
-        '_{name} {msg}_'.format(name=update.message.from_user.first_name, msg=message)
-    )
+    name = update.message.from_user.first_name
+    update.message.reply_markdown(f'_{name} {message}_')
 
 
 @bot_handler
@@ -46,8 +46,9 @@ def cmd_replace(bot, update):
 
     this method will suggest different words based on patterns defined on the handler
     TODO: get a parameter with the replacement ID
-    CAADAQADCwADgGntCPaKda9GXFZ3Ag is a sticker file_id, to get the Id start a conversation
-    with the Get Sticker Id Bot. Send the sticker and it will output the id
+    CAADAQADCwADgGntCPaKda9GXFZ3Ag is a sticker file_id, to get the Id start a
+    conversation with the Get Sticker Id Bot. Send the sticker and it
+    will output the id
     """
     update.message.reply_text("Hmmmm, vc quis dizer Larissa?")
     update.message.reply_sticker("CAADAQADCwADgGntCPaKda9GXFZ3Ag")

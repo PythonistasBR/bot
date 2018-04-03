@@ -1,4 +1,5 @@
-from urllib import parse
+import json
+from urllib import parse, request
 
 from telegram.ext import CommandHandler, RegexHandler
 
@@ -70,3 +71,20 @@ def cmd_aurelio(bot, update, args):
 @bot_handler
 def aurelio_factory():
     return CommandHandler("aurelio", cmd_aurelio, pass_args=True)
+
+
+def cmd_joke(bot, update, args):
+    """
+    Tell a random joke
+    """
+    try:
+        req = request.urlopen(request.Request('http://api.icndb.com/jokes/random'))
+        joke = parse.unquote(json.loads(req.read())['value']['joke'])
+        update.message.reply_text(joke)
+    except Exception:
+        update.message.reply_text('To sem saco!')
+
+
+@bot_handler
+def joke_factory():
+    return CommandHandler("joke", cmd_joke, pass_args=True)

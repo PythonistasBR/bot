@@ -8,7 +8,7 @@ HANDLERS = []
 
 def autodiscovery(apps):
     for app in apps:
-        module = f'{app}_features'
+        module = f'features.{app}'
         try:
             import_module(module)
         except Exception:
@@ -16,10 +16,10 @@ def autodiscovery(apps):
 
 
 def bot_handler(handle_factory):
-    HANDLERS.append(handle_factory())
+    HANDLERS.append(handle_factory)
     return handle_factory
 
 
 def get_handlers():
     for handler in HANDLERS:
-        yield handler
+        yield handler()

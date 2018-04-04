@@ -57,7 +57,8 @@ def cmd_replace(bot, update):
     conversation with the Get Sticker Id Bot. Send the sticker and it
     will output the id
     """
-    bot.send_sticke("CAADAQADCwADgGntCPaKda9GXFZ3Ag")
+    chat = update.message.chat
+    bot.send_sticker(chat.id, "CAADAQADCwADgGntCPaKda9GXFZ3Ag")
 
 
 @bot_handler

@@ -10,4 +10,4 @@ logging.basicConfig(
 )
 
 # Configure the enabled apps
-APPS = ['basic', 'poll', 'help']
+APPS = ['basic', 'poll', 'help', 'weather']

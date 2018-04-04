@@ -9,7 +9,8 @@ def cmd_help(bot, update):
         doc = handler.__doc__
         if doc:
             out += f'{doc.strip()}\n'
-    update.message.reply_text(out)
+    user = update.message.from_user
+    bot.send_message(user.id, out)
 
 
 @bot_handler

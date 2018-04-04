@@ -22,6 +22,9 @@ def cmd_all(bot, update):
 
 @bot_handler
 def all_factory():
+    """
+    /all - mention all admins on the room
+    """
     return CommandHandler("all", cmd_all)
 
 
@@ -38,6 +41,9 @@ def cmd_me(bot, update, args):
 
 @bot_handler
 def me_factory():
+    """
+    /me <text> - clone /me from IRC
+    """
     return CommandHandler("me", cmd_me, pass_args=True)
 
 
@@ -70,6 +76,9 @@ def cmd_aurelio(bot, update, args):
 
 @bot_handler
 def aurelio_factory():
+    """
+    /aurelio - teach James how to use google
+    """
     return CommandHandler("aurelio", cmd_aurelio, pass_args=True)
 
 
@@ -87,4 +96,7 @@ def cmd_joke(bot, update, args):
 
 @bot_handler
 def joke_factory():
+    """
+    /joke - send a random joke about Chuck Norris
+    """
     return CommandHandler("joke", cmd_joke, pass_args=True)

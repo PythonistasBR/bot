@@ -66,22 +66,6 @@ def larissa_factory():
     return RegexHandler(r".*\b([Hh][Bb]|[[hH].nr.qu.[\s]*[bB].st.s)\b.*", cmd_replace)
 
 
-def cmd_aurelio(bot, update, args):
-    """
-    Teach you how to find something on the internet
-    """
-    message = parse.quote(' '.join(args))
-    update.message.reply_markdown(f'Tenta ai, http://lmgtfy.com/?q={message}')
-
-
-@bot_handler
-def aurelio_factory():
-    """
-    /aurelio - teach James how to use google
-    """
-    return CommandHandler("aurelio", cmd_aurelio, pass_args=True)
-
-
 def cmd_joke(bot, update, args):
     """
     Tell a random joke

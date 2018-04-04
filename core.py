@@ -23,3 +23,8 @@ def bot_handler(handle_factory):
 def get_handlers():
     for handler in HANDLERS:
         yield handler()
+
+
+def get_lazy_handlers():
+    for handler in HANDLERS:
+        yield handler

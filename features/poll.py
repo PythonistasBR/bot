@@ -144,6 +144,9 @@ def poll_cancel(bot, update):
 
 @bot_handler
 def poll_factory():
+    """
+    /poll_new <text> - Create a new poll
+    """
     entry_points = [CommandHandler('poll_new', poll_new, pass_args=True)]
     states = {
         CHOICES: [

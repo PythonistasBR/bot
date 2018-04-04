@@ -21,15 +21,16 @@ def _get_weather_info(location):
 
 def cmd_weather(bot, update, args):
     if not args:
-        args = 'dublin'
+        args = ['dublin']
 
-    weather_info = _get_weather_info(args)
+    location = ' '.join(args)
+    weather_info = _get_weather_info(location)
     if not weather_info:
         return
 
     condition = weather_info['channel']['item']['condition']
     msg = '{location}, {date}, {temp}°C, {sky}'.format(
-        location=args.capitalize(),
+        location=location.capitalize(),
         date=condition['date'],
         temp=condition['temp'],
         sky=condition['text'],

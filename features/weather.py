@@ -14,7 +14,7 @@ def _get_weather_info(location):
         'from geo.places(1) where text="%s") AND u="c"' % location
     )
     final_url = BASE_URL + parse.urlencode({'q': query}) + "&format=json"
-    result = json.loads(request.urlopen(request.Request(final_url)).read())
+    result = json.loads(request.urlopen(final_url).read())
     if result['query']['count'] > 0:
         return result['query']['results']
 

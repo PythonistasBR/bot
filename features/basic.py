@@ -87,7 +87,7 @@ def cmd_joke(bot, update, args):
     Tell a random joke
     """
     try:
-        req = request.urlopen(request.Request('http://api.icndb.com/jokes/random'))
+        req = request.urlopen('http://api.icndb.com/jokes/random')
         joke = parse.unquote(json.loads(req.read())['value']['joke'])
         update.message.reply_text(joke)
     except Exception:

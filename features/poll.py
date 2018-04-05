@@ -1,5 +1,5 @@
 import operator
-from collections import Counter
+from collections import Counter, defaultdict
 
 from telegram.ext import CommandHandler, ConversationHandler
 
@@ -48,8 +48,8 @@ class Poll:
         Compute the partial/final result of the poll
         :return: tuple - (winner, number_of_votes, percentage)
         """
-        if not len(self.votes):
-            return None, 0, 0
+        if not self.votes:
+            return '', 0, 0
 
         winner_id, number_of_votes = max(
             self.votes_count.items(), key=operator.itemgetter(1)
@@ -61,10 +61,16 @@ class Poll:
         return winner, number_of_votes, percentage
 
     def choices_as_str(self):
-        return '\n'.join(
-            f'{i}. {choice} {self.votes_count[i]}'
-            for i, choice in enumerate(self.choices)
-        )
+        who_votes = defaultdict(list)
+        for user, choice_id in self.votes.items():
+            who_votes[choice_id].append(user.username)
+        out = ''
+        for choice_id, choice in enumerate(self.choices):
+            out += f'{choice_id}. {choice} ({self.votes_count[choice_id]})\n'
+            if choice_id in who_votes:
+                users = ', '.join(who_votes[choice_id])
+                out += f'\t[{users}]\n'
+        return out
 
     def __str__(self):
         choices_results = self.choices_as_str()

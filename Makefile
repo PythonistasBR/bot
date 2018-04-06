@@ -1,27 +1,26 @@
+.PHONY: help
+
 help:
 	@echo "Usage: make command"
-	@echo "run           - Run autonomia bot"
-	@echo "fmt           - Format code using iSort and Black"
-	@echo "lint          - Run flake8"
-	@echo "install-dev   - Install all dependencies"
-	@echo "install       - Install only prod dependencies"
-	@echo "clean         - Clean all compiled python code"
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
+		sort | \
+		awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-run:
+run: ## Run autonomia bot
 	@pipenv run python autonomia.py
 
-fmt:
+fmt: ## Format code using iSort and Black
 	@pipenv run isort -rc --atomic .
 	@pipenv run black .
 
-lint:
+lint: ## Run flake8
 	@pipenv run flake8 .
 
-install-dev:
+install-dev: ## Install all dependencies
 	@pipenv install --dev
 
-install:
+install: ## Install only prod dependencies
 	@pipenv install
 
-clean:
+clean: ## Clean all compiled python code
 	@find . -name __pycache__ -delete -or -iname "*.py[co]" -delete

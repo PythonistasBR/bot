@@ -60,7 +60,8 @@ def cmd_meetup(bot, update):
     try:
         data = _get_calendar_data()
         text = _format_events(data)
-        update.message.reply_text(text, disable_web_page_preview=True)
+        user = update.message.from_user
+        bot.send_message(user.id, text, disable_web_page_preview=True)
     except Exception as e:
         logger.error(e, 'To sem saco!', exc_info=1)
         update.message.reply_text('To sem saco!')

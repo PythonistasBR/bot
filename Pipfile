@@ -4,9 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [dev-packages]
-black = "*"
 "flake8" = "*"
 isort = "*"
+black = "*"
 
 [packages]
 python-telegram-bot = "*"

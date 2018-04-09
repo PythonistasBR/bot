@@ -25,9 +25,9 @@ def _get_calendar_data():
     ]
 
     query_string = parse.urlencode(
-        {'only': ','.join(fields), 'sign': 'true', 'key': MEETUP_API_KEY}
+        {"only": ",".join(fields), "sign": "true", "key": MEETUP_API_KEY}
     )
-    url = f'{MEETUP_CALENDAR_URL}?{query_string}'
+    url = f"{MEETUP_CALENDAR_URL}?{query_string}"
     response = request.urlopen(url)
     signed_url = response.getheader("X-Meetup-Signed-URL")
     response = request.urlopen(signed_url)
@@ -35,25 +35,25 @@ def _get_calendar_data():
 
 
 def _format_events(data):
-    out = ['Next meetups available:']
+    out = ["Next meetups available:"]
     today = datetime.now().today()
     for e in data:
-        date = datetime.strptime(e['local_date'], '%Y-%m-%d')
+        date = datetime.strptime(e["local_date"], "%Y-%m-%d")
         days = (date - today).days
         if days > 30:
             break
 
-        if e['status'] != 'upcoming' or 'venue' not in e:
+        if e["status"] != "upcoming" or "venue" not in e:
             continue
 
-        out.append('-' * 25)
+        out.append("-" * 25)
         out.append(
             f"{e['name']} - [{e['yes_rsvp_count']}/{e.get('rsvp_limit', 'Unlimited')}]"
         )
         out.append(f"Date: {date.strftime('%d-%m-%Y')} {e['local_time']}")
         out.append(f"Venue: {e['venue']['name']} - {e['venue']['address_1']}")
         out.append(f"{e['link']}")
-    return '\n'.join(out)
+    return "\n".join(out)
 
 
 def cmd_meetup(bot, update):
@@ -62,8 +62,8 @@ def cmd_meetup(bot, update):
         text = _format_events(data)
         update.message.reply_text(text, disable_web_page_preview=True)
     except Exception as e:
-        logger.error(e, 'To sem saco!', exc_info=1)
-        update.message.reply_text('To sem saco!')
+        logger.error(e, "To sem saco!", exc_info=1)
+        update.message.reply_text("To sem saco!")
 
 
 @bot_handler

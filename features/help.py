@@ -8,7 +8,7 @@ def cmd_help(bot, update):
     for handler in get_lazy_handlers():
         doc = handler.__doc__
         if doc:
-            out += f'{doc.strip()}\n'
+            out += f"{doc.strip()}\n"
     user = update.message.from_user
     bot.send_message(user.id, out)
 

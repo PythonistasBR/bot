@@ -51,6 +51,6 @@ def main():
 
 if __name__ == "__main__":
     if not API_TOKEN:
-        logger.critical('Telegram API Token is missing(TELEGRAM_API_TOKEN)')
+        logger.critical("Telegram API Token is missing(TELEGRAM_API_TOKEN)")
         sys.exit(1)
     main()

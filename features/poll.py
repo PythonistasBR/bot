@@ -22,17 +22,17 @@ class Poll:
 
     def add_choice(self, text):
         if text in self.choices:
-            raise ValueError(f'{text} was already added')
+            raise ValueError(f"{text} was already added")
 
         self.choices.append(text)
 
     def vote(self, user, choice):
         if choice < 0 or choice >= len(self.choices):
-            raise ValueError(f'Invalid choice')
+            raise ValueError(f"Invalid choice")
 
         if user in self.votes:
             if choice == self.votes[user]:
-                raise AlreadyVotedError('You already voted on this choice')
+                raise AlreadyVotedError("You already voted on this choice")
 
             self.votes[user] = choice
         else:
@@ -49,7 +49,7 @@ class Poll:
         :return: tuple - (winner, number_of_votes, percentage)
         """
         if not self.votes:
-            return '', 0, 0
+            return "", 0, 0
 
         winner_id, number_of_votes = max(
             self.votes_count.items(), key=operator.itemgetter(1)
@@ -64,25 +64,25 @@ class Poll:
         who_votes = defaultdict(list)
         for user, choice_id in self.votes.items():
             who_votes[choice_id].append(user.username)
-        out = ''
+        out = ""
         for choice_id, choice in enumerate(self.choices):
-            out += f'{choice_id}. {choice} ({self.votes_count[choice_id]})\n'
+            out += f"{choice_id}. {choice} ({self.votes_count[choice_id]})\n"
             if choice_id in who_votes:
-                users = ', '.join(who_votes[choice_id])
-                out += f'\t[{users}]\n'
+                users = ", ".join(who_votes[choice_id])
+                out += f"\t[{users}]\n"
         return out
 
     def __str__(self):
         choices_results = self.choices_as_str()
-        out = f'Question: {self.question}\n{choices_results}'
+        out = f"Question: {self.question}\n{choices_results}"
         winner, number_of_votes, percentage = self.result()
         if winner and number_of_votes and percentage:
-            out += f'\nWinner: {winner} - {number_of_votes}({percentage:.2f}%)'
+            out += f"\nWinner: {winner} - {number_of_votes}({percentage:.2f}%)"
         return out
 
 
 def poll_new(bot, update, args):
-    question = ' '.join(args)
+    question = " ".join(args)
     if not question:
         update.message.reply_text(f"Use: /poll_new <text>")
         return
@@ -98,7 +98,7 @@ def poll_new(bot, update, args):
 
 
 def poll_choice(bot, update, args):
-    choice = ' '.join(args)
+    choice = " ".join(args)
     if not choice:
         update.message.reply_text(f"Use: /poll_choice <text>")
         return CHOICES
@@ -121,7 +121,7 @@ def poll_start_voting(bot, update):
 
 def poll_vote(bot, update, args):
     try:
-        choice = int(' '.join(args))
+        choice = int(" ".join(args))
         bot.poll.vote(update.message.from_user, choice)
     except ValueError:
         choices = bot.poll.choices_as_str()
@@ -137,13 +137,13 @@ def poll_result(bot, update):
 
 
 def poll_finish(bot, update):
-    update.message.reply_text(f'Poll finished!\n{bot.poll}')
+    update.message.reply_text(f"Poll finished!\n{bot.poll}")
     bot.poll = None
     return ConversationHandler.END
 
 
 def poll_cancel(bot, update):
-    update.message.reply_text('Poll cancelled!')
+    update.message.reply_text("Poll cancelled!")
     bot.poll = None
     return ConversationHandler.END
 
@@ -153,14 +153,14 @@ def poll_factory():
     """
     /poll_new <text> - Create a new poll
     """
-    entry_points = [CommandHandler('poll_new', poll_new, pass_args=True)]
+    entry_points = [CommandHandler("poll_new", poll_new, pass_args=True)]
     states = {
         CHOICES: [
-            CommandHandler('poll_choice', poll_choice, pass_args=True),
+            CommandHandler("poll_choice", poll_choice, pass_args=True),
             CommandHandler("poll_voting", poll_start_voting),
         ],
         VOTING: [
-            CommandHandler('v', poll_vote, pass_args=True),
+            CommandHandler("v", poll_vote, pass_args=True),
             CommandHandler("poll_finish", poll_finish),
             CommandHandler("poll_result", poll_result),
         ],

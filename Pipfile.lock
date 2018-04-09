@@ -48,11 +48,11 @@
         },
         "black": {
             "hashes": [
-                "sha256:40c7d13615f9f183b5bab52afa4b3fa9eac62549149ba698185a5365db8efffc",
-                "sha256:814a1f5c9cf8dd8d325a224aa989be622fbaec9325ba13d884d9cf5485b47056"
+                "sha256:390b3b3ec035dc2ca5e9df6303e6049d800d07b89d01d985db44ffca4976ae11",
+                "sha256:3d0b42275fc6362f60eeaecf9168a503085490be4fd780dffa48035271dc8908"
             ],
             "index": "pypi",
-            "version": "==18.3a4"
+            "version": "==18.4a0"
         },
         "click": {
             "hashes": [

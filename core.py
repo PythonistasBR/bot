@@ -8,11 +8,11 @@ HANDLERS = []
 
 def autodiscovery(apps):
     for app in apps:
-        module = f'features.{app}'
+        module = f"features.{app}"
         try:
             import_module(module)
         except Exception:
-            logger.error('Something went wrong importing: %s', module, exc_info=1)
+            logger.error("Something went wrong importing: %s", module, exc_info=1)
 
 
 def bot_handler(handle_factory):

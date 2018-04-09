@@ -17,7 +17,7 @@ def cmd_all(bot, update):
     chat_id = update.message.chat_id
     admins = bot.get_chat_administrators(chat_id)
     admins = [item.user.mention_markdown() for item in admins]
-    update.message.reply_markdown(' '.join(admins))
+    update.message.reply_markdown(" ".join(admins))
 
 
 @bot_handler
@@ -34,9 +34,9 @@ def cmd_me(bot, update, args):
     the object is from, but as it's a python reserved word
     we must use from_user instead
     """
-    message = ' '.join(args)
+    message = " ".join(args)
     name = update.message.from_user.first_name
-    update.message.reply_markdown(f'_{name} {message}_')
+    update.message.reply_markdown(f"_{name} {message}_")
 
 
 @bot_handler
@@ -70,8 +70,8 @@ def cmd_aurelio(bot, update, args):
     """
     Teach you how to find something on the internet
     """
-    message = parse.quote(' '.join(args))
-    update.message.reply_markdown(f'Tenta ai, http://lmgtfy.com/?q={message}')
+    message = parse.quote(" ".join(args))
+    update.message.reply_markdown(f"Tenta ai, http://lmgtfy.com/?q={message}")
 
 
 @bot_handler
@@ -87,11 +87,11 @@ def cmd_joke(bot, update, args):
     Tell a random joke
     """
     try:
-        req = request.urlopen('http://api.icndb.com/jokes/random')
-        joke = parse.unquote(json.loads(req.read())['value']['joke'])
+        req = request.urlopen("http://api.icndb.com/jokes/random")
+        joke = parse.unquote(json.loads(req.read())["value"]["joke"])
         update.message.reply_text(joke)
     except Exception:
-        update.message.reply_text('To sem saco!')
+        update.message.reply_text("To sem saco!")
 
 
 @bot_handler

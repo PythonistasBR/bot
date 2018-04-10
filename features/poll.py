@@ -46,19 +46,21 @@ class Poll:
     def result(self):
         """
         Compute the partial/final result of the poll
-        :return: tuple - (winner, number_of_votes, percentage)
+        :return: tuple - (winners, number_of_votes, percentage)
         """
         if not self.votes:
-            return "", 0, 0
+            return [], 0, 0
 
-        winner_id, number_of_votes = max(
-            self.votes_count.items(), key=operator.itemgetter(1)
-        )
-        winner = self.choices[winner_id]
+        max_vote = max(self.votes_count.items(), key=operator.itemgetter(1))[1]
+        winners = [
+            self.choices[choice]
+            for choice, votes in self.votes_count.items()
+            if votes == max_vote
+        ]
         percentage = 0
         if self.total:
-            percentage = (number_of_votes / self.total) * 100
-        return winner, number_of_votes, percentage
+            percentage = (max_vote / self.total) * 100
+        return winners, max_vote, percentage
 
     def choices_as_str(self):
         who_votes = defaultdict(list)
@@ -75,24 +77,26 @@ class Poll:
     def __str__(self):
         choices_results = self.choices_as_str()
         out = f"Question: {self.question}\n{choices_results}"
-        winner, number_of_votes, percentage = self.result()
-        if winner and number_of_votes and percentage:
-            out += f"\nWinner: {winner} - {number_of_votes}({percentage:.2f}%)"
+        winners, number_of_votes, percentage = self.result()
+        if winners and number_of_votes and percentage:
+            winners = ", ".join(winners)
+            result = "Winner" if len(winners) == 1 else "Draw"
+            out += f"\n{result}: {winners} - {number_of_votes}({percentage:.2f}%)"
         return out
 
 
 def poll_new(bot, update, args):
     question = " ".join(args)
     if not question:
-        update.message.reply_text(f"Use: /poll_new <text>")
+        update.message.reply_text(f"Use: /poll <text>")
         return
 
     bot.poll = Poll(question)
     update.message.reply_text(
         f"Starting new poll.\n"
         f"Question: {question}\n"
-        f"Please add choices using: /poll_choice <text>\n"
-        f"To start the poll use: /poll_voting"
+        f"Please add choices using: /choice <text>\n"
+        f"To start the poll use: /voting"
     )
     return CHOICES
 
@@ -100,7 +104,7 @@ def poll_new(bot, update, args):
 def poll_choice(bot, update, args):
     choice = " ".join(args)
     if not choice:
-        update.message.reply_text(f"Use: /poll_choice <text>")
+        update.message.reply_text(f"Use: /choice <text>")
         return CHOICES
 
     try:
@@ -151,13 +155,13 @@ def poll_cancel(bot, update):
 @bot_handler
 def poll_factory():
     """
-    /poll_new <text> - Create a new poll
+    /poll <text> - Create a new poll
     """
-    entry_points = [CommandHandler("poll_new", poll_new, pass_args=True)]
+    entry_points = [CommandHandler("poll", poll_new, pass_args=True)]
     states = {
         CHOICES: [
-            CommandHandler("poll_choice", poll_choice, pass_args=True),
-            CommandHandler("poll_voting", poll_start_voting),
+            CommandHandler("choice", poll_choice, pass_args=True),
+            CommandHandler("voting", poll_start_voting),
         ],
         VOTING: [
             CommandHandler("v", poll_vote, pass_args=True),

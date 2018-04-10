@@ -79,8 +79,8 @@ class Poll:
         out = f"Question: {self.question}\n{choices_results}"
         winners, number_of_votes, percentage = self.result()
         if winners and number_of_votes and percentage:
-            winners = ", ".join(winners)
             result = "Winner" if len(winners) == 1 else "Draw"
+            winners = ", ".join(winners)
             out += f"\n{result}: {winners} - {number_of_votes}({percentage:.2f}%)"
         return out
 

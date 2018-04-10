@@ -46,19 +46,21 @@ class Poll:
     def result(self):
         """
         Compute the partial/final result of the poll
-        :return: tuple - (winner, number_of_votes, percentage)
+        :return: tuple - (winners, number_of_votes, percentage)
         """
         if not self.votes:
-            return "", 0, 0
+            return [], 0, 0
 
-        winner_id, number_of_votes = max(
-            self.votes_count.items(), key=operator.itemgetter(1)
-        )
-        winner = self.choices[winner_id]
+        max_vote = max(self.votes_count.items(), key=operator.itemgetter(1))[1]
+        winners = [
+            self.choices[choice]
+            for choice, votes in self.votes_count.items()
+            if votes == max_vote
+        ]
         percentage = 0
         if self.total:
-            percentage = (number_of_votes / self.total) * 100
-        return winner, number_of_votes, percentage
+            percentage = (max_vote / self.total) * 100
+        return winners, max_vote, percentage
 
     def choices_as_str(self):
         who_votes = defaultdict(list)
@@ -75,9 +77,11 @@ class Poll:
     def __str__(self):
         choices_results = self.choices_as_str()
         out = f"Question: {self.question}\n{choices_results}"
-        winner, number_of_votes, percentage = self.result()
-        if winner and number_of_votes and percentage:
-            out += f"\nWinner: {winner} - {number_of_votes}({percentage:.2f}%)"
+        winners, number_of_votes, percentage = self.result()
+        if winners and number_of_votes and percentage:
+            winners = ", ".join(winners)
+            result = "Winner" if len(winners) == 1 else "Draw"
+            out += f"\n{result}: {winners} - {number_of_votes}({percentage:.2f}%)"
         return out
 
 

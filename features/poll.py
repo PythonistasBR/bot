@@ -88,15 +88,15 @@ class Poll:
 def poll_new(bot, update, args):
     question = " ".join(args)
     if not question:
-        update.message.reply_text(f"Use: /poll_new <text>")
+        update.message.reply_text(f"Use: /poll <text>")
         return
 
     bot.poll = Poll(question)
     update.message.reply_text(
         f"Starting new poll.\n"
         f"Question: {question}\n"
-        f"Please add choices using: /poll_choice <text>\n"
-        f"To start the poll use: /poll_voting"
+        f"Please add choices using: /choice <text>\n"
+        f"To start the poll use: /voting"
     )
     return CHOICES
 
@@ -104,7 +104,7 @@ def poll_new(bot, update, args):
 def poll_choice(bot, update, args):
     choice = " ".join(args)
     if not choice:
-        update.message.reply_text(f"Use: /poll_choice <text>")
+        update.message.reply_text(f"Use: /choice <text>")
         return CHOICES
 
     try:
@@ -155,13 +155,13 @@ def poll_cancel(bot, update):
 @bot_handler
 def poll_factory():
     """
-    /poll_new <text> - Create a new poll
+    /poll <text> - Create a new poll
     """
-    entry_points = [CommandHandler("poll_new", poll_new, pass_args=True)]
+    entry_points = [CommandHandler("poll", poll_new, pass_args=True)]
     states = {
         CHOICES: [
-            CommandHandler("poll_choice", poll_choice, pass_args=True),
-            CommandHandler("poll_voting", poll_start_voting),
+            CommandHandler("choice", poll_choice, pass_args=True),
+            CommandHandler("voting", poll_start_voting),
         ],
         VOTING: [
             CommandHandler("v", poll_vote, pass_args=True),

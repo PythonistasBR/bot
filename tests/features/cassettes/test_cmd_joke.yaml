@@ -1,0 +1,27 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Connection: [close]
+      Host: [api.icndb.com]
+      User-Agent: [Python-urllib/3.6]
+    method: GET
+    uri: http://api.icndb.com/jokes/random
+  response:
+    body: {string: '{ "type": "success", "value": { "id": 288, "joke": "To be or not
+        to be? That is the question. The answer? Chuck Norris.", "categories": []
+        } }'}
+    headers:
+      Access-Control-Allow-Methods: [GET]
+      Access-Control-Allow-Origin: ['*']
+      CF-RAY: [409f9892f2ba297b-DUB]
+      Cache-Control: ['no-cache, must-revalidate']
+      Connection: [close]
+      Content-Type: [application/json]
+      Date: ['Wed, 11 Apr 2018 18:42:57 GMT']
+      Expires: ['Sat, 26 Jul 1997 05:00:00 GMT']
+      Server: [cloudflare]
+      Set-Cookie: ['__cfduid=d5b64ada7b6a8b9da61d6590617e697991523472177; expires=Thu,
+          11-Apr-19 18:42:57 GMT; path=/; domain=.icndb.com; HttpOnly']
+    status: {code: 200, message: OK}
+version: 1

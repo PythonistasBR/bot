@@ -3,7 +3,7 @@ from urllib import parse, request
 
 from telegram.ext import CommandHandler, RegexHandler
 
-from core import bot_handler
+from autonomia.core import bot_handler
 
 
 def cmd_all(bot, update):
@@ -82,7 +82,7 @@ def aurelio_factory():
     return CommandHandler("aurelio", cmd_aurelio, pass_args=True)
 
 
-def cmd_joke(bot, update, args):
+def cmd_joke(bot, update):
     """
     Tell a random joke
     """
@@ -99,4 +99,4 @@ def joke_factory():
     """
     /joke - send a random joke about Chuck Norris
     """
-    return CommandHandler("joke", cmd_joke, pass_args=True)
+    return CommandHandler("joke", cmd_joke)

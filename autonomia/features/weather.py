@@ -3,7 +3,7 @@ from urllib import parse, request
 
 from telegram.ext import CommandHandler
 
-from core import bot_handler
+from autonomia.core import bot_handler
 
 BASE_URL = "https://query.yahooapis.com/v1/public/yql?"
 

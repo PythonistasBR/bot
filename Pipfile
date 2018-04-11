@@ -7,6 +7,9 @@ name = "pypi"
 "flake8" = "*"
 isort = "*"
 black = "*"
+pytest = "*"
+pytest-cov = "*"
+pytest-vcr = "*"
 
 [packages]
 python-telegram-bot = "*"

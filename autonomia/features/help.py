@@ -1,6 +1,6 @@
 from telegram.ext import CommandHandler
 
-from core import bot_handler, get_lazy_handlers
+from autonomia.core import bot_handler, get_lazy_handlers
 
 
 def cmd_help(bot, update):

@@ -7,7 +7,10 @@ help:
 		awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 run: ## Run autonomia bot
-	@pipenv run python autonomia.py
+	@pipenv run python -m autonomia
+
+test: ## Run pytest
+	@pipenv run pytest --cov=autonomia tests/
 
 fmt: ## Format code using iSort and Black
 	@pipenv run isort -rc --atomic .

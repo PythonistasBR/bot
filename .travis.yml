@@ -9,4 +9,5 @@ install:
   - make install-dev
 
 script:
+  - make lint
   - make test

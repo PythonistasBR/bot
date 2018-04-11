@@ -26,8 +26,8 @@ import sys
 
 from telegram.ext import Updater
 
-from core import autodiscovery, get_handlers
-from settings import API_TOKEN, APPS
+from autonomia.core import autodiscovery, get_handlers
+from autonomia.settings import API_TOKEN, APPS
 
 logger = logging.getLogger(__name__)
 

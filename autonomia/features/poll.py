@@ -3,7 +3,7 @@ from collections import Counter, defaultdict
 
 from telegram.ext import CommandHandler, ConversationHandler
 
-from core import bot_handler
+from autonomia.core import bot_handler
 
 CHOICES, VOTING = range(2)
 

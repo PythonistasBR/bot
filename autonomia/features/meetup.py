@@ -5,8 +5,8 @@ from urllib import parse, request
 
 from telegram.ext import CommandHandler
 
-from core import bot_handler
-from settings import MEETUP_API_KEY
+from autonomia.core import bot_handler
+from autonomia.settings import MEETUP_API_KEY
 
 logger = logging.getLogger(__name__)
 MEETUP_CALENDAR_URL = "https://api.meetup.com/self/calendar"

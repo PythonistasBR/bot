@@ -6,8 +6,12 @@ python:
 
 install:
   - pip install pipenv
+  - pip install codecov
   - make install-dev
 
 script:
   - make lint
   - make test
+
+after_success:
+  - codecov

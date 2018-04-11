@@ -1,5 +1,6 @@
 # Autonomia Bot
 
+[![Build Status](https://travis-ci.org/PythonistasBR/bot.svg?branch=master)](https://travis-ci.org/PythonistasBR/bot)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 ![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)
 
@@ -29,4 +30,4 @@ clean         - Clean all compiled python code
 ```
 
 ## License
-MIT
+[MIT](LICENSE)

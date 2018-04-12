@@ -1,0 +1,85 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Connection: [close]
+      Host: [api.meetup.com]
+      User-Agent: [Python-urllib/3.6]
+    method: GET
+    uri: https://api.meetup.com/self/calendar?only=name%2Cstatus%2Crsvp_limit%2Cyes_rsvp_count%2Clocal_date%2Clocal_time%2Cvenue%2Clink&sign=true
+  response:
+    body: {string: '[{"link":"https://www.meetup.com/DataScientistsIreland/events/248761834/","venue":{"id":25712815,"name":"Bank
+        of Ireland Workbench","lat":52.66349411010742,"lon":-8.627531051635742,"repinned":false,"address_1":"125
+        O''Connell Street","city":"Limerick","country":"ie","localized_country_name":"Ireland"},"local_time":"18:30","local_date":"2018-04-12","yes_rsvp_count":14,"status":"upcoming","name":"[Limerick]
+        Data Visualization with R (April 2018)"},{"link":"https://www.meetup.com/DataScientistsIreland/events/248696033/","venue":{"id":25766921,"name":"Bank
+        of Ireland Workbench","lat":53.27234649658203,"lon":-9.053709030151367,"repinned":false,"address_1":"22
+        Mainguard St","city":"Galway","country":"ie","localized_country_name":"Ireland"},"local_time":"18:30","local_date":"2018-05-17","yes_rsvp_count":8,"status":"upcoming","name":"[Galway]
+        Analytics at Speed with Kx Community"}]'}
+    headers:
+      Accept-Ranges: [bytes]
+      Connection: [close]
+      Content-Length: ['16539']
+      Content-Type: [application/json;charset=utf-8]
+      Date: ['Thu, 12 Apr 2018 19:44:07 GMT']
+      ETag: ['"6c32fc79fd99c1bb44afef59fd80880c"']
+      Link: ['<https://api.meetup.com/self/calendar?scroll=since%3A2019-03-13T18%3A30%3A00.000-04%3A00%21245556820&sign=true&only=name%2Cstatus%2Crsvp_limit%2Cyes_rsvp_count%2Clocal_date%2Clocal_time%2Cvenue%2Clink>;
+          rel="next"', '<https://api.meetup.com/self/calendar?scroll=before%3A2018-04-12T18%3A30%3A00.000-04%3A00%21248761834&sign=true&only=name%2Cstatus%2Crsvp_limit%2Cyes_rsvp_count%2Clocal_date%2Clocal_time%2Cvenue%2Clink>;
+          rel="prev"']
+      Server: [Apache-Coyote/1.1]
+      Vary: ['Accept-Encoding,User-Agent,Accept-Language']
+      Via: [1.1 varnish]
+      X-Accepted-OAuth-Scopes: [basic]
+      X-Cache: [MISS]
+      X-Cache-Hits: ['0']
+      X-Meetup-Request-ID: [6217a437-f857-4e5f-9009-1e5be24a707c]
+      X-Meetup-Signed-URL: ['https://api.meetup.com/self/calendar?only=name%2Cstatus%2Crsvp_limit%2Cyes_rsvp_count%2Clocal_date%2Clocal_time%2Cvenue%2Clink']
+      X-Meetup-server: [ee72d7a2e429]
+      X-OAuth-Scopes: [basic]
+      X-RateLimit-Limit: ['30']
+      X-RateLimit-Remaining: ['29']
+      X-RateLimit-Reset: ['10']
+      X-Served-By: [cache-lcy19222-LCY]
+      X-Timer: ['S1523562247.842208,VS0,VE434']
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Connection: [close]
+      Host: [api.meetup.com]
+      User-Agent: [Python-urllib/3.6]
+    method: GET
+    uri: https://api.meetup.com/self/calendar?only=name%2Cstatus%2Crsvp_limit%2Cyes_rsvp_count%2Clocal_date%2Clocal_time%2Cvenue%2Clink
+  response:
+    body: {string: '[{"link":"https://www.meetup.com/DataScientistsIreland/events/248761834/","venue":{"id":25712815,"name":"Bank
+        of Ireland Workbench","lat":52.66349411010742,"lon":-8.627531051635742,"repinned":false,"address_1":"125
+        O''Connell Street","city":"Limerick","country":"ie","localized_country_name":"Ireland"},"local_time":"18:30","local_date":"2018-04-12","yes_rsvp_count":14,"status":"upcoming","name":"[Limerick]
+        Data Visualization with R (April 2018)"},{"link":"https://www.meetup.com/DataScientistsIreland/events/248696033/","venue":{"id":25766921,"name":"Bank
+        of Ireland Workbench","lat":53.27234649658203,"lon":-9.053709030151367,"repinned":false,"address_1":"22
+        Mainguard St","city":"Galway","country":"ie","localized_country_name":"Ireland"},"local_time":"18:30","local_date":"2018-05-17","yes_rsvp_count":8,"status":"upcoming","name":"[Galway]
+        Analytics at Speed with Kx Community"}]'}
+    headers:
+      Accept-Ranges: [bytes]
+      Connection: [close]
+      Content-Length: ['16539']
+      Content-Type: [application/json;charset=utf-8]
+      Date: ['Thu, 12 Apr 2018 19:44:08 GMT']
+      ETag: ['"6c32fc79fd99c1bb44afef59fd80880c"']
+      Link: ['<https://api.meetup.com/self/calendar?scroll=since%3A2019-03-13T18%3A30%3A00.000-04%3A00%21245556820&only=name%2Cstatus%2Crsvp_limit%2Cyes_rsvp_count%2Clocal_date%2Clocal_time%2Cvenue%2Clink>;
+          rel="next"', '<https://api.meetup.com/self/calendar?scroll=before%3A2018-04-12T18%3A30%3A00.000-04%3A00%21248761834&only=name%2Cstatus%2Crsvp_limit%2Cyes_rsvp_count%2Clocal_date%2Clocal_time%2Cvenue%2Clink>;
+          rel="prev"']
+      Server: [Apache-Coyote/1.1]
+      Vary: ['Accept-Encoding,User-Agent,Accept-Language']
+      Via: [1.1 varnish]
+      X-Accepted-OAuth-Scopes: [basic]
+      X-Cache: [MISS]
+      X-Cache-Hits: ['0']
+      X-Meetup-Request-ID: [bdf202c3-480e-49e8-8f46-5ac20e4ce467]
+      X-Meetup-server: [ad8d2d1987d6]
+      X-OAuth-Scopes: [basic]
+      X-RateLimit-Limit: ['30']
+      X-RateLimit-Remaining: ['28']
+      X-RateLimit-Reset: ['9']
+      X-Served-By: [cache-lcy19245-LCY]
+      X-Timer: ['S1523562247.489948,VS0,VE583']
+    status: {code: 200, message: OK}
+version: 1

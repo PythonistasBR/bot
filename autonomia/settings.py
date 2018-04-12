@@ -2,6 +2,7 @@ import logging
 import os
 
 API_TOKEN = os.environ.get("TELEGRAM_API_TOKEN", "")
+FIXER_IO_API_TOKEN = os.environ.get("FIXER_IO_API_TOKEN", "")
 MEETUP_API_KEY = os.environ.get("MEETUP_API_KEY", "")
 LOG_LEVEL = os.environ.get("LOG_LEVEL", "INFO")
 
@@ -11,4 +12,4 @@ logging.basicConfig(
 )
 
 # Configure the enabled apps
-APPS = ["basic", "poll", "help", "weather", "meetup"]
+APPS = ["basic", "poll", "help", "weather", "meetup", "currency"]

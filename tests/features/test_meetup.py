@@ -24,6 +24,14 @@ def test_cmd_meetup(bot, update):
         )
 
 
+@patch("urllib.request.urlopen")
+def test_cmd_meetup_on_error(urlopen_mock, bot, update):
+    urlopen_mock.site_effect = ValueError()
+    with patch.object(update.message, "reply_text") as m:
+        meetup.cmd_meetup(bot, update)
+        m.assert_called_with("To sem saco!")
+
+
 def test_meetup_factory():
     handler = meetup.meetup_factory()
     assert isinstance(handler, CommandHandler)

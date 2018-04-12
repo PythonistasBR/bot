@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/PythonistasBR/bot.svg?branch=master)](https://travis-ci.org/PythonistasBR/bot)
 [![codecov](https://codecov.io/gh/PythonistasBR/bot/branch/master/graph/badge.svg)](https://codecov.io/gh/PythonistasBR/bot)
+[![Maintainability](https://api.codeclimate.com/v1/badges/2ab48f832b7383d5cae6/maintainability)](https://codeclimate.com/github/PythonistasBR/bot/maintainability)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 ![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)
 

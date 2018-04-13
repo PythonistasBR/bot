@@ -1,5 +1,5 @@
 import pytest
-from telegram import Bot, Message, Update, User
+from telegram import Bot, Chat, Message, Update, User
 
 
 @pytest.fixture(scope="session")
@@ -22,3 +22,16 @@ def message(user):
 @pytest.fixture
 def update(message):
     return Update(update_id=1, message=message)
+
+
+@pytest.fixture
+def chat_message():
+    chat = Chat(
+        123993705, "Filhos do Henrique", "group", all_members_are_administrators=True
+    )
+    return Message(message_id=1, from_user=user, date=None, chat=chat, chat_id=chat.id)
+
+
+@pytest.fixture
+def chat_update(chat_message):
+    return Update(update_id=2, message=chat_message)

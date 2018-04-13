@@ -47,23 +47,14 @@ def me_factory():
     return CommandHandler("me", cmd_me, pass_args=True)
 
 
-def cmd_replace(bot, update):
-    """
-    bot and replace are default shit from telegram.ext don't touch
-
-    this method will suggest different words based on patterns defined on the handler
-    TODO: get a parameter with the replacement ID
-    CAADAQADCwADgGntCPaKda9GXFZ3Ag is a sticker file_id, to get the Id start a
-    conversation with the Get Sticker Id Bot. Send the sticker and it
-    will output the id
-    """
+def cmd_larissa(bot, update):
     chat = update.message.chat
     bot.send_sticker(chat.id, "CAADAQADCwADgGntCPaKda9GXFZ3Ag")
 
 
 @bot_handler
 def larissa_factory():
-    return RegexHandler(r".*\b([Hh][Bb]|[[hH].nr.qu.[\s]*[bB].st.s)\b.*", cmd_replace)
+    return RegexHandler(r".*\b([Hh][Bb]|[[hH].nr.qu.[\s]*[bB].st.s)\b.*", cmd_larissa)
 
 
 def cmd_aurelio(bot, update, args):

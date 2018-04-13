@@ -1,0 +1,58 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Connection: [close]
+      Host: [query.yahooapis.com]
+      User-Agent: [Python-urllib/3.6]
+    method: GET
+    uri: https://query.yahooapis.com/v1/public/yql?q=select+%2A+from+weather.forecast+where+woeid+in+%28select+woeid+from+geo.places%281%29+where+text%3D%22Fortaleza%22%29+AND+u%3D%22c%22&format=json
+  response:
+    body: {string: '{"query":{"count":1,"created":"2018-04-12T19:18:15Z","lang":"en-US","results":{"channel":{"units":{"distance":"km","pressure":"mb","speed":"km/h","temperature":"C"},"title":"Yahoo!
+        Weather - Fortaleza, CE, BR","link":"http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-455830/","description":"Yahoo!
+        Weather for Fortaleza, CE, BR","language":"en-us","lastBuildDate":"Thu, 12
+        Apr 2018 04:18 PM BRT","ttl":"60","location":{"city":"Fortaleza","country":"Brazil","region":"
+        CE"},"wind":{"chill":"81","direction":"68","speed":"11.27"},"atmosphere":{"humidity":"77","pressure":"34168.68","rising":"0","visibility":"25.91"},"astronomy":{"sunrise":"5:34
+        am","sunset":"5:36 pm"},"image":{"title":"Yahoo! Weather","width":"142","height":"18","link":"http://weather.yahoo.com","url":"http://l.yimg.com/a/i/brand/purplelogo//uh/us/news-wea.gif"},"item":{"title":"Conditions
+        for Fortaleza, CE, BR at 03:00 PM BRT","lat":"-3.7184","long":"-38.542919","link":"http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-455830/","pubDate":"Thu,
+        12 Apr 2018 03:00 PM BRT","condition":{"code":"28","date":"Thu, 12 Apr 2018
+        03:00 PM BRT","temp":"27","text":"Mostly Cloudy"},"forecast":[{"code":"4","date":"12
+        Apr 2018","day":"Thu","high":"28","low":"23","text":"Thunderstorms"},{"code":"4","date":"13
+        Apr 2018","day":"Fri","high":"27","low":"23","text":"Thunderstorms"},{"code":"4","date":"14
+        Apr 2018","day":"Sat","high":"28","low":"23","text":"Thunderstorms"},{"code":"4","date":"15
+        Apr 2018","day":"Sun","high":"27","low":"23","text":"Thunderstorms"},{"code":"4","date":"16
+        Apr 2018","day":"Mon","high":"28","low":"23","text":"Thunderstorms"},{"code":"47","date":"17
+        Apr 2018","day":"Tue","high":"27","low":"24","text":"Scattered Thunderstorms"},{"code":"4","date":"18
+        Apr 2018","day":"Wed","high":"28","low":"24","text":"Thunderstorms"},{"code":"4","date":"19
+        Apr 2018","day":"Thu","high":"28","low":"24","text":"Thunderstorms"},{"code":"4","date":"20
+        Apr 2018","day":"Fri","high":"27","low":"24","text":"Thunderstorms"},{"code":"47","date":"21
+        Apr 2018","day":"Sat","high":"27","low":"24","text":"Scattered Thunderstorms"}],"description":"<![CDATA[<img
+        src=\"http://l.yimg.com/a/i/us/we/52/28.gif\"/>\n<BR />\n<b>Current Conditions:</b>\n<BR
+        />Mostly Cloudy\n<BR />\n<BR />\n<b>Forecast:</b>\n<BR /> Thu - Thunderstorms.
+        High: 28Low: 23\n<BR /> Fri - Thunderstorms. High: 27Low: 23\n<BR /> Sat -
+        Thunderstorms. High: 28Low: 23\n<BR /> Sun - Thunderstorms. High: 27Low: 23\n<BR
+        /> Mon - Thunderstorms. High: 28Low: 23\n<BR />\n<BR />\n<a href=\"http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-455830/\">Full
+        Forecast at Yahoo! Weather</a>\n<BR />\n<BR />\n<BR />\n]]>","guid":{"isPermaLink":"false"}}}}}}'}
+    headers:
+      Access-Control-Allow-Origin: ['*']
+      Age: ['0']
+      Cache-Control: [no-cache]
+      Connection: [close]
+      Content-Type: [application/json;charset=utf-8]
+      Date: ['Thu, 12 Apr 2018 19:18:15 GMT']
+      Expect-CT: ['max-age=31536000; report-uri="http://csp.yahoo.com/beacon/csp?src=yahoocom-expect-ct-report-only"']
+      Public-Key-Pins-Report-Only: ['max-age=2592000; pin-sha256="2oALgLKofTmeZvoZ1y/fSZg7R9jPMix8eVA6DH4o/q8=";
+          pin-sha256="cAajgxHlj7GTSEIzIYIQxmEloOSoJq7VOaxWHfv72QM="; pin-sha256="SVqWumuteCQHvVIaALrOZXuzVVVeS7f4FGxxu6V+es4=";
+          pin-sha256="UZJDjsNp1+4M5x9cbbdflB779y5YRBcV6Z6rBMLIrO4="; pin-sha256="JbQbUG5JMJUoI6brnx0x3vZF6jilxsapbXGVfjhN8Fg=";
+          pin-sha256="lnsM2T/O9/J84sJFdnrpsFp3awZJ+ZZbYpCWhGloaHI="; pin-sha256="h6801m+z8v3zbgkRHpq6L29Esgfzhj89C1SyUCOQmqU=";
+          pin-sha256="SQVGZiOrQXi+kqxcvWWE96HhfydlLVqFr4lQTqI5qqo="; pin-sha256="q5hJUnat8eyv8o81xTBIeB5cFxjaucjmelBPT2pRMo8=";
+          pin-sha256="vPtEqrmtAhAVcGtBIep2HIHJ6IlnWQ9vlK50TciLePs="; pin-sha256="lpkiXF3lLlbN0y3y6W0c/qWqPKC7Us2JM8I7XCdEOCA=";
+          pin-sha256="r/mIkG3eEpVdm+u/ko/cwxzOMo1bk4TyHIlByibiA5E="; pin-sha256="WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18=";
+          pin-sha256="2fRAUXyxl4A1/XHrKNBmc8bTkzA7y4FB/GLJuNAzCqY="; pin-sha256="dolnbtzEBnELx/9lOEQ22e6OZO/QNb6VSSX2XHA3E7A=";
+          includeSubdomains; report-uri="http://csp.yahoo.com/beacon/csp?src=yahoocom-hpkp-report-only"']
+      Server: [ATS]
+      Strict-Transport-Security: [max-age=31536000]
+      Via: ['http/1.1 a05.ue.bf1.yahoo.net (ApacheTrafficServer [cMsSf ])']
+      X-Content-Type-Options: [nosniff]
+    status: {code: 200, message: OK}
+version: 1

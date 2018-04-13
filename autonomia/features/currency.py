@@ -27,7 +27,7 @@ def cmd_convert(bot, update, args):
             partial = amount / rates[source]
             result = rates[target] * float(partial)
 
-        msg = "{0:.2f} {1} is equals to {2:.2f} {3}".format(amount, source, result, target)
+        msg = f"{amount:.2f} {source} is equals to {result:.2f} {target}"
         update.message.reply_text(msg)
 
     except ValueError:

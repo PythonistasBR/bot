@@ -24,6 +24,7 @@ make run
 ```
 Usage: make command
 clean                          Clean all compiled python code
+coverage                       Run test and create HTML coverage report
 fmt                            Format code using iSort and Black
 install-dev                    Install all dependencies
 install                        Install only prod dependencies

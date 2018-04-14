@@ -188,10 +188,105 @@ def test_poll_choice_with_existing_choice(bot, update):
         m.assert_called_with("Sim was already added")
 
 
+def test_start_voting_poll(bot, update):
+    bot.poll = poll.Poll("Vai ter dojo?")
+    bot.poll.add_choice("Sim")
+    bot.poll.add_choice("Não")
+    with patch.object(update.message, "reply_text") as m:
+        next_state = poll.poll_start_voting(bot, update)
+        assert next_state == poll.VOTING
+        expected = (
+            "Question: Vai ter dojo?\n"
+            "0. Sim (0)\n"
+            "1. Não (0)\n\n"
+            "Choose an option: /v <choice_id>"
+        )
+        m.assert_called_with(expected)
+
+
+def test_start_voting_poll_without_enough_choices(bot, update):
+    bot.poll = poll.Poll("Vai ter dojo?")
+    bot.poll.add_choice("Sim")
+    with patch.object(update.message, "reply_text") as m:
+        next_state = poll.poll_start_voting(bot, update)
+        assert next_state == poll.CHOICES
+        m.assert_called_with("Please, add at least 2 choices")
+
+
+def test_voting_correct_choice(bot, update):
+    bot.poll = poll.Poll("Vai ter dojo?")
+    bot.poll.add_choice("Sim")
+    bot.poll.add_choice("Não")
+    next_state = poll.poll_vote(bot, update, args=["1"])
+    assert next_state == poll.VOTING
+    assert bot.poll.votes[update.message.from_user] == 1
+
+
+def test_voting_wrong_choice(bot, update):
+    bot.poll = poll.Poll("Vai ter dojo?")
+    bot.poll.add_choice("Sim")
+    bot.poll.add_choice("Não")
+    with patch.object(update.message, "reply_text") as m:
+        next_state = poll.poll_vote(bot, update, args=["3"])
+        assert next_state == poll.VOTING
+        m.assert_called_with("Invalid option, please choose:\n0. Sim (0)\n1. Não (0)\n")
+
+
+def test_voting_same_choice(bot, update):
+    bot.poll = poll.Poll("Vai ter dojo?")
+    bot.poll.add_choice("Sim")
+    bot.poll.add_choice("Não")
+    next_state = poll.poll_vote(bot, update, args=["1"])
+    assert next_state == poll.VOTING
+    with patch.object(update.message, "reply_text") as m:
+        next_state = poll.poll_vote(bot, update, args=["1"])
+        assert next_state == poll.VOTING
+        m.assert_called_with("You already voted on this choice")
+
+
+def test_result(bot, update, user):
+    bot.poll = poll.Poll("Vai ter dojo?")
+    bot.poll.add_choice("Sim")
+    bot.poll.add_choice("Não")
+    bot.poll.vote(user, 0)
+    with patch.object(update.message, "reply_text") as m:
+        next_state = poll.poll_result(bot, update)
+        assert next_state == poll.VOTING
+        expected = (
+            "Question: Vai ter dojo?\n"
+            "0. Sim (1)\n"
+            "\t[alanturing]\n"
+            "1. Não (0)\n\n"
+            "Winner: Sim - 1(100.00%)"
+        )
+        m.assert_called_with(expected)
+
+
+def test_finish(bot, update, user):
+    bot.poll = poll.Poll("Vai ter dojo?")
+    bot.poll.add_choice("Sim")
+    bot.poll.add_choice("Não")
+    bot.poll.vote(user, 0)
+    with patch.object(update.message, "reply_text") as m:
+        next_state = poll.poll_finish(bot, update)
+        assert bot.poll is None
+        assert next_state == ConversationHandler.END
+        expected = (
+            "Poll finished!\n"
+            "Question: Vai ter dojo?\n"
+            "0. Sim (1)\n"
+            "\t[alanturing]\n"
+            "1. Não (0)\n\n"
+            "Winner: Sim - 1(100.00%)"
+        )
+        m.assert_called_with(expected)
+
+
 def test_poll_cancel(bot, update):
     bot.poll = poll.Poll("Vai ter dojo?")
     with patch.object(update.message, "reply_text") as m:
         next_state = poll.poll_cancel(bot, update)
+        assert bot.poll is None
         assert next_state == ConversationHandler.END
         m.assert_called_with("Poll cancelled!")
 

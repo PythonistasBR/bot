@@ -1,0 +1,112 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Connection: [close]
+      Host: [data.smartdublin.ie]
+      User-Agent: [Python-urllib/3.6]
+    method: GET
+    uri: https://data.smartdublin.ie/cgi-bin/rtpi/realtimebusinformation?stopid=1020&format=json
+  response:
+    body: {string: "{\"errorcode\":\"0\",\"errormessage\":\"\",\"numberofresults\":19,\"stopid\":\"1020\",\"timestamp\":\"15\\/04\\/2018
+        18:35:43\",\"results\":[{\"arrivaldatetime\":\"15\\/04\\/2018 18:35:58\",\"duetime\":\"Due\",\"departuredatetime\":\"15\\/04\\/2018
+        18:35:58\",\"departureduetime\":\"Due\",\"scheduledarrivaldatetime\":\"15\\/04\\/2018
+        18:34:00\",\"scheduleddeparturedatetime\":\"15\\/04\\/2018 18:34:00\",\"destination\":\"Stocking
+        Ave\",\"destinationlocalized\":\"Ascaill Stoic\xEDn \",\"origin\":\"Ringsend
+        Road\",\"originlocalized\":\"Ringsend Road\",\"direction\":\"Outbound\",\"operator\":\"bac\",\"additionalinformation\":\"\",\"lowfloorstatus\":\"no\",\"route\":\"15B\",\"sourcetimestamp\":\"15\\/04\\/2018
+        18:34:22\",\"monitored\":\"true\"},{\"arrivaldatetime\":\"15\\/04\\/2018 18:41:07\",\"duetime\":\"5\",\"departuredatetime\":\"15\\/04\\/2018
+        18:41:07\",\"departureduetime\":\"5\",\"scheduledarrivaldatetime\":\"15\\/04\\/2018
+        18:36:00\",\"scheduleddeparturedatetime\":\"15\\/04\\/2018 18:36:00\",\"destination\":\"Ballycullen
+        Road\",\"destinationlocalized\":\"Br Bhaile U\xED Chuilinn\",\"origin\":\"Clongriffin\",\"originlocalized\":\"Cluain
+        Ghr\xEDf\xEDn\",\"direction\":\"Outbound\",\"operator\":\"bac\",\"additionalinformation\":\"\",\"lowfloorstatus\":\"no\",\"route\":\"15\",\"sourcetimestamp\":\"15\\/04\\/2018
+        18:31:04\",\"monitored\":\"true\"},{\"arrivaldatetime\":\"15\\/04\\/2018 18:42:13\",\"duetime\":\"6\",\"departuredatetime\":\"15\\/04\\/2018
+        18:42:13\",\"departureduetime\":\"6\",\"scheduledarrivaldatetime\":\"15\\/04\\/2018
+        18:48:00\",\"scheduleddeparturedatetime\":\"15\\/04\\/2018 18:48:00\",\"destination\":\"Dundrum
+        LUAS\",\"destinationlocalized\":\"D\xFAn Droma \",\"origin\":\"Maryfield Drive\",\"originlocalized\":\"Maryfield
+        Drive\",\"direction\":\"Outbound\",\"operator\":\"bac\",\"additionalinformation\":\"\",\"lowfloorstatus\":\"no\",\"route\":\"14\",\"sourcetimestamp\":\"15\\/04\\/2018
+        18:34:22\",\"monitored\":\"true\"},{\"arrivaldatetime\":\"15\\/04\\/2018 18:44:56\",\"duetime\":\"9\",\"departuredatetime\":\"15\\/04\\/2018
+        18:44:56\",\"departureduetime\":\"9\",\"scheduledarrivaldatetime\":\"15\\/04\\/2018
+        18:45:00\",\"scheduleddeparturedatetime\":\"15\\/04\\/2018 18:45:00\",\"destination\":\"Blessington\",\"destinationlocalized\":\"Baile
+        Coim\xEDn\",\"origin\":\"Poolbeg Street\",\"originlocalized\":\"Poolbeg Street\",\"direction\":\"Outbound\",\"operator\":\"bac\",\"additionalinformation\":\"\",\"lowfloorstatus\":\"no\",\"route\":\"65\",\"sourcetimestamp\":\"15\\/04\\/2018
+        17:46:30\",\"monitored\":\"true\"},{\"arrivaldatetime\":\"15\\/04\\/2018 18:46:53\",\"duetime\":\"11\",\"departuredatetime\":\"15\\/04\\/2018
+        18:46:53\",\"departureduetime\":\"11\",\"scheduledarrivaldatetime\":\"15\\/04\\/2018
+        18:48:00\",\"scheduleddeparturedatetime\":\"15\\/04\\/2018 18:48:00\",\"destination\":\"Rathmines\",\"destinationlocalized\":\"R\xE1th
+        Maonais\",\"origin\":\"IKEA\",\"originlocalized\":\"IKEA\",\"direction\":\"Outbound\",\"operator\":\"bac\",\"additionalinformation\":\"\",\"lowfloorstatus\":\"no\",\"route\":\"140\",\"sourcetimestamp\":\"15\\/04\\/2018
+        18:34:22\",\"monitored\":\"true\"},{\"arrivaldatetime\":\"15\\/04\\/2018 18:50:43\",\"duetime\":\"14\",\"departuredatetime\":\"15\\/04\\/2018
+        18:50:43\",\"departureduetime\":\"14\",\"scheduledarrivaldatetime\":\"15\\/04\\/2018
+        18:49:00\",\"scheduleddeparturedatetime\":\"15\\/04\\/2018 18:49:00\",\"destination\":\"Limekiln
+        Ave\",\"destinationlocalized\":\"Limekiln Ave\",\"origin\":\"Ringsend Road\",\"originlocalized\":\"Ringsend
+        Road\",\"direction\":\"Outbound\",\"operator\":\"bac\",\"additionalinformation\":\"\",\"lowfloorstatus\":\"no\",\"route\":\"15A\",\"sourcetimestamp\":\"15\\/04\\/2018
+        18:34:22\",\"monitored\":\"true\"},{\"arrivaldatetime\":\"15\\/04\\/2018 18:54:28\",\"duetime\":\"18\",\"departuredatetime\":\"15\\/04\\/2018
+        18:54:28\",\"departureduetime\":\"18\",\"scheduledarrivaldatetime\":\"15\\/04\\/2018
+        18:58:00\",\"scheduleddeparturedatetime\":\"15\\/04\\/2018 18:58:00\",\"destination\":\"Ballycullen
+        Road\",\"destinationlocalized\":\"Br Bhaile U\xED Chuilinn\",\"origin\":\"Clongriffin\",\"originlocalized\":\"Cluain
+        Ghr\xEDf\xEDn\",\"direction\":\"Outbound\",\"operator\":\"bac\",\"additionalinformation\":\"\",\"lowfloorstatus\":\"no\",\"route\":\"15\",\"sourcetimestamp\":\"15\\/04\\/2018
+        18:34:22\",\"monitored\":\"true\"},{\"arrivaldatetime\":\"15\\/04\\/2018 19:03:16\",\"duetime\":\"27\",\"departuredatetime\":\"15\\/04\\/2018
+        19:03:16\",\"departureduetime\":\"27\",\"scheduledarrivaldatetime\":\"15\\/04\\/2018
+        19:08:00\",\"scheduleddeparturedatetime\":\"15\\/04\\/2018 19:08:00\",\"destination\":\"Kimmage\",\"destinationlocalized\":\"Camaigh\",\"origin\":\"Charlestown
+        Rd\",\"originlocalized\":\"Charlestown Rd\",\"direction\":\"Outbound\",\"operator\":\"bac\",\"additionalinformation\":\"\",\"lowfloorstatus\":\"no\",\"route\":\"83\",\"sourcetimestamp\":\"15\\/04\\/2018
+        18:32:43\",\"monitored\":\"true\"},{\"arrivaldatetime\":\"15\\/04\\/2018 19:04:22\",\"duetime\":\"28\",\"departuredatetime\":\"15\\/04\\/2018
+        19:04:22\",\"departureduetime\":\"28\",\"scheduledarrivaldatetime\":\"15\\/04\\/2018
+        19:04:00\",\"scheduleddeparturedatetime\":\"15\\/04\\/2018 19:04:00\",\"destination\":\"Stocking
+        Ave\",\"destinationlocalized\":\"Ascaill Stoic\xEDn \",\"origin\":\"Ringsend
+        Road\",\"originlocalized\":\"Ringsend Road\",\"direction\":\"Outbound\",\"operator\":\"bac\",\"additionalinformation\":\"\",\"lowfloorstatus\":\"no\",\"route\":\"15B\",\"sourcetimestamp\":\"15\\/04\\/2018
+        18:04:40\",\"monitored\":\"true\"},{\"arrivaldatetime\":\"15\\/04\\/2018 19:05:55\",\"duetime\":\"30\",\"departuredatetime\":\"15\\/04\\/2018
+        19:05:55\",\"departureduetime\":\"30\",\"scheduledarrivaldatetime\":\"15\\/04\\/2018
+        18:48:00\",\"scheduleddeparturedatetime\":\"15\\/04\\/2018 18:48:00\",\"destination\":\"Kimmage\",\"destinationlocalized\":\"Camaigh\",\"origin\":\"Charlestown
+        Rd\",\"originlocalized\":\"Charlestown Rd\",\"direction\":\"Outbound\",\"operator\":\"bac\",\"additionalinformation\":\"\",\"lowfloorstatus\":\"no\",\"route\":\"83\",\"sourcetimestamp\":\"15\\/04\\/2018
+        18:24:28\",\"monitored\":\"true\"},{\"arrivaldatetime\":\"15\\/04\\/2018 19:08:10\",\"duetime\":\"32\",\"departuredatetime\":\"15\\/04\\/2018
+        19:08:10\",\"departureduetime\":\"32\",\"scheduledarrivaldatetime\":\"15\\/04\\/2018
+        19:08:00\",\"scheduleddeparturedatetime\":\"15\\/04\\/2018 19:08:00\",\"destination\":\"Rathmines\",\"destinationlocalized\":\"R\xE1th
+        Maonais\",\"origin\":\"IKEA\",\"originlocalized\":\"IKEA\",\"direction\":\"Outbound\",\"operator\":\"bac\",\"additionalinformation\":\"\",\"lowfloorstatus\":\"no\",\"route\":\"140\",\"sourcetimestamp\":\"15\\/04\\/2018
+        18:09:36\",\"monitored\":\"true\"},{\"arrivaldatetime\":\"15\\/04\\/2018 19:11:30\",\"duetime\":\"35\",\"departuredatetime\":\"15\\/04\\/2018
+        19:11:30\",\"departureduetime\":\"35\",\"scheduledarrivaldatetime\":\"15\\/04\\/2018
+        19:12:00\",\"scheduleddeparturedatetime\":\"15\\/04\\/2018 19:12:00\",\"destination\":\"Dundrum
+        LUAS\",\"destinationlocalized\":\"D\xFAn Droma \",\"origin\":\"Maryfield Drive\",\"originlocalized\":\"Maryfield
+        Drive\",\"direction\":\"Outbound\",\"operator\":\"bac\",\"additionalinformation\":\"\",\"lowfloorstatus\":\"no\",\"route\":\"14\",\"sourcetimestamp\":\"15\\/04\\/2018
+        18:12:55\",\"monitored\":\"true\"},{\"arrivaldatetime\":\"15\\/04\\/2018 19:12:04\",\"duetime\":\"36\",\"departuredatetime\":\"15\\/04\\/2018
+        19:12:04\",\"departureduetime\":\"36\",\"scheduledarrivaldatetime\":\"15\\/04\\/2018
+        19:12:00\",\"scheduleddeparturedatetime\":\"15\\/04\\/2018 19:12:00\",\"destination\":\"Ballycullen
+        Road\",\"destinationlocalized\":\"Br Bhaile U\xED Chuilinn\",\"origin\":\"Clongriffin\",\"originlocalized\":\"Cluain
+        Ghr\xEDf\xEDn\",\"direction\":\"Outbound\",\"operator\":\"bac\",\"additionalinformation\":\"\",\"lowfloorstatus\":\"no\",\"route\":\"15\",\"sourcetimestamp\":\"15\\/04\\/2018
+        18:12:55\",\"monitored\":\"true\"},{\"arrivaldatetime\":\"15\\/04\\/2018 19:14:46\",\"duetime\":\"39\",\"departuredatetime\":\"15\\/04\\/2018
+        19:14:46\",\"departureduetime\":\"39\",\"scheduledarrivaldatetime\":\"15\\/04\\/2018
+        19:15:00\",\"scheduleddeparturedatetime\":\"15\\/04\\/2018 19:15:00\",\"destination\":\"Citywest\",\"destinationlocalized\":\"Iarthar
+        na Cathrach \",\"origin\":\"Poolbeg Street\",\"originlocalized\":\"Poolbeg
+        Street\",\"direction\":\"Outbound\",\"operator\":\"bac\",\"additionalinformation\":\"\",\"lowfloorstatus\":\"no\",\"route\":\"65B\",\"sourcetimestamp\":\"15\\/04\\/2018
+        18:16:12\",\"monitored\":\"true\"},{\"arrivaldatetime\":\"15\\/04\\/2018 19:19:24\",\"duetime\":\"43\",\"departuredatetime\":\"15\\/04\\/2018
+        19:19:24\",\"departureduetime\":\"43\",\"scheduledarrivaldatetime\":\"15\\/04\\/2018
+        19:19:00\",\"scheduleddeparturedatetime\":\"15\\/04\\/2018 19:19:00\",\"destination\":\"Limekiln
+        Ave\",\"destinationlocalized\":\"Limekiln Ave\",\"origin\":\"Ringsend Road\",\"originlocalized\":\"Ringsend
+        Road\",\"direction\":\"Outbound\",\"operator\":\"bac\",\"additionalinformation\":\"\",\"lowfloorstatus\":\"no\",\"route\":\"15A\",\"sourcetimestamp\":\"15\\/04\\/2018
+        18:19:31\",\"monitored\":\"true\"},{\"arrivaldatetime\":\"15\\/04\\/2018 19:25:56\",\"duetime\":\"50\",\"departuredatetime\":\"15\\/04\\/2018
+        19:25:56\",\"departureduetime\":\"50\",\"scheduledarrivaldatetime\":\"15\\/04\\/2018
+        19:26:00\",\"scheduleddeparturedatetime\":\"15\\/04\\/2018 19:26:00\",\"destination\":\"Rathmines\",\"destinationlocalized\":\"R\xE1th
+        Maonais\",\"origin\":\"IKEA\",\"originlocalized\":\"IKEA\",\"direction\":\"Outbound\",\"operator\":\"bac\",\"additionalinformation\":\"\",\"lowfloorstatus\":\"no\",\"route\":\"140\",\"sourcetimestamp\":\"15\\/04\\/2018
+        18:26:07\",\"monitored\":\"true\"},{\"arrivaldatetime\":\"15\\/04\\/2018 19:26:24\",\"duetime\":\"50\",\"departuredatetime\":\"15\\/04\\/2018
+        19:26:24\",\"departureduetime\":\"50\",\"scheduledarrivaldatetime\":\"15\\/04\\/2018
+        19:23:00\",\"scheduleddeparturedatetime\":\"15\\/04\\/2018 19:23:00\",\"destination\":\"Kimmage\",\"destinationlocalized\":\"Camaigh\",\"origin\":\"Charlestown
+        Rd\",\"originlocalized\":\"Charlestown Rd\",\"direction\":\"Outbound\",\"operator\":\"bac\",\"additionalinformation\":\"\",\"lowfloorstatus\":\"no\",\"route\":\"83A\",\"sourcetimestamp\":\"15\\/04\\/2018
+        18:27:46\",\"monitored\":\"true\"},{\"arrivaldatetime\":\"15\\/04\\/2018 19:32:04\",\"duetime\":\"56\",\"departuredatetime\":\"15\\/04\\/2018
+        19:32:04\",\"departureduetime\":\"56\",\"scheduledarrivaldatetime\":\"15\\/04\\/2018
+        19:32:00\",\"scheduleddeparturedatetime\":\"15\\/04\\/2018 19:32:00\",\"destination\":\"Ballycullen
+        Road\",\"destinationlocalized\":\"Br Bhaile U\xED Chuilinn\",\"origin\":\"Clongriffin\",\"originlocalized\":\"Cluain
+        Ghr\xEDf\xEDn\",\"direction\":\"Outbound\",\"operator\":\"bac\",\"additionalinformation\":\"\",\"lowfloorstatus\":\"no\",\"route\":\"15\",\"sourcetimestamp\":\"15\\/04\\/2018
+        18:32:43\",\"monitored\":\"true\"},{\"arrivaldatetime\":\"15\\/04\\/2018 19:34:05\",\"duetime\":\"58\",\"departuredatetime\":\"15\\/04\\/2018
+        19:34:05\",\"departureduetime\":\"58\",\"scheduledarrivaldatetime\":\"15\\/04\\/2018
+        19:34:00\",\"scheduleddeparturedatetime\":\"15\\/04\\/2018 19:34:00\",\"destination\":\"Stocking
+        Ave\",\"destinationlocalized\":\"Ascaill Stoic\xEDn \",\"origin\":\"Ringsend
+        Road\",\"originlocalized\":\"Ringsend Road\",\"direction\":\"Outbound\",\"operator\":\"bac\",\"additionalinformation\":\"\",\"lowfloorstatus\":\"no\",\"route\":\"15B\",\"sourcetimestamp\":\"15\\/04\\/2018
+        18:34:22\",\"monitored\":\"true\"}]}"}
+    headers:
+      Access-Control-Allow-Origin: ['*']
+      Cache-Control: [private]
+      Connection: [close]
+      Content-Length: ['10011']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Sun, 15 Apr 2018 17:35:43 GMT']
+      Server: [nginx]
+      X-AspNet-Version: [4.0.30319]
+      X-Powered-By: [ASP.NET]
+    status: {code: 200, message: OK}
+version: 1

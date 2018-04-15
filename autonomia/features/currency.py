@@ -6,7 +6,7 @@ from telegram.ext import CommandHandler
 from autonomia.core import bot_handler
 from autonomia.settings import FIXER_IO_API_TOKEN as token
 
-FIXER_IO_API_ENDPOINT = "http://data.fixer.io/api/latest?access_key={0}".format(token)
+FIXER_IO_API_ENDPOINT = f"http://data.fixer.io/api/latest?access_key={token}"
 
 
 def cmd_convert(bot, update, args):
@@ -16,7 +16,7 @@ def cmd_convert(bot, update, args):
         amount = float(amount)
         source = source.upper()
         target = target.upper()
-        req = request.urlopen(request.Request(FIXER_IO_API_ENDPOINT))
+        req = request.urlopen(FIXER_IO_API_ENDPOINT)
         rates = json.loads(req.read())["rates"]
 
         if source == "EUR":

@@ -26,8 +26,8 @@ import sys
 
 from telegram.ext import Updater
 
+from autonomia import settings
 from autonomia.core import autodiscovery, get_handlers
-from autonomia.settings import API_TOKEN, APPS
 
 logger = logging.getLogger(__name__)
 
@@ -38,8 +38,12 @@ def error(bot, update, error):
 
 
 def main():
-    updater = Updater(API_TOKEN)
-    autodiscovery(APPS)
+    if not settings.API_TOKEN:
+        logger.critical("Telegram API Token is missing(TELEGRAM_API_TOKEN)")
+        return 1
+
+    updater = Updater(settings.API_TOKEN)
+    autodiscovery(settings.APPS)
     dp = updater.dispatcher
     for handler in get_handlers():
         dp.add_handler(handler)
@@ -47,10 +51,8 @@ def main():
     dp.add_error_handler(error)
     updater.start_polling()
     updater.idle()
+    return 0
 
 
-if __name__ == "__main__":
-    if not API_TOKEN:
-        logger.critical("Telegram API Token is missing(TELEGRAM_API_TOKEN)")
-        sys.exit(1)
-    main()
+if __name__ == "__main__":  # pragma: no cover
+    sys.exit(main())

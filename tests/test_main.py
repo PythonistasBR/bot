@@ -7,7 +7,9 @@ from autonomia import __main__ as main_module
 
 @patch("autonomia.__main__.autodiscovery")
 @patch("autonomia.__main__.get_handlers")
-def test_main(mock_get_handler, autodiscovery_mock):
+@patch("autonomia.__main__.settings")
+def test_main(mock_settings, mock_get_handler, autodiscovery_mock):
+    mock_settings.API_TOKEN = "1234:TESTING:TOKEN"
 
     def example_cmd():
         print("ok")

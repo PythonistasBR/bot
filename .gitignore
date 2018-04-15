@@ -1,4 +1,5 @@
 .env
 .coverage
 .pytest_cache
+htmlcov
 .vscode

@@ -88,7 +88,7 @@ class Poll:
 def poll_new(bot, update, args):
     question = " ".join(args)
     if not question:
-        update.message.reply_text(f"Use: /poll <text>")
+        update.message.reply_text("Use: /poll <text>")
         return
 
     bot.poll = Poll(question)
@@ -104,7 +104,7 @@ def poll_new(bot, update, args):
 def poll_choice(bot, update, args):
     choice = " ".join(args)
     if not choice:
-        update.message.reply_text(f"Use: /choice <text>")
+        update.message.reply_text("Use: /choice <text>")
         return CHOICES
 
     try:

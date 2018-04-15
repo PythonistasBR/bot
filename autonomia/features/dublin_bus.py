@@ -1,43 +1,51 @@
 import json
+import logging
 from urllib import parse, request
 
 from telegram.ext import CommandHandler
+
 from autonomia.core import bot_handler
 
-def _format_result(location):
-    DUBLIN_BUS_URL = "https://data.smartdublin.ie/cgi-bin/rtpi/realtimebusinformation?"
+logger = logging.getLogger(__name__)
 
-    bus_stop = location
 
-    url = DUBLIN_BUS_URL + parse.urlencode({"stopid": bus_stop}) + "&format=json"
-    result = request.urlopen(url).read().decode('utf8').replace("'", '"');
+DUBLIN_BUS_URL = "https://data.smartdublin.ie/cgi-bin/rtpi/realtimebusinformation?"
 
-    data = json.loads(result)
 
-    array = data["results"]
+def _get_timetable(bus_stop):
+    url = DUBLIN_BUS_URL + parse.urlencode({"stopid": bus_stop, "format": "json"})
+    result = json.loads(request.urlopen(url).read().decode("utf8"))
+    return result["results"]
 
-    result = ""
 
-    for value in array[:5]:
-        msg = "Route {route} Duetime {duetime}".format(route=value["route"],duetime=value["duetime"])
-        print(msg)
-        result += msg +"\n"
+def _format_timetable(bus_stop, data):
+    if not data:
+        return f"Não há informação para: {bus_stop}"
 
-    return result
+    msg = f"Bus stop {bus_stop}:\n"
+    for time in data[:5]:
+        msg += f"    {time['route']} - duetime: {time['duetime']}\n"
+    return msg
 
 
 def cmd_dublin_bus(bot, update, args):
     try:
-        location = " ".join(args)
-        result = _format_result(location)
-        update.message.reply_text(result)
+        bus_stop = " ".join(args)
+        if not bus_stop:
+            update.message.reply_text("Use: /bus <bus stop number>")
+            return
+
+        bus_timetable = _get_timetable(bus_stop)
+        msg = _format_timetable(bus_stop, bus_timetable)
+        update.message.reply_text(msg)
     except Exception as e:
         logger.error(e, "To sem saco!", exc_info=1)
         update.message.reply_text("To sem saco!")
 
+
 @bot_handler
 def dublin_bus_factory():
     """
-    /bus - list the bus from the station
+    /bus <bus_stop> - list the bus from the station
     """
     return CommandHandler("bus", cmd_dublin_bus, pass_args=True)

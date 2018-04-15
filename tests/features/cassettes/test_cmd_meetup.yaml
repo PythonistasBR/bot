@@ -11,7 +11,11 @@ interactions:
     body: {string: '[{"link":"https://www.meetup.com/DataScientistsIreland/events/248761834/","venue":{"id":25712815,"name":"Bank
         of Ireland Workbench","lat":52.66349411010742,"lon":-8.627531051635742,"repinned":false,"address_1":"125
         O''Connell Street","city":"Limerick","country":"ie","localized_country_name":"Ireland"},"local_time":"18:30","local_date":"2018-04-12","yes_rsvp_count":14,"status":"upcoming","name":"[Limerick]
+        Data Visualization with R (April 2018)"},{"link":"https://www.meetup.com/DataScientistsIreland/events/248761834/","local_time":"18:30","local_date":"2018-04-12","yes_rsvp_count":14,"status":"upcoming","name":"[Limerick]
         Data Visualization with R (April 2018)"},{"link":"https://www.meetup.com/DataScientistsIreland/events/248696033/","venue":{"id":25766921,"name":"Bank
+        of Ireland Workbench","lat":53.27234649658203,"lon":-9.053709030151367,"repinned":false,"address_1":"22
+        Mainguard St","city":"Galway","country":"ie","localized_country_name":"Ireland"},"local_time":"18:30","local_date":"2018-04-17","yes_rsvp_count":8,"status":"cancelled","name":"[Galway]
+        Analytics at Speed with Kx Community"},{"link":"https://www.meetup.com/DataScientistsIreland/events/248696033/","venue":{"id":25766921,"name":"Bank
         of Ireland Workbench","lat":53.27234649658203,"lon":-9.053709030151367,"repinned":false,"address_1":"22
         Mainguard St","city":"Galway","country":"ie","localized_country_name":"Ireland"},"local_time":"18:30","local_date":"2018-05-17","yes_rsvp_count":8,"status":"upcoming","name":"[Galway]
         Analytics at Speed with Kx Community"}]'}
@@ -53,7 +57,11 @@ interactions:
     body: {string: '[{"link":"https://www.meetup.com/DataScientistsIreland/events/248761834/","venue":{"id":25712815,"name":"Bank
         of Ireland Workbench","lat":52.66349411010742,"lon":-8.627531051635742,"repinned":false,"address_1":"125
         O''Connell Street","city":"Limerick","country":"ie","localized_country_name":"Ireland"},"local_time":"18:30","local_date":"2018-04-12","yes_rsvp_count":14,"status":"upcoming","name":"[Limerick]
+        Data Visualization with R (April 2018)"}, {"link":"https://www.meetup.com/DataScientistsIreland/events/248761834/","local_time":"18:30","local_date":"2018-04-12","yes_rsvp_count":14,"status":"upcoming","name":"[Limerick]
         Data Visualization with R (April 2018)"},{"link":"https://www.meetup.com/DataScientistsIreland/events/248696033/","venue":{"id":25766921,"name":"Bank
+        of Ireland Workbench","lat":53.27234649658203,"lon":-9.053709030151367,"repinned":false,"address_1":"22
+        Mainguard St","city":"Galway","country":"ie","localized_country_name":"Ireland"},"local_time":"18:30","local_date":"2018-04-17","yes_rsvp_count":8,"status":"cancelled","name":"[Galway]
+        Analytics at Speed with Kx Community"},{"link":"https://www.meetup.com/DataScientistsIreland/events/248696033/","venue":{"id":25766921,"name":"Bank
         of Ireland Workbench","lat":53.27234649658203,"lon":-9.053709030151367,"repinned":false,"address_1":"22
         Mainguard St","city":"Galway","country":"ie","localized_country_name":"Ireland"},"local_time":"18:30","local_date":"2018-05-17","yes_rsvp_count":8,"status":"upcoming","name":"[Galway]
         Analytics at Speed with Kx Community"}]'}

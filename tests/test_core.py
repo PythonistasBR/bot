@@ -24,7 +24,7 @@ def test_autodiscovery_failure_module():
 
 
 def test_bot_handler_decorator():
-    core.HANDLERS = []
+    core.BotRouter.clean()
 
     @core.bot_handler
     def example_factory():
@@ -34,13 +34,12 @@ def test_bot_handler_decorator():
     def example_factory2():
         pass
 
-    assert example_factory in core.HANDLERS
-    assert example_factory2 in core.HANDLERS
+    assert example_factory in core.get_lazy_handlers()
+    assert example_factory2 in core.get_lazy_handlers()
 
 
 def test_get_lazy_handlers():
-
-    core.HANDLERS = []
+    core.BotRouter.clean()
 
     @core.bot_handler
     def example_factory():
@@ -55,8 +54,7 @@ def test_get_lazy_handlers():
 
 
 def test_get_handlers():
-
-    core.HANDLERS = []
+    core.BotRouter.clean()
 
     @core.bot_handler
     def example_factory():

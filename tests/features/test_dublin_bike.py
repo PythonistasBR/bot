@@ -5,6 +5,7 @@ from telegram.ext import CommandHandler
 
 from autonomia.features import dublin_bike
 
+
 """
 @pytest.mark.vcr
 def test_cmd_dublin_bike(bot, update):
@@ -17,6 +18,7 @@ def test_cmd_dublin_bike(bot, update):
             "    Location FITZWILLIAM SQUARE EAST\n"
         )
 """
+
 
 def test_cmd_dublin_bike_without_bike_stop(bot, update):
     with patch.object(update.message, "reply_text") as m:

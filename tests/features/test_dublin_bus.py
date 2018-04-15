@@ -34,6 +34,11 @@ def test_cmd_dublin_bus_on_error(urlopen_mock, bot, update):
         m.assert_called_with("To sem saco!")
 
 
+def test_formating_dublin_bus_message():
+    msg = dublin_bus._format_timetable("Invalid", [])
+    assert msg == "Não há informação para: Invalid"
+
+
 def test_dublin_bus_factory():
     handler = dublin_bus.dublin_bus_factory()
     assert isinstance(handler, CommandHandler)

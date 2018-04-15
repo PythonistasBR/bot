@@ -14,14 +14,14 @@ DUBLIN_BUS_URL = "https://data.smartdublin.ie/cgi-bin/rtpi/realtimebusinformatio
 
 def _get_timetable(bus_stop):
     url = DUBLIN_BUS_URL + parse.urlencode({"stopid": bus_stop, "format": "json"})
-    print("*" * 100)
-    print(url)
-    print("*" * 100)
     result = json.loads(request.urlopen(url).read().decode("utf8"))
     return result["results"]
 
 
 def _format_timetable(bus_stop, data):
+    if not data:
+        return f"Não há informação para: {bus_stop}"
+
     msg = f"Bus stop {bus_stop}:\n"
     for time in data[:5]:
         msg += f"    {time['route']} - duetime: {time['duetime']}\n"

@@ -1,0 +1,355 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Connection: [close]
+      Host: [api.citybik.es]
+      User-Agent: [Python-urllib/3.6]
+    method: GET
+    uri: https://api.citybik.es/dublinbikes.json
+  response:
+    body: {string: "[\n  {\n    \"bikes\": 3, \n    \"name\": \"GRANGEGORMAN LOWER\
+        \ (CENTRAL)\", \n    \"idx\": 0, \n    \"lat\": 53355173, \n    \"timestamp\"\
+        : \"2018-04-16T18:20:36.587000Z\", \n    \"lng\": -6278424, \n    \"id\":\
+        \ 0, \n    \"free\": 37, \n    \"number\": 104\n  }, \n  {\n    \"bikes\"\
+        : 21, \n    \"name\": \"FENIAN STREET\", \n    \"idx\": 1, \n    \"lat\":\
+        \ 53341428, \n    \"timestamp\": \"2018-04-16T18:20:36.564000Z\", \n    \"\
+        lng\": -6246720, \n    \"id\": 1, \n    \"free\": 14, \n    \"number\": 63\n\
+        \  }, \n  {\n    \"bikes\": 12, \n    \"name\": \"CITY QUAY\", \n    \"idx\"\
+        : 2, \n    \"lat\": 53346637, \n    \"timestamp\": \"2018-04-16T18:20:36.566000Z\"\
+        , \n    \"lng\": -6246154, \n    \"id\": 2, \n    \"free\": 17, \n    \"number\"\
+        : 99\n  }, \n  {\n    \"bikes\": 4, \n    \"name\": \"FITZWILLIAM SQUARE EAST\"\
+        , \n    \"idx\": 3, \n    \"lat\": 53335211, \n    \"timestamp\": \"2018-04-16T18:20:36.636000Z\"\
+        , \n    \"lng\": -6250900, \n    \"id\": 3, \n    \"free\": 36, \n    \"number\"\
+        : 89\n  }, \n  {\n    \"bikes\": 20, \n    \"name\": \"BROOKFIELD ROAD\",\
+        \ \n    \"idx\": 4, \n    \"lat\": 53339005, \n    \"timestamp\": \"2018-04-16T18:20:36.559000Z\"\
+        , \n    \"lng\": -6300217, \n    \"id\": 4, \n    \"free\": 10, \n    \"number\"\
+        : 84\n  }, \n  {\n    \"bikes\": 21, \n    \"name\": \"EMMET ROAD\", \n  \
+        \  \"idx\": 5, \n    \"lat\": 53340714, \n    \"timestamp\": \"2018-04-16T18:20:36.647000Z\"\
+        , \n    \"lng\": -6308191, \n    \"id\": 5, \n    \"free\": 19, \n    \"number\"\
+        : 83\n  }, \n  {\n    \"bikes\": 23, \n    \"name\": \"ROTHE ABBEY\", \n \
+        \   \"idx\": 6, \n    \"lat\": 53338776, \n    \"timestamp\": \"2018-04-16T18:20:36.633000Z\"\
+        , \n    \"lng\": -6303950, \n    \"id\": 6, \n    \"free\": 12, \n    \"number\"\
+        : 85\n  }, \n  {\n    \"bikes\": 7, \n    \"name\": \"KING STREET NORTH\"\
+        , \n    \"idx\": 7, \n    \"lat\": 53350291, \n    \"timestamp\": \"2018-04-16T18:20:36.588000Z\"\
+        , \n    \"lng\": -6273507, \n    \"id\": 7, \n    \"free\": 23, \n    \"number\"\
+        : 101\n  }, \n  {\n    \"bikes\": 0, \n    \"name\": \"GREEK STREET\", \n\
+        \    \"idx\": 8, \n    \"lat\": 53346874, \n    \"timestamp\": \"2018-04-16T18:20:36.575000Z\"\
+        , \n    \"lng\": -6272976, \n    \"id\": 8, \n    \"free\": 20, \n    \"number\"\
+        : 4\n  }, \n  {\n    \"bikes\": 30, \n    \"name\": \"WESTERN WAY\", \n  \
+        \  \"idx\": 9, \n    \"lat\": 53354929, \n    \"timestamp\": \"2018-04-16T18:20:36.581000Z\"\
+        , \n    \"lng\": -6269425, \n    \"id\": 9, \n    \"free\": 10, \n    \"number\"\
+        : 102\n  }, \n  {\n    \"bikes\": 15, \n    \"name\": \"CHARLEMONT PLACE\"\
+        , \n    \"idx\": 10, \n    \"lat\": 53330662, \n    \"timestamp\": \"2018-04-16T18:20:36.571000Z\"\
+        , \n    \"lng\": -6260177, \n    \"id\": 10, \n    \"free\": 25, \n    \"\
+        number\": 5\n  }, \n  {\n    \"bikes\": 38, \n    \"name\": \"PARKGATE STREET\"\
+        , \n    \"idx\": 11, \n    \"lat\": 53347972, \n    \"timestamp\": \"2018-04-16T18:20:36.628000Z\"\
+        , \n    \"lng\": -6291804, \n    \"id\": 11, \n    \"free\": 0, \n    \"number\"\
+        : 86\n  }, \n  {\n    \"bikes\": 15, \n    \"name\": \"HIGH STREET\", \n \
+        \   \"idx\": 12, \n    \"lat\": 53343565, \n    \"timestamp\": \"2018-04-16T18:20:36.579000Z\"\
+        , \n    \"lng\": -6275071, \n    \"id\": 12, \n    \"free\": 14, \n    \"\
+        number\": 7\n  }, \n  {\n    \"bikes\": 21, \n    \"name\": \"HEUSTON BRIDGE\
+        \ (SOUTH)\", \n    \"idx\": 13, \n    \"lat\": 53347106, \n    \"timestamp\"\
+        : \"2018-04-16T18:20:36.630000Z\", \n    \"lng\": -6292041, \n    \"id\":\
+        \ 13, \n    \"free\": 4, \n    \"number\": 100\n  }, \n  {\n    \"bikes\"\
+        : 15, \n    \"name\": \"PORTOBELLO HARBOUR\", \n    \"idx\": 14, \n    \"\
+        lat\": 53330362, \n    \"timestamp\": \"2018-04-16T18:20:36.622000Z\", \n\
+        \    \"lng\": -6265163, \n    \"id\": 14, \n    \"free\": 14, \n    \"number\"\
+        : 34\n  }, \n  {\n    \"bikes\": 0, \n    \"name\": \"ECCLES STREET EAST\"\
+        , \n    \"idx\": 15, \n    \"lat\": 53358115, \n    \"timestamp\": \"2018-04-16T18:20:36.601000Z\"\
+        , \n    \"lng\": -6265601, \n    \"id\": 15, \n    \"free\": 27, \n    \"\
+        number\": 79\n  }, \n  {\n    \"bikes\": 0, \n    \"name\": \"MERRION SQUARE\
+        \ EAST\", \n    \"idx\": 16, \n    \"lat\": 53339434, \n    \"timestamp\"\
+        : \"2018-04-16T18:20:36.603000Z\", \n    \"lng\": -6246548, \n    \"id\":\
+        \ 16, \n    \"free\": 30, \n    \"number\": 25\n  }, \n  {\n    \"bikes\"\
+        : 10, \n    \"name\": \"SMITHFIELD\", \n    \"idx\": 17, \n    \"lat\": 53347692,\
+        \ \n    \"timestamp\": \"2018-04-16T18:20:36.629000Z\", \n    \"lng\": -6278214,\
+        \ \n    \"id\": 17, \n    \"free\": 20, \n    \"number\": 35\n  }, \n  {\n\
+        \    \"bikes\": 24, \n    \"name\": \"PORTOBELLO ROAD\", \n    \"idx\": 18,\
+        \ \n    \"lat\": 53330091, \n    \"timestamp\": \"2018-04-16T18:20:36.550000Z\"\
+        , \n    \"lng\": -6268044, \n    \"id\": 18, \n    \"free\": 6, \n    \"number\"\
+        : 43\n  }, \n  {\n    \"bikes\": 12, \n    \"name\": \"CUSTOM HOUSE QUAY\"\
+        , \n    \"idx\": 19, \n    \"lat\": 53347884, \n    \"timestamp\": \"2018-04-16T18:20:36.590000Z\"\
+        , \n    \"lng\": -6248048, \n    \"id\": 19, \n    \"free\": 17, \n    \"\
+        number\": 8\n  }, \n  {\n    \"bikes\": 5, \n    \"name\": \"MERRION SQUARE\
+        \ WEST\", \n    \"idx\": 20, \n    \"lat\": 53339764, \n    \"timestamp\"\
+        : \"2018-04-16T18:20:36.625000Z\", \n    \"lng\": -6251988, \n    \"id\":\
+        \ 20, \n    \"free\": 15, \n    \"number\": 26\n  }, \n  {\n    \"bikes\"\
+        : 4, \n    \"name\": \"HARDWICKE PLACE\", \n    \"idx\": 21, \n    \"lat\"\
+        : 53357043, \n    \"timestamp\": \"2018-04-16T18:20:36.572000Z\", \n    \"\
+        lng\": -6263232, \n    \"id\": 21, \n    \"free\": 21, \n    \"number\": 61\n\
+        \  }, \n  {\n    \"bikes\": 2, \n    \"name\": \"ST. STEPHEN'S GREEN EAST\"\
+        , \n    \"idx\": 22, \n    \"lat\": 53337824, \n    \"timestamp\": \"2018-04-16T18:20:36.614000Z\"\
+        , \n    \"lng\": -6256035, \n    \"id\": 22, \n    \"free\": 38, \n    \"\
+        number\": 36\n  }, \n  {\n    \"bikes\": 1, \n    \"name\": \"MOLESWORTH STREET\"\
+        , \n    \"idx\": 23, \n    \"lat\": 53341288, \n    \"timestamp\": \"2018-04-16T18:20:36.591000Z\"\
+        , \n    \"lng\": -6258117, \n    \"id\": 23, \n    \"free\": 18, \n    \"\
+        number\": 27\n  }, \n  {\n    \"bikes\": 30, \n    \"name\": \"UPPER SHERRARD\
+        \ STREET\", \n    \"idx\": 24, \n    \"lat\": 53358437, \n    \"timestamp\"\
+        : \"2018-04-16T18:20:36.635000Z\", \n    \"lng\": -6260641, \n    \"id\":\
+        \ 24, \n    \"free\": 0, \n    \"number\": 44\n  }, \n  {\n    \"bikes\":\
+        \ 14, \n    \"name\": \"MOUNTJOY SQUARE WEST\", \n    \"idx\": 25, \n    \"\
+        lat\": 53356299, \n    \"timestamp\": \"2018-04-16T18:20:36.645000Z\", \n\
+        \    \"lng\": -6258586, \n    \"id\": 25, \n    \"free\": 16, \n    \"number\"\
+        : 28\n  }, \n  {\n    \"bikes\": 2, \n    \"name\": \"LIME STREET\", \n  \
+        \  \"idx\": 26, \n    \"lat\": 53346026, \n    \"timestamp\": \"2018-04-16T18:20:36.570000Z\"\
+        , \n    \"lng\": -6243576, \n    \"id\": 26, \n    \"free\": 38, \n    \"\
+        number\": 62\n  }, \n  {\n    \"bikes\": 4, \n    \"name\": \"EXCHEQUER STREET\"\
+        , \n    \"idx\": 27, \n    \"lat\": 53343034, \n    \"timestamp\": \"2018-04-16T18:20:36.567000Z\"\
+        , \n    \"lng\": -6263578, \n    \"id\": 27, \n    \"free\": 20, \n    \"\
+        number\": 9\n  }, \n  {\n    \"bikes\": 4, \n    \"name\": \"ORMOND QUAY UPPER\"\
+        , \n    \"idx\": 28, \n    \"lat\": 53346057, \n    \"timestamp\": \"2018-04-16T18:20:36.642000Z\"\
+        , \n    \"lng\": -6268001, \n    \"id\": 28, \n    \"free\": 25, \n    \"\
+        number\": 29\n  }, \n  {\n    \"bikes\": 10, \n    \"name\": \"NEW CENTRAL\
+        \ BANK\", \n    \"idx\": 29, \n    \"lat\": 53347122, \n    \"timestamp\"\
+        : \"2018-04-16T18:20:36.586000Z\", \n    \"lng\": -6234749, \n    \"id\":\
+        \ 29, \n    \"free\": 30, \n    \"number\": 66\n  }, \n  {\n    \"bikes\"\
+        : 5, \n    \"name\": \"DAME STREET\", \n    \"idx\": 30, \n    \"lat\": 53344007,\
+        \ \n    \"timestamp\": \"2018-04-16T18:20:36.630000Z\", \n    \"lng\": -6266802,\
+        \ \n    \"id\": 30, \n    \"free\": 10, \n    \"number\": 10\n  }, \n  {\n\
+        \    \"bikes\": 2, \n    \"name\": \"PARNELL SQUARE NORTH\", \n    \"idx\"\
+        : 31, \n    \"lat\": 53353462, \n    \"timestamp\": \"2018-04-16T18:20:36.540000Z\"\
+        , \n    \"lng\": -6265305, \n    \"id\": 31, \n    \"free\": 18, \n    \"\
+        number\": 30\n  }, \n  {\n    \"bikes\": 15, \n    \"name\": \"DEVERELL PLACE\"\
+        , \n    \"idx\": 32, \n    \"lat\": 53351464, \n    \"timestamp\": \"2018-04-16T18:20:36.562000Z\"\
+        , \n    \"lng\": -6255265, \n    \"id\": 32, \n    \"free\": 15, \n    \"\
+        number\": 45\n  }, \n  {\n    \"bikes\": 7, \n    \"name\": \"EARLSFORT TERRACE\"\
+        , \n    \"idx\": 33, \n    \"lat\": 53334019, \n    \"timestamp\": \"2018-04-16T18:20:36.560000Z\"\
+        , \n    \"lng\": -6258371, \n    \"id\": 33, \n    \"free\": 23, \n    \"\
+        number\": 11\n  }, \n  {\n    \"bikes\": 0, \n    \"name\": \"BOLTON STREET\"\
+        , \n    \"idx\": 34, \n    \"lat\": 53351182, \n    \"timestamp\": \"2018-04-16T18:20:36.640000Z\"\
+        , \n    \"lng\": -6269859, \n    \"id\": 34, \n    \"free\": 20, \n    \"\
+        number\": 3\n  }, \n  {\n    \"bikes\": 16, \n    \"name\": \"ECCLES STREET\"\
+        , \n    \"idx\": 35, \n    \"lat\": 53359246, \n    \"timestamp\": \"2018-04-16T18:20:36.621000Z\"\
+        , \n    \"lng\": -6269779, \n    \"id\": 35, \n    \"free\": 4, \n    \"number\"\
+        : 12\n  }, \n  {\n    \"bikes\": 20, \n    \"name\": \"CATHAL BRUGHA STREET\"\
+        , \n    \"idx\": 36, \n    \"lat\": 53352149, \n    \"timestamp\": \"2018-04-16T18:20:36.632000Z\"\
+        , \n    \"lng\": -6260533, \n    \"id\": 36, \n    \"free\": 0, \n    \"number\"\
+        : 24\n  }, \n  {\n    \"bikes\": 14, \n    \"name\": \"STRAND STREET GREAT\"\
+        , \n    \"idx\": 37, \n    \"lat\": 53347082, \n    \"timestamp\": \"2018-04-16T18:20:36.641000Z\"\
+        , \n    \"lng\": -6264192, \n    \"id\": 37, \n    \"free\": 21, \n    \"\
+        number\": 46\n  }, \n  {\n    \"bikes\": 0, \n    \"name\": \"FITZWILLIAM\
+        \ SQUARE WEST\", \n    \"idx\": 38, \n    \"lat\": 53336074, \n    \"timestamp\"\
+        : \"2018-04-16T18:20:36.549000Z\", \n    \"lng\": -6252825, \n    \"id\":\
+        \ 38, \n    \"free\": 30, \n    \"number\": 13\n  }, \n  {\n    \"bikes\"\
+        : 25, \n    \"name\": \"FOWNES STREET UPPER\", \n    \"idx\": 39, \n    \"\
+        lat\": 53344603, \n    \"timestamp\": \"2018-04-16T18:20:36.553000Z\", \n\
+        \    \"lng\": -6263371, \n    \"id\": 39, \n    \"free\": 5, \n    \"number\"\
+        : 14\n  }, \n  {\n    \"bikes\": 0, \n    \"name\": \"HERBERT STREET\", \n\
+        \    \"idx\": 40, \n    \"lat\": 53335742, \n    \"timestamp\": \"2018-04-16T18:20:36.589000Z\"\
+        , \n    \"lng\": -6245510, \n    \"id\": 40, \n    \"free\": 40, \n    \"\
+        number\": 47\n  }, \n  {\n    \"bikes\": 4, \n    \"name\": \"PARNELL STREET\"\
+        , \n    \"idx\": 41, \n    \"lat\": 53350929, \n    \"timestamp\": \"2018-04-16T18:20:36.551000Z\"\
+        , \n    \"lng\": -6265125, \n    \"id\": 41, \n    \"free\": 16, \n    \"\
+        number\": 31\n  }, \n  {\n    \"bikes\": 9, \n    \"name\": \"ST. STEPHEN'S\
+        \ GREEN SOUTH\", \n    \"idx\": 42, \n    \"lat\": 53337494, \n    \"timestamp\"\
+        : \"2018-04-16T18:20:36.607000Z\", \n    \"lng\": -6261990, \n    \"id\":\
+        \ 42, \n    \"free\": 21, \n    \"number\": 37\n  }, \n  {\n    \"bikes\"\
+        : 15, \n    \"name\": \"PEARSE STREET\", \n    \"idx\": 43, \n    \"lat\"\
+        : 53344304, \n    \"timestamp\": \"2018-04-16T18:20:36.546000Z\", \n    \"\
+        lng\": -6250427, \n    \"id\": 43, \n    \"free\": 15, \n    \"number\": 32\n\
+        \  }, \n  {\n    \"bikes\": 23, \n    \"name\": \"EXCISE WALK\", \n    \"\
+        idx\": 44, \n    \"lat\": 53347777, \n    \"timestamp\": \"2018-04-16T18:20:36.548000Z\"\
+        , \n    \"lng\": -6244239, \n    \"id\": 44, \n    \"free\": 17, \n    \"\
+        number\": 48\n  }, \n  {\n    \"bikes\": 12, \n    \"name\": \"TALBOT STREET\"\
+        , \n    \"idx\": 45, \n    \"lat\": 53350974, \n    \"timestamp\": \"2018-04-16T18:20:36.582000Z\"\
+        , \n    \"lng\": -6252940, \n    \"id\": 45, \n    \"free\": 28, \n    \"\
+        number\": 38\n  }, \n  {\n    \"bikes\": 28, \n    \"name\": \"CUSTOM HOUSE\"\
+        , \n    \"idx\": 46, \n    \"lat\": 53348279, \n    \"timestamp\": \"2018-04-16T18:20:36.555000Z\"\
+        , \n    \"lng\": -6254662, \n    \"id\": 46, \n    \"free\": 1, \n    \"number\"\
+        : 23\n  }, \n  {\n    \"bikes\": 15, \n    \"name\": \"GEORGES QUAY\", \n\
+        \    \"idx\": 47, \n    \"lat\": 53347508, \n    \"timestamp\": \"2018-04-16T18:20:36.593000Z\"\
+        , \n    \"lng\": -6252192, \n    \"id\": 47, \n    \"free\": 5, \n    \"number\"\
+        : 16\n  }, \n  {\n    \"bikes\": 0, \n    \"name\": \"LEINSTER STREET SOUTH\"\
+        , \n    \"idx\": 48, \n    \"lat\": 53342180, \n    \"timestamp\": \"2018-04-16T18:20:36.650000Z\"\
+        , \n    \"lng\": -6254485, \n    \"id\": 48, \n    \"free\": 30, \n    \"\
+        number\": 21\n  }, \n  {\n    \"bikes\": 2, \n    \"name\": \"WILTON TERRACE\"\
+        , \n    \"idx\": 49, \n    \"lat\": 53332383, \n    \"timestamp\": \"2018-04-16T18:20:36.646000Z\"\
+        , \n    \"lng\": -6252717, \n    \"id\": 49, \n    \"free\": 18, \n    \"\
+        number\": 39\n  }, \n  {\n    \"bikes\": 7, \n    \"name\": \"TOWNSEND STREET\"\
+        , \n    \"idx\": 50, \n    \"lat\": 53345922, \n    \"timestamp\": \"2018-04-16T18:20:36.619000Z\"\
+        , \n    \"lng\": -6254614, \n    \"id\": 50, \n    \"free\": 13, \n    \"\
+        number\": 22\n  }, \n  {\n    \"bikes\": 0, \n    \"name\": \"JERVIS STREET\"\
+        , \n    \"idx\": 51, \n    \"lat\": 53348300, \n    \"timestamp\": \"2018-04-16T18:20:36.641000Z\"\
+        , \n    \"lng\": -6266651, \n    \"id\": 51, \n    \"free\": 21, \n    \"\
+        number\": 40\n  }, \n  {\n    \"bikes\": 39, \n    \"name\": \"HEUSTON STATION\
+        \ (CENTRAL)\", \n    \"idx\": 52, \n    \"lat\": 53346603, \n    \"timestamp\"\
+        : \"2018-04-16T18:20:36.618000Z\", \n    \"lng\": -6296924, \n    \"id\":\
+        \ 52, \n    \"free\": 1, \n    \"number\": 93\n  }, \n  {\n    \"bikes\":\
+        \ 15, \n    \"name\": \"SMITHFIELD NORTH\", \n    \"idx\": 53, \n    \"lat\"\
+        : 53349562, \n    \"timestamp\": \"2018-04-16T18:20:36.538000Z\", \n    \"\
+        lng\": -6278198, \n    \"id\": 53, \n    \"free\": 15, \n    \"number\": 42\n\
+        \  }, \n  {\n    \"bikes\": 2, \n    \"name\": \"KEVIN STREET\", \n    \"\
+        idx\": 54, \n    \"lat\": 53337757, \n    \"timestamp\": \"2018-04-16T18:20:36.597000Z\"\
+        , \n    \"lng\": -6267699, \n    \"id\": 54, \n    \"free\": 38, \n    \"\
+        number\": 71\n  }, \n  {\n    \"bikes\": 0, \n    \"name\": \"NEWMAN HOUSE\"\
+        , \n    \"idx\": 55, \n    \"lat\": 53337132, \n    \"timestamp\": \"2018-04-16T18:20:36.583000Z\"\
+        , \n    \"lng\": -6260590, \n    \"id\": 55, \n    \"free\": 40, \n    \"\
+        number\": 53\n  }, \n  {\n    \"bikes\": 27, \n    \"name\": \"SANDWITH STREET\"\
+        , \n    \"idx\": 56, \n    \"lat\": 53345203, \n    \"timestamp\": \"2018-04-16T18:20:36.633000Z\"\
+        , \n    \"lng\": -6247163, \n    \"id\": 56, \n    \"free\": 13, \n    \"\
+        number\": 64\n  }, \n  {\n    \"bikes\": 13, \n    \"name\": \"MOUNT STREET\
+        \ LOWER\", \n    \"idx\": 57, \n    \"lat\": 53337960, \n    \"timestamp\"\
+        : \"2018-04-16T18:20:36.542000Z\", \n    \"lng\": -6241530, \n    \"id\":\
+        \ 57, \n    \"free\": 27, \n    \"number\": 56\n  }, \n  {\n    \"bikes\"\
+        : 2, \n    \"name\": \"HANOVER QUAY\", \n    \"idx\": 58, \n    \"lat\": 53344115,\
+        \ \n    \"timestamp\": \"2018-04-16T18:20:36.556000Z\", \n    \"lng\": -6237153,\
+        \ \n    \"id\": 58, \n    \"free\": 38, \n    \"number\": 68\n  }, \n  {\n\
+        \    \"bikes\": 2, \n    \"name\": \"CHRISTCHURCH PLACE\", \n    \"idx\":\
+        \ 59, \n    \"lat\": 53343368, \n    \"timestamp\": \"2018-04-16T18:20:36.544000Z\"\
+        , \n    \"lng\": -6270120, \n    \"id\": 59, \n    \"free\": 18, \n    \"\
+        number\": 6\n  }, \n  {\n    \"bikes\": 2, \n    \"name\": \"SIR PATRICK DUN'S\"\
+        , \n    \"idx\": 60, \n    \"lat\": 53339218, \n    \"timestamp\": \"2018-04-16T18:20:36.585000Z\"\
+        , \n    \"lng\": -6240642, \n    \"id\": 60, \n    \"free\": 38, \n    \"\
+        number\": 58\n  }, \n  {\n    \"bikes\": 5, \n    \"name\": \"GUILD STREET\"\
+        , \n    \"idx\": 61, \n    \"lat\": 53347932, \n    \"timestamp\": \"2018-04-16T18:20:36.577000Z\"\
+        , \n    \"lng\": -6240928, \n    \"id\": 61, \n    \"free\": 34, \n    \"\
+        number\": 49\n  }, \n  {\n    \"bikes\": 1, \n    \"name\": \"YORK STREET\
+        \ WEST\", \n    \"idx\": 62, \n    \"lat\": 53339334, \n    \"timestamp\"\
+        : \"2018-04-16T18:20:36.604000Z\", \n    \"lng\": -6264699, \n    \"id\":\
+        \ 62, \n    \"free\": 39, \n    \"number\": 51\n  }, \n  {\n    \"bikes\"\
+        : 3, \n    \"name\": \"HARCOURT TERRACE\", \n    \"idx\": 63, \n    \"lat\"\
+        : 53332763, \n    \"timestamp\": \"2018-04-16T18:20:36.639000Z\", \n    \"\
+        lng\": -6257942, \n    \"id\": 63, \n    \"free\": 17, \n    \"number\": 41\n\
+        \  }, \n  {\n    \"bikes\": 5, \n    \"name\": \"YORK STREET EAST\", \n  \
+        \  \"idx\": 64, \n    \"lat\": 53338755, \n    \"timestamp\": \"2018-04-16T18:20:36.547000Z\"\
+        , \n    \"lng\": -6262003, \n    \"id\": 64, \n    \"free\": 27, \n    \"\
+        number\": 52\n  }, \n  {\n    \"bikes\": 32, \n    \"name\": \"ST JAMES HOSPITAL\
+        \ (LUAS)\", \n    \"idx\": 65, \n    \"lat\": 53341359, \n    \"timestamp\"\
+        : \"2018-04-16T18:20:36.638000Z\", \n    \"lng\": -6292951, \n    \"id\":\
+        \ 65, \n    \"free\": 8, \n    \"number\": 80\n  }, \n  {\n    \"bikes\":\
+        \ 7, \n    \"name\": \"CLONMEL STREET\", \n    \"idx\": 66, \n    \"lat\"\
+        : 53336021, \n    \"timestamp\": \"2018-04-16T18:20:36.541000Z\", \n    \"\
+        lng\": -6262980, \n    \"id\": 66, \n    \"free\": 26, \n    \"number\": 54\n\
+        \  }, \n  {\n    \"bikes\": 7, \n    \"name\": \"JOHN STREET WEST\", \n  \
+        \  \"idx\": 67, \n    \"lat\": 53343105, \n    \"timestamp\": \"2018-04-16T18:20:36.563000Z\"\
+        , \n    \"lng\": -6277167, \n    \"id\": 67, \n    \"free\": 24, \n    \"\
+        number\": 72\n  }, \n  {\n    \"bikes\": 19, \n    \"name\": \"JAMES STREET\"\
+        , \n    \"idx\": 68, \n    \"lat\": 53343456, \n    \"timestamp\": \"2018-04-16T18:20:36.624000Z\"\
+        , \n    \"lng\": -6287409, \n    \"id\": 68, \n    \"free\": 21, \n    \"\
+        number\": 75\n  }, \n  {\n    \"bikes\": 29, \n    \"name\": \"MARKET STREET\
+        \ SOUTH\", \n    \"idx\": 69, \n    \"lat\": 53342296, \n    \"timestamp\"\
+        : \"2018-04-16T18:20:36.596000Z\", \n    \"lng\": -6287661, \n    \"id\":\
+        \ 69, \n    \"free\": 9, \n    \"number\": 76\n  }, \n  {\n    \"bikes\":\
+        \ 29, \n    \"name\": \"MATER HOSPITAL\", \n    \"idx\": 70, \n    \"lat\"\
+        : 53359967, \n    \"timestamp\": \"2018-04-16T18:20:36.623000Z\", \n    \"\
+        lng\": -6264828, \n    \"id\": 70, \n    \"free\": 11, \n    \"number\": 78\n\
+        \  }, \n  {\n    \"bikes\": 1, \n    \"name\": \"CONVENTION CENTRE\", \n \
+        \   \"idx\": 71, \n    \"lat\": 53347440, \n    \"timestamp\": \"2018-04-16T18:20:36.626000Z\"\
+        , \n    \"lng\": -6238523, \n    \"id\": 71, \n    \"free\": 39, \n    \"\
+        number\": 65\n  }, \n  {\n    \"bikes\": 18, \n    \"name\": \"PRINCES STREET\
+        \ / O'CONNELL STREET\", \n    \"idx\": 72, \n    \"lat\": 53349013, \n   \
+        \ \"timestamp\": \"2018-04-16T18:20:36.634000Z\", \n    \"lng\": -6260311,\
+        \ \n    \"id\": 72, \n    \"free\": 5, \n    \"number\": 33\n  }, \n  {\n\
+        \    \"bikes\": 0, \n    \"name\": \"WOLFE TONE STREET\", \n    \"idx\": 73,\
+        \ \n    \"lat\": 53348875, \n    \"timestamp\": \"2018-04-16T18:20:36.573000Z\"\
+        , \n    \"lng\": -6267459, \n    \"id\": 73, \n    \"free\": 28, \n    \"\
+        number\": 77\n  }, \n  {\n    \"bikes\": 27, \n    \"name\": \"OLIVER BOND\
+        \ STREET\", \n    \"idx\": 74, \n    \"lat\": 53343893, \n    \"timestamp\"\
+        : \"2018-04-16T18:20:36.557000Z\", \n    \"lng\": -6280531, \n    \"id\":\
+        \ 74, \n    \"free\": 3, \n    \"number\": 74\n  }, \n  {\n    \"bikes\":\
+        \ 18, \n    \"name\": \"BARROW STREET\", \n    \"idx\": 75, \n    \"lat\"\
+        : 53341655, \n    \"timestamp\": \"2018-04-16T18:20:36.643000Z\", \n    \"\
+        lng\": -6236198, \n    \"id\": 75, \n    \"free\": 22, \n    \"number\": 70\n\
+        \  }, \n  {\n    \"bikes\": 1, \n    \"name\": \"HERBERT PLACE\", \n    \"\
+        idx\": 76, \n    \"lat\": 53334432, \n    \"timestamp\": \"2018-04-16T18:20:36.578000Z\"\
+        , \n    \"lng\": -6245575, \n    \"id\": 76, \n    \"free\": 29, \n    \"\
+        number\": 19\n  }, \n  {\n    \"bikes\": 3, \n    \"name\": \"GRAND CANAL\
+        \ DOCK\", \n    \"idx\": 77, \n    \"lat\": 53342638, \n    \"timestamp\"\
+        : \"2018-04-16T18:20:36.602000Z\", \n    \"lng\": -6238695, \n    \"id\":\
+        \ 77, \n    \"free\": 37, \n    \"number\": 69\n  }, \n  {\n    \"bikes\"\
+        : 7, \n    \"name\": \"DENMARK STREET GREAT\", \n    \"idx\": 78, \n    \"\
+        lat\": 53355610, \n    \"timestamp\": \"2018-04-16T18:20:36.608000Z\", \n\
+        \    \"lng\": -6261397, \n    \"id\": 78, \n    \"free\": 13, \n    \"number\"\
+        : 59\n  }, \n  {\n    \"bikes\": 14, \n    \"name\": \"FRANCIS STREET\", \n\
+        \    \"idx\": 79, \n    \"lat\": 53342081, \n    \"timestamp\": \"2018-04-16T18:20:36.574000Z\"\
+        , \n    \"lng\": -6275233, \n    \"id\": 79, \n    \"free\": 16, \n    \"\
+        number\": 73\n  }, \n  {\n    \"bikes\": 29, \n    \"name\": \"NORTH CIRCULAR\
+        \ ROAD\", \n    \"idx\": 80, \n    \"lat\": 53359624, \n    \"timestamp\"\
+        : \"2018-04-16T18:20:36.580000Z\", \n    \"lng\": -6260348, \n    \"id\":\
+        \ 80, \n    \"free\": 1, \n    \"number\": 60\n  }, \n  {\n    \"bikes\":\
+        \ 16, \n    \"name\": \"THE POINT\", \n    \"idx\": 81, \n    \"lat\": 53346867,\
+        \ \n    \"timestamp\": \"2018-04-16T18:20:36.568000Z\", \n    \"lng\": -6230852,\
+        \ \n    \"id\": 81, \n    \"free\": 23, \n    \"number\": 67\n  }, \n  {\n\
+        \    \"bikes\": 9, \n    \"name\": \"KILMAINHAM LANE\", \n    \"idx\": 82,\
+        \ \n    \"lat\": 53341805, \n    \"timestamp\": \"2018-04-16T18:20:36.594000Z\"\
+        , \n    \"lng\": -6305085, \n    \"id\": 82, \n    \"free\": 21, \n    \"\
+        number\": 96\n  }, \n  {\n    \"bikes\": 10, \n    \"name\": \"BLESSINGTON\
+        \ STREET\", \n    \"idx\": 83, \n    \"lat\": 53356769, \n    \"timestamp\"\
+        : \"2018-04-16T18:20:36.623000Z\", \n    \"lng\": -6268140, \n    \"id\":\
+        \ 83, \n    \"free\": 10, \n    \"number\": 2\n  }, \n  {\n    \"bikes\":\
+        \ 21, \n    \"name\": \"ROYAL HOSPITAL\", \n    \"idx\": 84, \n    \"lat\"\
+        : 53343897, \n    \"timestamp\": \"2018-04-16T18:20:36.609000Z\", \n    \"\
+        lng\": -6297060, \n    \"id\": 84, \n    \"free\": 19, \n    \"number\": 95\n\
+        \  }, \n  {\n    \"bikes\": 21, \n    \"name\": \"COLLINS BARRACKS MUSEUM\"\
+        , \n    \"idx\": 85, \n    \"lat\": 53347477, \n    \"timestamp\": \"2018-04-16T18:20:36.557000Z\"\
+        , \n    \"lng\": -6285250, \n    \"id\": 85, \n    \"free\": 17, \n    \"\
+        number\": 87\n  }, \n  {\n    \"bikes\": 5, \n    \"name\": \"BLACKHALL PLACE\"\
+        , \n    \"idx\": 86, \n    \"lat\": 53348800, \n    \"timestamp\": \"2018-04-16T18:20:36.656000Z\"\
+        , \n    \"lng\": -6281637, \n    \"id\": 86, \n    \"free\": 25, \n    \"\
+        number\": 88\n  }, \n  {\n    \"bikes\": 28, \n    \"name\": \"KILMAINHAM\
+        \ GAOL\", \n    \"idx\": 87, \n    \"lat\": 53342113, \n    \"timestamp\"\
+        : \"2018-04-16T18:20:36.572000Z\", \n    \"lng\": -6310015, \n    \"id\":\
+        \ 87, \n    \"free\": 12, \n    \"number\": 97\n  }, \n  {\n    \"bikes\"\
+        : 25, \n    \"name\": \"HEUSTON STATION (CAR PARK)\", \n    \"idx\": 88, \n\
+        \    \"lat\": 53346985, \n    \"timestamp\": \"2018-04-16T18:20:36.612000Z\"\
+        , \n    \"lng\": -6297804, \n    \"id\": 88, \n    \"free\": 15, \n    \"\
+        number\": 94\n  }, \n  {\n    \"bikes\": 0, \n    \"name\": \"BENSON STREET\"\
+        , \n    \"idx\": 89, \n    \"lat\": 53344153, \n    \"timestamp\": \"2018-04-16T18:20:36.560000Z\"\
+        , \n    \"lng\": -6233451, \n    \"id\": 89, \n    \"free\": 0, \n    \"number\"\
+        : 90\n  }, \n  {\n    \"bikes\": 0, \n    \"name\": \"FREDERICK STREET SOUTH\"\
+        , \n    \"idx\": 90, \n    \"lat\": 53341515, \n    \"timestamp\": \"2018-04-16T18:20:36.552000Z\"\
+        , \n    \"lng\": -6256853, \n    \"id\": 90, \n    \"free\": 30, \n    \"\
+        number\": 98\n  }, \n  {\n    \"bikes\": 21, \n    \"name\": \"SOUTH DOCK\
+        \ ROAD\", \n    \"idx\": 91, \n    \"lat\": 53341833, \n    \"timestamp\"\
+        : \"2018-04-16T18:20:36.565000Z\", \n    \"lng\": -6231291, \n    \"id\":\
+        \ 91, \n    \"free\": 9, \n    \"number\": 91\n  }, \n  {\n    \"bikes\":\
+        \ 27, \n    \"name\": \"ST. JAMES HOSPITAL (CENTRAL)\", \n    \"idx\": 92,\
+        \ \n    \"lat\": 53339983, \n    \"timestamp\": \"2018-04-16T18:20:36.551000Z\"\
+        , \n    \"lng\": -6295594, \n    \"id\": 92, \n    \"free\": 13, \n    \"\
+        number\": 81\n  }, \n  {\n    \"bikes\": 40, \n    \"name\": \"HEUSTON BRIDGE\
+        \ (NORTH)\", \n    \"idx\": 93, \n    \"lat\": 53347802, \n    \"timestamp\"\
+        : \"2018-04-16T18:20:36.648000Z\", \n    \"lng\": -6292432, \n    \"id\":\
+        \ 93, \n    \"free\": 0, \n    \"number\": 92\n  }, \n  {\n    \"bikes\":\
+        \ 18, \n    \"name\": \"MOUNT BROWN\", \n    \"idx\": 94, \n    \"lat\": 53341645,\
+        \ \n    \"timestamp\": \"2018-04-16T18:20:36.595000Z\", \n    \"lng\": -6297190,\
+        \ \n    \"id\": 94, \n    \"free\": 4, \n    \"number\": 82\n  }, \n  {\n\
+        \    \"bikes\": 10, \n    \"name\": \"GRANTHAM STREET\", \n    \"idx\": 95,\
+        \ \n    \"lat\": 53334123, \n    \"timestamp\": \"2018-04-16T18:20:36.545000Z\"\
+        , \n    \"lng\": -6265436, \n    \"id\": 95, \n    \"free\": 20, \n    \"\
+        number\": 18\n  }, \n  {\n    \"bikes\": 0, \n    \"name\": \"GRATTAN STREET\"\
+        , \n    \"idx\": 96, \n    \"lat\": 53339629, \n    \"timestamp\": \"2018-04-16T18:20:36.637000Z\"\
+        , \n    \"lng\": -6243778, \n    \"id\": 96, \n    \"free\": 23, \n    \"\
+        number\": 57\n  }, \n  {\n    \"bikes\": 10, \n    \"name\": \"HARDWICKE STREET\"\
+        , \n    \"idx\": 97, \n    \"lat\": 53355473, \n    \"timestamp\": \"2018-04-16T18:20:36.627000Z\"\
+        , \n    \"lng\": -6264423, \n    \"id\": 97, \n    \"free\": 6, \n    \"number\"\
+        : 15\n  }, \n  {\n    \"bikes\": 0, \n    \"name\": \"HATCH STREET\", \n \
+        \   \"idx\": 98, \n    \"lat\": 53334030, \n    \"timestamp\": \"2018-04-16T18:20:36.569000Z\"\
+        , \n    \"lng\": -6260714, \n    \"id\": 98, \n    \"free\": 36, \n    \"\
+        number\": 55\n  }, \n  {\n    \"bikes\": 1, \n    \"name\": \"GOLDEN LANE\"\
+        , \n    \"idx\": 99, \n    \"lat\": 53340803, \n    \"timestamp\": \"2018-04-16T18:20:36.561000Z\"\
+        , \n    \"lng\": -6267732, \n    \"id\": 99, \n    \"free\": 19, \n    \"\
+        number\": 17\n  }, \n  {\n    \"bikes\": 7, \n    \"name\": \"GEORGES LANE\"\
+        , \n    \"idx\": 100, \n    \"lat\": 53350230, \n    \"timestamp\": \"2018-04-16T18:20:36.620000Z\"\
+        , \n    \"lng\": -6279696, \n    \"id\": 100, \n    \"free\": 33, \n    \"\
+        number\": 50\n  }, \n  {\n    \"bikes\": 0, \n    \"name\": \"GRANGEGORMAN\
+        \ LOWER (SOUTH)\", \n    \"idx\": 101, \n    \"lat\": 53354663, \n    \"timestamp\"\
+        : \"2018-04-16T18:20:36.644000Z\", \n    \"lng\": -6278681, \n    \"id\":\
+        \ 101, \n    \"free\": 40, \n    \"number\": 103\n  }, \n  {\n    \"bikes\"\
+        : 8, \n    \"name\": \"GRANGEGORMAN LOWER (NORTH)\", \n    \"idx\": 102, \n\
+        \    \"lat\": 53355954, \n    \"timestamp\": \"2018-04-16T18:20:36.613000Z\"\
+        , \n    \"lng\": -6278378, \n    \"id\": 102, \n    \"free\": 28, \n    \"\
+        number\": 105\n  }, \n  {\n    \"bikes\": 0, \n    \"name\": \"CLARENDON ROW\"\
+        , \n    \"idx\": 103, \n    \"lat\": 53340927, \n    \"timestamp\": \"2018-04-16T18:20:36.554000Z\"\
+        , \n    \"lng\": -6262501, \n    \"id\": 103, \n    \"free\": 31, \n    \"\
+        number\": 1\n  }\n]"}
+    headers:
+      Access-Control-Allow-Origin: ['*']
+      Connection: [close]
+      Content-Length: ['22733']
+      Content-Type: [application/json]
+      Date: ['Mon, 16 Apr 2018 18:22:28 GMT']
+      Server: [nginx/1.10.1]
+      Strict-Transport-Security: [max-age=15768000]
+    status: {code: 200, message: OK}
+version: 1

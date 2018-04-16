@@ -6,18 +6,16 @@ from telegram.ext import CommandHandler
 from autonomia.features import dublin_bike
 
 
-"""
 @pytest.mark.vcr
 def test_cmd_dublin_bike(bot, update):
     with patch.object(update.message, "reply_text") as m:
         dublin_bike.cmd_dublin_bike(bot, update, args=["89"])
         m.assert_called_with(
-            "Dublin Bike station 89:\n"
-            "    Bikes 1\n"
-            "    Free spaces 39\n"
+            "Dublin bike station 89:\n"
+            "    Bikes 4\n"
+            "    Free spaces 36\n"
             "    Location FITZWILLIAM SQUARE EAST\n"
         )
-"""
 
 
 def test_cmd_dublin_bike_without_bike_stop(bot, update):

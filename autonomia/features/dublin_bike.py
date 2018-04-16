@@ -14,13 +14,13 @@ DUBLIN_BIKE_URL = "https://api.citybik.es/dublinbikes.json"
 
 def _get_bike_station_info(bike_station):
     result = request.urlopen(DUBLIN_BIKE_URL).read().decode("utf8")
-    data = json.loads(result)
+    list_station_info = json.loads(result)
     msg = f"Dublin bike station {bike_station}:\n"
-    for value in data:
-        if str(value["number"]) == str(bike_station):
-            msg += "    Bikes {bikes} \n    Free spaces {free}\n    Location {name}".format(
-                bikes=value["bikes"], free=value["free"], name=value["name"]
-            )
+    for station_info in list_station_info:
+        if str(station_info["number"]) == str(bike_station):
+            msg += f"    Bikes {station_info['bikes']}\n"
+            msg += f"    Free spaces {station_info['free']}\n"
+            msg += f"    Location {station_info['name']}\n"
             return msg
 
     return "deu merda!"

@@ -30,6 +30,7 @@ install-dev                    Install all dependencies
 install                        Install only prod dependencies
 lint                           Run flake8
 run                            Run autonomia bot
+run_flask                      Run bot using flask as server
 test                           Run pytest
 ```
 

@@ -9,6 +9,9 @@ help:
 run: ## Run autonomia bot
 	@pipenv run python -m autonomia
 
+run_flask: ## Run bot using flask as server
+	@pipenv run flask run
+
 test: ## Run pytest
 	@pipenv run pytest --cov=autonomia tests/
 

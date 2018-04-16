@@ -18,9 +18,8 @@ def test_cmd_dublin_bike(bot, update):
         )
 
 
-def test_get_bike_station_info():
+def test_get_bike_station_info_with_invalid_station():
     msg = dublin_bike._get_bike_station_info("80000")
-    print(msg)
     assert msg == "deu merda!"
 
 

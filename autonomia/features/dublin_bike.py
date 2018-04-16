@@ -1,6 +1,6 @@
 import json
 import logging
-from urllib import parse, request
+from urllib import request
 
 from telegram.ext import CommandHandler
 

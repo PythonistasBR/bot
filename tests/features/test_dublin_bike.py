@@ -18,6 +18,12 @@ def test_cmd_dublin_bike(bot, update):
         )
 
 
+def test_get_bike_station_info():
+    msg = dublin_bike._get_bike_station_info("80000")
+    print(msg)
+    assert msg == "deu merda!"
+
+
 def test_cmd_dublin_bike_without_bike_stop(bot, update):
     with patch.object(update.message, "reply_text") as m:
         dublin_bike.cmd_dublin_bike(bot, update, args=[])
@@ -29,7 +35,7 @@ def test_cmd_dublin_bike_on_error(urlopen_mock, bot, update):
     urlopen_mock.site_effect = ValueError()
     with patch.object(update.message, "reply_text") as m:
         dublin_bike.cmd_dublin_bike(bot, update, args=["200"])
-        m.assert_called_with("Oops de merda!")
+        m.assert_called_with("Oops deu merda!")
 
 
 def test_dublin_bike_factory():

@@ -36,8 +36,8 @@ def cmd_dublin_bike(bot, update, args):
         bike_station_info = _get_bike_station_info(bike_station)
         update.message.reply_text(bike_station_info)
     except Exception as e:
-        logger.error(e, "Oops de merda!", exc_info=1)
-        update.message.reply_text("Oops de merda!")
+        logger.error(e, "Oops deu merda!", exc_info=1)
+        update.message.reply_text("Oops deu merda!")
 
 
 @bot_handler

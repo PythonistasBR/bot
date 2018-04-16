@@ -29,7 +29,7 @@ def webhook_handler():
 @app.route(f"/{settings.WEBHOOK_SET_PATH}", methods=["GET", "POST"])
 def set_webhook():
     webhook_url = f"https://{settings.WEBHOOK_DOMAIN}/{settings.WEBHOOK_PATH}"
-    success = bot.instance.setWebhook(webhook_url)
+    success = bot.instance.set_webhook(webhook_url)
     if success:
         return "webhook setup ok"
 

@@ -28,6 +28,9 @@ lint: ## Run flake8
 update_webhook: ## Update telegram webhook config from settings
 	@pipenv run flask update_webhook
 
+heroku_update_webhook:
+	heroku run FLASK_APP=autonomia/app.py flask update_webhook
+
 install-dev: ## Install all dependencies
 	@pipenv install --dev
 

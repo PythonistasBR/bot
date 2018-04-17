@@ -6,10 +6,10 @@ help:
 		sort | \
 		awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-run: ## Run autonomia bot
+run_polling: ## Run autonomia bot using polling
 	@pipenv run python -m autonomia
 
-run_flask: ## Run bot using flask as server
+run: ## Run bot using flask as server
 	@pipenv run flask run
 
 test: ## Run pytest

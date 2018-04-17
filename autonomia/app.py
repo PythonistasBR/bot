@@ -3,7 +3,8 @@ import logging
 from flask import request
 from telegram import Update
 
-from autonomia import create_app, settings
+from autonomia import settings
+from autonomia.app_factory import create_app
 from autonomia.telegram_flask import TelegramFlask
 
 app = create_app("settings.py")

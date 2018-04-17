@@ -29,9 +29,9 @@ class TelegramFlask:
             self.dispatcher.add_handler(handler)
         # log all errors
         self.dispatcher.add_error_handler(self.error)
-        self.setup_webook(app)
+        self.setup_webhook(app)
 
-    def setup_webook(self, app):
+    def setup_webhook(self, app):
         # setup webhook callback
         domain = app.config.get("WEBHOOK_DOMAIN")
         path = app.config.get("WEBHOOK_PATH")

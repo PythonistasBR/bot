@@ -1,5 +1,6 @@
 import logging
 
+import click
 from flask import request
 from telegram import Update
 
@@ -22,3 +23,12 @@ def webhook_handler():
         return "fail"
 
     return "ok"
+
+
+@app.cli.command()
+def update_webhook():
+    updated, msg = bot.setup_webhook(app)
+    if updated:
+        click.secho(msg, fg="green")
+    else:
+        click.secho(msg, fg="yellow")

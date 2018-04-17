@@ -25,6 +25,9 @@ fmt: ## Format code using iSort and Black
 lint: ## Run flake8
 	@pipenv run flake8 .
 
+update_webhook: ## Update telegram webhook config from settings
+	@pipenv run flask update_webhook
+
 install-dev: ## Install all dependencies
 	@pipenv install --dev
 

@@ -29,9 +29,6 @@ class TelegramFlask:
             self.dispatcher.add_handler(handler)
         # log all errors
         self.dispatcher.add_error_handler(self.error)
-        if not app.testing:
-            # Don't setup webhook in test mdoe
-            self.setup_webhook(app)  # pragma: no cover
 
     def setup_webhook(self, app):
         # setup webhook callback
@@ -45,8 +42,7 @@ class TelegramFlask:
             sys.exit(1)
 
         if response.url == webhook_url:
-            logger.info(f"Keeping the same webhook url")
-            return
+            return False, f"Keeping the same webhook url: {webhook_url}"
 
         try:
             success = self.instance.set_webhook(webhook_url)
@@ -56,6 +52,7 @@ class TelegramFlask:
         if not success:
             logger.fatal(f"Unable to set telegram webhook, return: {success}")
             sys.exit(1)
+        return True, f"Change webhook to the new url: {webhook_url}"
 
     @staticmethod
     def error(bot, update, error):

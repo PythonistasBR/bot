@@ -47,6 +47,7 @@ lint                           Run flake8
 run                            Run bot using flask as server
 run_polling                    Run autonomia bot using polling
 test                           Run pytest
+update_webhook                 Update telegram webhook config from settings
 ```
 
 ## License

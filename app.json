@@ -1,7 +1,0 @@
-{
-  "name": "Autonomia Bot",
-  "scripts": {
-    "postdeploy": "FLASK_APP=autonomia/app.py flask update_webhook"
-  }
-}
-

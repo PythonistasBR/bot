@@ -37,9 +37,19 @@ class TelegramFlask:
         path = app.config.get("WEBHOOK_PATH")
         webhook_url = f"https://{domain}/{path}"
         try:
+            response = self.instance.get_webhook_info()
+        except Exception:
+            logger.fatal("Unable to get telegram webhook", exc_info=1)
+            sys.exit(1)
+
+        if response.url == webhook_url:
+            logger.info(f"Keeping the same webhook url")
+            return
+
+        try:
             success = self.instance.set_webhook(webhook_url)
         except Exception:
-            logger.error("Unable to set telegram webhook", exc_info=1)
+            logger.fatal("Unable to set telegram webhook", exc_info=1)
             sys.exit(1)
         if not success:
             logger.fatal(f"Unable to set telegram webhook, return: {success}")

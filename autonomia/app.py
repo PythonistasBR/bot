@@ -7,7 +7,7 @@ from autonomia import settings
 from autonomia.app_factory import create_app
 from autonomia.telegram_flask import TelegramFlask
 
-app = create_app("settings.py")
+app = create_app()
 bot = TelegramFlask(app)
 logger = logging.getLogger(__name__)
 

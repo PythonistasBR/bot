@@ -21,7 +21,7 @@ class TelegramFlask:
         app.extensions["telegram"] = self
 
     def create_bot(self, app):
-        token = app.config.get("API_TOKEN", "")
+        token = app.config.get("API_TOKEN")
         autodiscovery(app.config.get("APPS", []))
         self.instance = telegram.Bot(token=token)
         self.dispatcher = Dispatcher(self.instance, None, workers=0)
@@ -29,7 +29,9 @@ class TelegramFlask:
             self.dispatcher.add_handler(handler)
         # log all errors
         self.dispatcher.add_error_handler(self.error)
-        self.setup_webhook(app)
+        if not app.testing:
+            # Don't setup webhook in test mdoe
+            self.setup_webhook(app)  # pragma: no cover
 
     def setup_webhook(self, app):
         # setup webhook callback

@@ -9,7 +9,7 @@ help:
 run_polling: ## Run autonomia bot using polling
 	@pipenv run python -m autonomia
 
-run: ## Run bot using flask as server
+run: update_webhook ## Run bot using flask as server
 	@pipenv run flask run
 
 test: ## Run pytest

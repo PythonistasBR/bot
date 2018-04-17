@@ -13,12 +13,17 @@ cp env_sample .env
 ```
 
 #### Step 1
-Get an Telegram API Token with the [bot father](https://telegram.me/botfather)
+Get n Telegram API Token with the [Bot father](https://telegram.me/botfather)
 
 Configure the `TELEGRAM_API_TOKEN`
 
 #### Step 2
 Install https://ngrok.com/
+
+Run ngrok
+```
+ngrok http 5000
+```
 
 Configure `WEBHOOK_DOMAIN` with the given domain from ngrok
 

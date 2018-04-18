@@ -6,8 +6,11 @@ help:
 		sort | \
 		awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-run: ## Run autonomia bot
+run_polling: ## Run autonomia bot using polling
 	@pipenv run python -m autonomia
+
+run: update_webhook ## Run bot using flask as server
+	@pipenv run flask run
 
 test: ## Run pytest
 	@pipenv run pytest --cov=autonomia tests/
@@ -21,6 +24,12 @@ fmt: ## Format code using iSort and Black
 
 lint: ## Run flake8
 	@pipenv run flake8 .
+
+update_webhook: ## Update telegram webhook config from settings
+	@pipenv run flask update_webhook
+
+heroku_update_webhook:
+	heroku run FLASK_APP=autonomia/app.py flask update_webhook
 
 install-dev: ## Install all dependencies
 	@pipenv install --dev

@@ -1,10 +1,17 @@
+import os
+
 import pytest
 from telegram import Bot, Chat, Message, Update, User
+
+from .settings_test import API_TOKEN
+
+TEST_PATH = os.path.dirname(os.path.realpath(__file__))
+os.environ["SETTINGS_FILE"] = os.path.join(TEST_PATH, "settings_test.py")
 
 
 @pytest.fixture(scope="session")
 def bot():
-    return Bot(token="133505823:AAHZFMHno3mzVLErU5b5jJvaeG--qUyLyG0")
+    return Bot(token=API_TOKEN)
 
 
 @pytest.fixture
@@ -35,3 +42,20 @@ def chat_message():
 @pytest.fixture
 def chat_update(chat_message):
     return Update(update_id=2, message=chat_message)
+
+
+@pytest.fixture
+def flask_app():
+    from autonomia.app import app
+    return app
+
+
+@pytest.fixture
+def flask_client(flask_app):
+    return flask_app.test_client()
+
+
+@pytest.fixture
+def telegram_flask_bot():
+    from autonomia.telegram_flask import telegram_flask
+    return telegram_flask

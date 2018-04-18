@@ -62,8 +62,8 @@ def cmd_meetup(bot, update):
         text = _format_events(data)
         user = update.message.from_user
         bot.send_message(user.id, text, disable_web_page_preview=True)
-    except Exception as e:
-        logger.error(e, "To sem saco!", exc_info=1)
+    except Exception:
+        logger.error("To sem saco!", exc_info=1)
         update.message.reply_text("To sem saco!")
 
 

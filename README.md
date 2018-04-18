@@ -7,12 +7,27 @@
 ![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)
 
 ## Setup bot
-Configure the `TELEGRAM_API_TOKEN`
 
 ```
 cp env_sample .env
 ```
 
+#### Step 1
+Get n Telegram API Token with the [Bot father](https://telegram.me/botfather)
+
+Configure the `TELEGRAM_API_TOKEN`
+
+#### Step 2
+Install https://ngrok.com/
+
+Run ngrok
+```
+ngrok http 5000
+```
+
+Configure `WEBHOOK_DOMAIN` with the given domain from ngrok
+
+#### Step 3
 Install the dependencies and run the Autonomia Bot
 
 ```
@@ -29,8 +44,10 @@ fmt                            Format code using iSort and Black
 install-dev                    Install all dependencies
 install                        Install only prod dependencies
 lint                           Run flake8
-run                            Run autonomia bot
+run                            Run bot using flask as server
+run_polling                    Run autonomia bot using polling
 test                           Run pytest
+update_webhook                 Update telegram webhook config from settings
 ```
 
 ## License

@@ -38,8 +38,8 @@ def cmd_dublin_bus(bot, update, args):
         bus_timetable = _get_timetable(bus_stop)
         msg = _format_timetable(bus_stop, bus_timetable)
         update.message.reply_text(msg)
-    except Exception as e:
-        logger.error(e, "To sem saco!", exc_info=1)
+    except Exception:
+        logger.error("To sem saco!", exc_info=1)
         update.message.reply_text("To sem saco!")
 
 

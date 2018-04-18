@@ -14,6 +14,8 @@ freezegun = "*"
 
 [packages]
 python-telegram-bot = "*"
+flask = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.6"

@@ -1,5 +1,4 @@
 import logging
-import sys
 
 import telegram
 from telegram.ext import Dispatcher
@@ -31,15 +30,13 @@ class TelegramFlask:
         self.dispatcher.add_error_handler(self.error)
 
     def setup_webhook(self, app):
-        # setup webhook callback
         domain = app.config.get("WEBHOOK_DOMAIN")
         path = app.config.get("WEBHOOK_PATH")
         webhook_url = f"https://{domain}/{path}"
         try:
             response = self.bot.get_webhook_info()
         except Exception:
-            logger.fatal("Unable to get telegram webhook", exc_info=1)
-            sys.exit(1)
+            return False, "Unable to get telegram webhook"
 
         if response.url == webhook_url:
             return False, f"Keeping the same webhook url: {webhook_url}"
@@ -47,11 +44,11 @@ class TelegramFlask:
         try:
             success = self.bot.set_webhook(webhook_url)
         except Exception:
-            logger.fatal("Unable to set telegram webhook", exc_info=1)
-            sys.exit(1)
+            return False, "Unable to set telegram webhook"
+
         if not success:
-            logger.fatal(f"Unable to set telegram webhook, return: {success}")
-            sys.exit(1)
+            return False, f"Unable to set telegram webhook, return: {success}"
+
         return True, f"Change webhook to the new url: {webhook_url}"
 
     @staticmethod

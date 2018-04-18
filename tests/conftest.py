@@ -56,6 +56,6 @@ def flask_client(flask_app):
 
 
 @pytest.fixture
-def flask_telegram_bot():
-    from autonomia.app import bot
-    return bot
+def telegram_flask_bot():
+    from autonomia.telegram_flask import telegram_flask
+    return telegram_flask

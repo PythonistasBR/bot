@@ -9,7 +9,7 @@ def test_webhook_without_body(flask_client):
     assert response.data == b"fail"
 
 
-def test_webhook_with_valid_message(flask_telegram_bot, flask_client):
+def test_webhook_with_valid_message(telegram_flask_bot, flask_client):
     message = {
         "update_id": 673398956,
         "message": {
@@ -34,9 +34,9 @@ def test_webhook_with_valid_message(flask_telegram_bot, flask_client):
             "entities": [{"offset": 0, "length": 5, "type": "bot_command"}],
         },
     }
-    update = Update.de_json(message, flask_telegram_bot.instance)
+    update = Update.de_json(message, telegram_flask_bot.bot)
     message = json.dumps(message)
-    with patch.object(flask_telegram_bot.dispatcher, "process_update") as m:
+    with patch.object(telegram_flask_bot.dispatcher, "process_update") as m:
         response = flask_client.post(
             "/hook", data=message, content_type="application/json"
         )

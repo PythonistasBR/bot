@@ -23,8 +23,8 @@ class TelegramFlask:
     def create_bot(self, app):
         token = app.config.get("API_TOKEN")
         autodiscovery(app.config.get("APPS", []))
-        self.instance = telegram.Bot(token=token)
-        self.dispatcher = Dispatcher(self.instance, None, workers=0)
+        self.bot = telegram.Bot(token=token)
+        self.dispatcher = Dispatcher(self.bot, None, workers=0)
         for handler in get_handlers():
             self.dispatcher.add_handler(handler)
         # log all errors
@@ -36,7 +36,7 @@ class TelegramFlask:
         path = app.config.get("WEBHOOK_PATH")
         webhook_url = f"https://{domain}/{path}"
         try:
-            response = self.instance.get_webhook_info()
+            response = self.bot.get_webhook_info()
         except Exception:
             logger.fatal("Unable to get telegram webhook", exc_info=1)
             sys.exit(1)
@@ -45,7 +45,7 @@ class TelegramFlask:
             return False, f"Keeping the same webhook url: {webhook_url}"
 
         try:
-            success = self.instance.set_webhook(webhook_url)
+            success = self.bot.set_webhook(webhook_url)
         except Exception:
             logger.fatal("Unable to set telegram webhook", exc_info=1)
             sys.exit(1)
@@ -58,3 +58,8 @@ class TelegramFlask:
     def error(bot, update, error):
         """Log Errors caused by Updates."""
         logger.warning('Update "%s" caused error "%s"', update, error)
+
+
+# This instance should be used to access bot features directly.
+# The attributes telegram_flask.bot and telegram_flask.dispatcher are available
+telegram_flask = TelegramFlask()

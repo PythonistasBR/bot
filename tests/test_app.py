@@ -2,6 +2,7 @@ import json
 from unittest.mock import patch
 
 from click.testing import CliRunner
+from flask.cli import ScriptInfo
 from telegram import Update
 
 from autonomia.app import update_webhook
@@ -49,13 +50,14 @@ def test_webhook_with_valid_message(telegram_flask_bot, flask_client):
 
 def test_update_webhook_cli(telegram_flask_bot, flask_app):
     runner = CliRunner()
+    script_info = ScriptInfo(create_app=lambda _: flask_app)
     with patch.object(telegram_flask_bot, "setup_webhook") as m:
         msg = "Change webhook to the new url: https://localhost:5000/hook"
         m.return_value = (True, msg)
-        result = runner.invoke(update_webhook)
+        result = runner.invoke(update_webhook, obj=script_info)
         assert msg in result.output.strip()
     with patch.object(telegram_flask_bot, "setup_webhook") as m:
         msg = "Unable to get telegram webhook"
         m.return_value = (False, msg)
-        result = runner.invoke(update_webhook)
+        result = runner.invoke(update_webhook, obj=script_info)
         assert msg in result.output.strip()

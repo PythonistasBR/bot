@@ -27,8 +27,9 @@ class PullRequestWebhook:
 
     def get_opened_message(self):
         url = self.data["pull_request"]["html_url"]
+        title = self.data["pull_request"]["title"]
         user = self.data["pull_request"]["user"]["login"]
-        message = f"New Pull Request from {user}\n"
+        message = f"New Pull Request from {user} - {title}\n"
         message += f"Please review it: {url}"
         return message
 

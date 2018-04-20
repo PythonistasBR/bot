@@ -1,6 +1,7 @@
 import json
 from unittest.mock import patch
 
+import pytest
 from click.testing import CliRunner
 from flask.cli import ScriptInfo
 from telegram import Update
@@ -48,16 +49,18 @@ def test_webhook_with_valid_message(telegram_flask_bot, flask_client):
     assert response.data == b"ok"
 
 
-def test_update_webhook_cli(telegram_flask_bot, flask_app):
+@pytest.mark.parametrize("updated", [True, False])
+@pytest.mark.parametrize(
+    "msg",
+    [
+        "Change webhook to the new url: https://localhost:5000/hook",
+        "Unable to get telegram webhook",
+    ],
+)
+def test_update_webhook_cli(telegram_flask_bot, flask_app, updated, msg):
     runner = CliRunner()
     script_info = ScriptInfo(create_app=lambda _: flask_app)
     with patch.object(telegram_flask_bot, "setup_webhook") as m:
-        msg = "Change webhook to the new url: https://localhost:5000/hook"
-        m.return_value = (True, msg)
-        result = runner.invoke(update_webhook, obj=script_info)
-        assert msg in result.output.strip()
-    with patch.object(telegram_flask_bot, "setup_webhook") as m:
-        msg = "Unable to get telegram webhook"
-        m.return_value = (False, msg)
+        m.return_value = (updated, msg)
         result = runner.invoke(update_webhook, obj=script_info)
         assert msg in result.output.strip()

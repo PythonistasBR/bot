@@ -8,6 +8,9 @@ logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     level=getattr(logging, LOG_LEVEL),
 )
+
+CHAT_ID = int(os.environ.get("CHAT_ID", 0))
+
 WEBHOOK_DOMAIN = os.environ.get("WEBHOOK_DOMAIN", "localhost:5000")
 WEBHOOK_PATH = os.environ.get("WEBHOOK_PATH", "hook")
 

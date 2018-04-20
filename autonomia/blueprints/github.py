@@ -17,9 +17,6 @@ class PullRequestWebhook:
         self.data = data
 
     def get_message(self):
-        return self.dispatcher()
-
-    def dispatcher(self):
         message = ""
         if self.data["action"] == "opened":
             message = self.get_opened_message()
@@ -43,7 +40,7 @@ def github_webhook():
         chat_id = app.config["CHAT_ID"]
         if message and chat_id:
             telegram_flask.bot.send_message(chat_id, message)
-    except Exception as e:
+    except Exception:
         logger.error("Something went wrong", exc_info=1)
         abort(500)
     return "ok"

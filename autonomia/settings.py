@@ -29,4 +29,5 @@ APPS = [
     "currency",
     "dublin_bus",
     "dublin_bike",
+    "fuck_off"
 ]

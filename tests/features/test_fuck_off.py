@@ -10,17 +10,15 @@ from autonomia.features import fuck_off
 def test_cmd_fuck_off(bot, update):
     with patch.object(update.message, "reply_text") as m:
         fuck_off.cmd_faas(bot, update, args=["Rondi"])
-        m.assert_called_with(
-            "http://foaas.com/off/Rondi/Alan"
-        )
+        m.assert_called_with("http://foaas.com/off/Rondi/Alan")
+
 
 @pytest.mark.vcr
 def test_fuck_off_empty_args(bot, update):
     with patch.object(update.message, "reply_text") as m:
         fuck_off.cmd_faas(bot, update, args=[])
-        m.assert_called_with(
-            "Use: /fuck <who> - To send someone fuck off"
-        )
+        m.assert_called_with("Use: /fuck <who> - To send someone fuck off")
+
 
 def test_fuck_factory():
     handler = fuck_off.fuck_factory()

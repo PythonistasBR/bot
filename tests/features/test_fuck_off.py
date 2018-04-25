@@ -7,10 +7,24 @@ from autonomia.features import fuck_off
 
 
 @pytest.mark.vcr
-def test_cmd_fuck_off(bot, update):
+def test_cmd_fuck_off_normal_arg(bot, update):
     with patch.object(update.message, "reply_text") as m:
         fuck_off.cmd_faas(bot, update, args=["Rondi"])
         m.assert_called_with("http://foaas.com/off/Rondi/Alan")
+
+
+@pytest.mark.vcr
+def test_cmd_fuck_off_username(bot, update):
+    with patch.object(update.message, "reply_text") as m:
+        fuck_off.cmd_faas(bot, update, args=["@rondi"])
+        m.assert_called_with("http://foaas.com/off/@rondi/Alan")
+
+
+@pytest.mark.vcr
+def test_cmd_fuck_off_multi_args(bot, update):
+    with patch.object(update.message, "reply_text") as m:
+        fuck_off.cmd_faas(bot, update, args=["the", "rules"])
+        m.assert_called_with("http://foaas.com/off/the%20rules/Alan")
 
 
 @pytest.mark.vcr

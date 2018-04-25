@@ -14,6 +14,20 @@ def test_cmd_fuck_off(bot, update):
 
 
 @pytest.mark.vcr
+def test_cmd_fuck_off(bot, update):
+    with patch.object(update.message, "reply_text") as m:
+        fuck_off.cmd_faas(bot, update, args=["@rondi"])
+        m.assert_called_with("http://foaas.com/off/@rondi/Alan")
+
+
+@pytest.mark.vcr
+def test_cmd_fuck_off(bot, update):
+    with patch.object(update.message, "reply_text") as m:
+        fuck_off.cmd_faas(bot, update, args=["the", "rules"])
+        m.assert_called_with("http://foaas.com/off/the%20rules/Alan")
+
+
+@pytest.mark.vcr
 def test_fuck_off_empty_args(bot, update):
     with patch.object(update.message, "reply_text") as m:
         fuck_off.cmd_faas(bot, update, args=[])

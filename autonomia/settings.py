@@ -18,6 +18,9 @@ WEBHOOK_PATH = os.environ.get("WEBHOOK_PATH", "hook")
 API_TOKEN = os.environ.get("TELEGRAM_API_TOKEN", "")
 FIXER_IO_API_TOKEN = os.environ.get("FIXER_IO_API_TOKEN", "")
 MEETUP_API_KEY = os.environ.get("MEETUP_API_KEY", "")
+MEETUP_API_KEY = os.environ.get("MEETUP_API_KEY", "")
+GOOGLE_CUSTOM_SEARCH_API_KEY = os.environ.get("GOOGLE_CUSTOM_SEARCH_API_KEY", "")
+GOOGLE_SEARCH_ENGINE_KEY = os.environ.get("GOOGLE_SEARCH_ENGINE_KEY", "")
 
 # Configure the enabled apps
 APPS = [
@@ -29,4 +32,5 @@ APPS = [
     "currency",
     "dublin_bus",
     "dublin_bike",
+    "image",
 ]

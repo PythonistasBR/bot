@@ -11,11 +11,16 @@ pytest = "*"
 pytest-cov = "*"
 pytest-vcr = "*"
 freezegun = "*"
+ipdb = "*"
+google = "*"
+google-api-python-client = "*"
 
 [packages]
 python-telegram-bot = "*"
 flask = "*"
 gunicorn = "*"
+google = "*"
+google-api-python-client = "*"
 
 [requires]
 python_version = "3.6"

@@ -6,7 +6,8 @@ from telegram import Bot, Chat, Message, Update, User
 from .settings_test import API_TOKEN
 
 TEST_PATH = os.path.dirname(os.path.realpath(__file__))
-del os.environ["FLASK_ENV"]
+if "FLASK_ENV" in os.environ:
+    del os.environ["FLASK_ENV"]
 os.environ["SETTINGS_FILE"] = os.path.join(TEST_PATH, "settings_test.py")
 
 

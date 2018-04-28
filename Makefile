@@ -3,14 +3,13 @@
 help:
 	@echo "Usage: make command"
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
-		sort | \
 		awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 run_polling: ## Run autonomia bot using polling
 	@pipenv run python -m autonomia
 
 run: update_webhook ## Run bot using flask as server
-	@pipenv run flask run
+	@pipenv run flask run --host 0.0.0.0
 
 test: ## Run pytest
 	@pipenv run pytest --cov=autonomia tests/
@@ -39,3 +38,34 @@ install: ## Install only prod dependencies
 
 clean: ## Clean all compiled python code
 	@find . -name __pycache__ -delete -or -iname "*.py[co]" -delete
+
+# docker commands
+start: up  ## [docker] - start bot
+	@sudo docker-compose start
+
+stop: ## [docker] - Stop bot
+	@sudo docker-compose stop
+
+up:
+	@sudo docker-compose up -d
+
+rebuild: down  ## [docker] - rebuild bot
+	@sudo docker-compose rm
+	@sudo docker-compose build
+
+down:
+	@sudo docker-compose down
+
+logs:  ## [docker] - tail bot logs
+	@sudo docker-compose logs --tail 60 -f
+
+restart: stop start
+
+kill:
+	@sudo docker-compose kill
+
+status:  ## [docker] - check bot status
+	@sudo docker-compose ps
+
+docker-update-webhook:  ## [docker] - update telegram webhook config from settings
+	@sudo docker-compose run --no-deps --rm web flask update_webhook

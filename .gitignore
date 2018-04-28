@@ -2,4 +2,5 @@
 .coverage
 .pytest_cache
 htmlcov
+__pycache__
 .vscode

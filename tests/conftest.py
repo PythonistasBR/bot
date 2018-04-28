@@ -6,6 +6,8 @@ from telegram import Bot, Chat, Message, Update, User
 from .settings_test import API_TOKEN
 
 TEST_PATH = os.path.dirname(os.path.realpath(__file__))
+if "FLASK_ENV" in os.environ:
+    del os.environ["FLASK_ENV"]
 os.environ["SETTINGS_FILE"] = os.path.join(TEST_PATH, "settings_test.py")
 
 
@@ -47,6 +49,7 @@ def chat_update(chat_message):
 @pytest.fixture
 def flask_app():
     from autonomia.app import app
+
     return app
 
 
@@ -58,4 +61,5 @@ def flask_client(flask_app):
 @pytest.fixture
 def telegram_flask_bot():
     from autonomia.telegram_flask import telegram_flask
+
     return telegram_flask

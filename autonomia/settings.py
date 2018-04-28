@@ -19,6 +19,8 @@ API_TOKEN = os.environ.get("TELEGRAM_API_TOKEN", "")
 FIXER_IO_API_TOKEN = os.environ.get("FIXER_IO_API_TOKEN", "")
 MEETUP_API_KEY = os.environ.get("MEETUP_API_KEY", "")
 
+REDIS_URL = os.environ.get("REDIS_URL", "")
+
 # Configure the enabled apps
 APPS = [
     "basic",

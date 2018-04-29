@@ -18,6 +18,7 @@ flask = "*"
 gunicorn = "*"
 redis = "*"
 flask-redis = "*"
+google-api-python-client = "*"
 
 [requires]
 python_version = "3.6"

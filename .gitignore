@@ -4,3 +4,7 @@
 htmlcov
 __pycache__
 .vscode
+
+# google generated files oO
+calendar.dat
+client_secrets.json

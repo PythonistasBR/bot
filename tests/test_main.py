@@ -18,9 +18,7 @@ def test_main(mock_settings, mock_get_handler, autodiscovery_mock):
 
     with patch.object(
         main_module.Updater, "start_polling"
-    ) as polling_mock, patch.object(
-        main_module.Updater, "idle"
-    ) as idle_mock:
+    ) as polling_mock, patch.object(main_module.Updater, "idle") as idle_mock:
         main_module.main()
         autodiscovery_mock.assert_called_once()
         polling_mock.assert_called_once()

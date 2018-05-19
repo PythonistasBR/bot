@@ -32,9 +32,7 @@ def test_setup_webhook_call_when_has_no_change(telegram_flask_bot, flask_app):
 def test_setup_webhook_call_when_has_change(telegram_flask_bot, flask_app):
     with patch.object(
         telegram_flask_bot.bot, "get_webhook_info"
-    ) as get_mock, patch.object(
-        telegram_flask_bot.bot, "set_webhook"
-    ) as set_mock:
+    ) as get_mock, patch.object(telegram_flask_bot.bot, "set_webhook") as set_mock:
         get_mock.return_value = Mock(url="https://localhost:5000/old_webhook")
         set_mock.return_value = True
         updated, ret = telegram_flask_bot.setup_webhook(flask_app)
@@ -53,9 +51,7 @@ def test_setup_webhook_exception_on_get_webhook_info(telegram_flask_bot, flask_a
 def test_setup_webhook_exception_on_set_webhook(telegram_flask_bot, flask_app):
     with patch.object(
         telegram_flask_bot.bot, "get_webhook_info"
-    ) as get_mock, patch.object(
-        telegram_flask_bot.bot, "set_webhook"
-    ) as set_mock:
+    ) as get_mock, patch.object(telegram_flask_bot.bot, "set_webhook") as set_mock:
         get_mock.return_value = Mock(url="https://localhost:5000/old_webhook")
         set_mock.side_effect = ValueError("bug bug bug")
         update, ret = telegram_flask_bot.setup_webhook(flask_app)
@@ -66,9 +62,7 @@ def test_setup_webhook_exception_on_set_webhook(telegram_flask_bot, flask_app):
 def test_setup_webhook_call_on_failure_to_set_webhook(telegram_flask_bot, flask_app):
     with patch.object(
         telegram_flask_bot.bot, "get_webhook_info"
-    ) as get_mock, patch.object(
-        telegram_flask_bot.bot, "set_webhook"
-    ) as set_mock:
+    ) as get_mock, patch.object(telegram_flask_bot.bot, "set_webhook") as set_mock:
         get_mock.return_value = Mock(url="https://localhost:5000/old_webhook")
         set_mock.return_value = False
         updated, ret = telegram_flask_bot.setup_webhook(flask_app)

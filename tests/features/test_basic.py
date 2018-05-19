@@ -97,7 +97,7 @@ def test_cmd_larissa(bot, chat_update):
 def test_larissa_factory(bot, chat_update):
     handler = basic.larissa_factory()
     assert isinstance(handler, RegexHandler)
-    assert (
-        handler.pattern == re.compile(r".*\b([Hh][Bb]|[[hH].nr.qu.[\s]*[bB].st.s)\b.*")
+    assert handler.pattern == re.compile(
+        r".*\b([Hh][Bb]|[[hH].nr.qu.[\s]*[bB].st.s)\b.*"
     )
     assert handler.callback == basic.cmd_larissa

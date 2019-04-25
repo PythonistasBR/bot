@@ -93,3 +93,15 @@ def joke_factory():
     /joke - send a random joke about Chuck Norris
     """
     return CommandHandler("joke", cmd_joke)
+
+
+def cmd_clear(bot, update):
+    update.message.reply_text(".\n" * 50)
+
+
+@bot_handler
+def clear_factory():
+    """
+    /clear - save your ass at work
+    """
+    return CommandHandler("clear", cmd_clear)

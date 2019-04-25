@@ -101,3 +101,16 @@ def test_larissa_factory(bot, chat_update):
         r".*\b([Hh][Bb]|[[hH].nr.qu.[\s]*[bB].st.s)\b.*"
     )
     assert handler.callback == basic.cmd_larissa
+
+
+def test_clear_factory():
+    handler = basic.clear_factory()
+    assert isinstance(handler, CommandHandler)
+    assert handler.command == ["clear"]
+    assert handler.callback == basic.cmd_clear
+
+
+def test_cmd_clear(bot, update):
+    with patch.object(update.message, "reply_text") as m:
+        basic.cmd_clear(bot, update)
+        m.assert_called_with(".\n" * 50)

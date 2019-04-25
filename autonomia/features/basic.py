@@ -1,7 +1,7 @@
 import json
 from urllib import parse, request
 
-from telegram.ext import CommandHandler, RegexHandler
+from telegram.ext import CommandHandler, Filters, MessageHandler
 
 from autonomia.core import bot_handler
 
@@ -54,7 +54,9 @@ def cmd_larissa(bot, update):
 
 @bot_handler
 def larissa_factory():
-    return RegexHandler(r".*\b([Hh][Bb]|[[hH].nr.qu.[\s]*[bB].st.s)\b.*", cmd_larissa)
+    return MessageHandler(
+        Filters.regex(r".*\b([Hh][Bb]|[[hH].nr.qu.[\s]*[bB].st.s)\b.*"), cmd_larissa
+    )
 
 
 def cmd_aurelio(bot, update, args):

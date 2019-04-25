@@ -1,4 +1,3 @@
-
 import logging
 
 from flask import Blueprint, abort
@@ -12,7 +11,6 @@ github = Blueprint("github", __name__, url_prefix="/github")
 
 
 class PullRequestWebhook:
-
     def __init__(self, data):
         self.data = data
 

@@ -9,7 +9,6 @@ from autonomia.telegram_flask import TelegramFlask
 @patch("autonomia.telegram_flask.autodiscovery")
 @patch("autonomia.telegram_flask.get_handlers")
 def test_main(mock_get_handler, autodiscovery_mock, flask_app):
-
     def example_cmd():
         print("ok")
 

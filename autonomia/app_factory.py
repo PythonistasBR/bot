@@ -14,7 +14,8 @@ def create_app():
     config_file = os.environ.get("SETTINGS_FILE", "settings.py")
     app.config.from_pyfile(config_file)
     # loading apps
-    redis_store.init_app(app)
+    if os.environ.get("REDIS_URL"):
+        redis_store.init_app(app)
     bot.init_app(app)
     # loading blueprints
     app.register_blueprint(github)

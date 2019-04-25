@@ -3,7 +3,7 @@ from unittest.mock import patch
 
 import pytest
 from telegram import ChatMember, User
-from telegram.ext import CommandHandler, RegexHandler
+from telegram.ext import CommandHandler, MessageHandler
 
 from autonomia.features import basic
 
@@ -91,13 +91,26 @@ def test_joke_factory():
 def test_cmd_larissa(bot, chat_update):
     with patch.object(bot, "send_sticker") as m:
         basic.cmd_larissa(bot, chat_update)
-        m.assert_called_with(123993705, "CAADAQADCwADgGntCPaKda9GXFZ3Ag")
+        m.assert_called_with(123_993_705, "CAADAQADCwADgGntCPaKda9GXFZ3Ag")
 
 
 def test_larissa_factory(bot, chat_update):
     handler = basic.larissa_factory()
-    assert isinstance(handler, RegexHandler)
-    assert handler.pattern == re.compile(
+    assert isinstance(handler, MessageHandler)
+    assert handler.filters.pattern == re.compile(
         r".*\b([Hh][Bb]|[[hH].nr.qu.[\s]*[bB].st.s)\b.*"
     )
     assert handler.callback == basic.cmd_larissa
+
+
+def test_clear_factory():
+    handler = basic.clear_factory()
+    assert isinstance(handler, CommandHandler)
+    assert handler.command == ["clear"]
+    assert handler.callback == basic.cmd_clear
+
+
+def test_cmd_clear(bot, update):
+    with patch.object(update.message, "reply_text") as m:
+        basic.cmd_clear(bot, update)
+        m.assert_called_with(".\n" * 50)

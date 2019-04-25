@@ -7,7 +7,6 @@ from autonomia.features import help
 
 @patch("autonomia.features.help.get_lazy_handlers")
 def test_cmd_meetup(mock_get_lazy_handler, bot, update):
-
     def example_factory():
         """/example - testing the help command"""
 

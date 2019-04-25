@@ -8,7 +8,6 @@ from autonomia.features import poll
 
 
 class TestBuildPoll:
-
     def test_init(self):
         p = poll.Poll("Vai ter dojo?")
         assert p.question == "Vai ter dojo?"
@@ -32,7 +31,6 @@ class TestBuildPoll:
 
 
 class TestVotingPoll:
-
     def test_vote(self, user):
         p = poll.Poll("Vai ter dojo?")
         p.add_choice("Sim")
@@ -73,7 +71,6 @@ class TestVotingPoll:
 
 
 class TestResultPoll:
-
     def test_result_with_winner(self, user):
         other_user1 = User(101, "user1", False)
         other_user2 = User(102, "user2", False)
@@ -119,7 +116,6 @@ class TestResultPoll:
 
 
 class TestFormatPoll:
-
     def test_poll_formating_without_votes(self):
         p = poll.Poll("Vai ter dojo?")
         p.add_choice("Sim")

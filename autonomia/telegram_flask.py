@@ -9,7 +9,6 @@ logger = logging.getLogger(__name__)
 
 
 class TelegramFlask:
-
     def __init__(self, app=None):
         self.app = app
         if app is not None:

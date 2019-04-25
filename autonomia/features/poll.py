@@ -13,7 +13,6 @@ class AlreadyVotedError(Exception):
 
 
 class Poll:
-
     def __init__(self, question):
         self.question = question
         self.total = 0

@@ -24,7 +24,7 @@ def webhook_handler():
     return "ok"
 
 
-@app.cli.command()
+@app.cli.command("update_webhook")
 def update_webhook():
     updated, msg = telegram_flask.setup_webhook(app)
     if updated:

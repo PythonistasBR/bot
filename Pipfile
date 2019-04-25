@@ -18,6 +18,8 @@ flask = "*"
 gunicorn = "*"
 redis = "*"
 flask-redis = "*"
+jinja2 = "*"
+pyyaml = "*"
 
 [requires]
 python_version = "3.6"

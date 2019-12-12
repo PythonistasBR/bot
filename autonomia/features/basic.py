@@ -54,7 +54,7 @@ def au_factory():
 
     """
     return MessageHandler(
-        Filters.regex(r"^au$"), cmd_au
+        Filters.regex(r".*\b([Aa][Uu]|[[aA].nr.qu.[\s]*[uU].st.s)\b.*"), cmd_au
     )
 
 

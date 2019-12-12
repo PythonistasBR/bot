@@ -47,6 +47,25 @@ def me_factory():
     return CommandHandler("me", cmd_me, pass_args=True)
 
 
+@bot_handler
+def au_factory():
+    """
+    send sticker au
+
+    """
+    return MessageHandler(
+        Filters.regex(r".*\b([aA][uU])\b.*"), cmd_au
+    )
+
+
+def cmd_au(bot, update):
+    """
+    send sticker au
+    """
+    chat = update.message.chat
+    bot.send_sticker(chat.id, "CAADAQAD0gIAAhwh_Q0qq24fquUvQRYE")
+
+
 def cmd_larissa(bot, update):
     chat = update.message.chat
     bot.send_sticker(chat.id, "CAADAQADCwADgGntCPaKda9GXFZ3Ag")

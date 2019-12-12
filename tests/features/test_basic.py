@@ -103,6 +103,21 @@ def test_larissa_factory(bot, chat_update):
     assert handler.callback == basic.cmd_larissa
 
 
+def test_cmd_au(bot, chat_update):
+    with patch.object(bot, "send_sticker") as m:
+        basic.cmd_au(bot, chat_update)
+        m.assert_called_with(123_993_705, "CAADAQAD0gIAAhwh_Q0qq24fquUvQRYE")
+
+
+def test_au_factory(bot, chat_update):
+    handler = basic.au_factory()
+    assert isinstance(handler, MessageHandler)
+    assert handler.filters.pattern == re.compile(
+        r".*\b([aA][uU])\b.*"
+    )
+    assert handler.callback == basic.cmd_au
+
+
 def test_clear_factory():
     handler = basic.clear_factory()
     assert isinstance(handler, CommandHandler)

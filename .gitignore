@@ -4,3 +4,4 @@
 htmlcov
 __pycache__
 .vscode
+/venv

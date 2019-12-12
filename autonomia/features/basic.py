@@ -47,7 +47,6 @@ def me_factory():
     return CommandHandler("me", cmd_me, pass_args=True)
 
 
-
 @bot_handler
 def au_factory():
     """
@@ -57,6 +56,7 @@ def au_factory():
     return MessageHandler(
         Filters.regex(r"^au$"), cmd_au
     )
+
 
 def cmd_au(bot, update):
     """

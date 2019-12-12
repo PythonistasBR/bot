@@ -113,7 +113,7 @@ def test_au_factory(bot, chat_update):
     handler = basic.au_factory()
     assert isinstance(handler, MessageHandler)
     assert handler.filters.pattern == re.compile(
-        r".*\b([aA]*[uU])\b.*"
+        r".*\b([aA][uU])\b.*"
     )
     assert handler.callback == basic.cmd_au
 

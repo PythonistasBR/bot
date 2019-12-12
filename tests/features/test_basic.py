@@ -109,7 +109,7 @@ def test_cmd_au(bot, chat_update):
         m.assert_called_with(123_993_705, "CAADAQAD0gIAAhwh_Q0qq24fquUvQRYE")
 
 
-def test_larissa_factory(bot, chat_update):
+def test_au_factory(bot, chat_update):
     handler = basic.au_factory()
     assert isinstance(handler, MessageHandler)
     assert handler.filters.pattern == re.compile(r"^au$")

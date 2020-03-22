@@ -62,8 +62,6 @@ def cmd_retrieve_covid_data(bot, update, args):
         )
     except IndexError:
         update.message.reply_text("Esqueceu o país doidao?")
-    except Exception as eee:
-        a = 1
 
 
 @bot_handler

@@ -21,19 +21,7 @@ def cmd_retrieve_covid_data(bot, update, args):
 
     Response looks like:
     HTTP/1.1 200 OK
-    Date: Sat, 21 Mar 2020 19:08:40 GMT
-    Content-Type: application/json; charset=utf-8
-    Transfer-Encoding: chunked
-    Connection: close
-    X-Powered-By: Express
-    Access-Control-Allow-Origin: *
-    ETag: W/"8e-pAnHe33/bOgTMFtotcRjfXkm4Js"
-    CF-Cache-Status: DYNAMIC
-    Expect-CT: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
-    Server: cloudflare
-    CF-RAY: 5779f681584773e5-IAD
-    Content-Encoding: gzip
-
+    ...
     {
         "country": "Brazil",
         "cases": 1021,
@@ -48,7 +36,11 @@ def cmd_retrieve_covid_data(bot, update, args):
     """
 
     try:
-        user_agent = "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7"
+        # Extra headers are required by Cloudflare
+        user_agent = (
+            "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7)"
+            "Gecko/2009021910 Firefox/3.0.7"
+        )
         headers = {
             "User-Agent": user_agent,
             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",

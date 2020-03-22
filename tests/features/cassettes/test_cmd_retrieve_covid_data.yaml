@@ -1,0 +1,48 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+      Connection:
+      - close
+      Host:
+      - corona.lmao.ninja
+      User-Agent:
+      - Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910
+        Firefox/3.0.7
+    method: GET
+    uri: https://corona.lmao.ninja/countries/ireland
+  response:
+    body:
+      string: '{"country":"Ireland","cases":785,"todayCases":0,"deaths":3,"todayDeaths":0,"recovered":5,"active":777,"critical":13,"casesPerOneMillion":159}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 577ffd8a48a0296d-DUB
+      Connection:
+      - close
+      Content-Length:
+      - '141'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 22 Mar 2020 12:42:03 GMT
+      ETag:
+      - W/"8d-4brXOm8K3pPAEmA9Tl3LZ9AOdBA"
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cfduid=da1db6806df1dce71022c7134ccd3e0641584880923; expires=Tue, 21-Apr-20
+        12:42:03 GMT; path=/; domain=.lmao.ninja; HttpOnly; SameSite=Lax; Secure
+      X-Powered-By:
+      - Express
+    status:
+      code: 200
+      message: OK
+version: 1

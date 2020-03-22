@@ -1,0 +1,46 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+      Connection:
+      - close
+      Host:
+      - corona.lmao.ninja
+      User-Agent:
+      - Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910
+        Firefox/3.0.7
+    method: GET
+    uri: https://corona.lmao.ninja/countries/omg-ponneys
+  response:
+    body:
+      string: Country not found
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 577ffd8ddcd7a717-DUB
+      Connection:
+      - close
+      Content-Type:
+      - text/html; charset=utf-8
+      Date:
+      - Sun, 22 Mar 2020 12:42:04 GMT
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cfduid=d4e7fed696523c03793f6f67e5fb734e91584880923; expires=Tue, 21-Apr-20
+        12:42:03 GMT; path=/; domain=.lmao.ninja; HttpOnly; SameSite=Lax; Secure
+      Transfer-Encoding:
+      - chunked
+      X-Powered-By:
+      - Express
+    status:
+      code: 200
+      message: OK
+version: 1

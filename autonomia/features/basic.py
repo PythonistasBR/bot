@@ -53,9 +53,7 @@ def au_factory():
     send sticker au
 
     """
-    return MessageHandler(
-        Filters.regex(r".*\b([aA][uU])\b.*"), cmd_au
-    )
+    return MessageHandler(Filters.regex(r".*\b([aA][uU])\b.*"), cmd_au)
 
 
 def cmd_au(bot, update):

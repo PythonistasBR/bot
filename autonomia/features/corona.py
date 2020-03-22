@@ -4,7 +4,6 @@ from urllib import request
 from telegram.ext import CommandHandler
 
 from autonomia.core import bot_handler
-from autonomia.settings import FIXER_IO_API_TOKEN as token
 
 # Source: https://github.com/NovelCOVID/API
 _URL = "https://corona.lmao.ninja/countries/{}"

@@ -8,18 +8,21 @@ from autonomia.features import corona
 
 @pytest.mark.vcr
 def test_cmd_retrieve_covid_data(bot, update):
-    with patch.object(update.message, "reply_text") as m:
+    with patch.object(update.message, "reply_markdown") as m:
         corona.cmd_retrieve_covid_data(bot, update, args=["ireland"])
         m.assert_called_with(
-            "Country               Ireland\n"
-            "Cases                     785\n"
-            "Today Cases                 0\n"
-            "Deaths                      3\n"
-            "Today Deaths                0\n"
-            "Recovered                   5\n"
-            "Active                    777\n"
-            "Critical                   13\n"
-            "Cases Per One Million     159\n"
+            "```\n"
+            "Country                Ireland\n"
+            "Cases                     1329\n"
+            "Today Cases                204\n"
+            "Deaths                       7\n"
+            "Today Deaths                 1\n"
+            "Recovered                    5\n"
+            "Active                    1317\n"
+            "Critical                    29\n"
+            "Cases Per One Million      269\n"
+            "Deaths Per One Million       1\n"
+            "```"
         )
 
 

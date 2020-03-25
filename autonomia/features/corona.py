@@ -1,5 +1,6 @@
 import json
 from urllib import request
+from urllib.parse import quote
 
 from telegram.ext import CommandHandler
 
@@ -14,25 +15,24 @@ def _camel_case_to_title(key):
     return key.title()
 
 
+def _format_message(response_body):
+    skip_items = {"countryInfo"}
+    msg = "```\n"
+    for item, value in response_body.items():
+        if item in skip_items:
+            continue
+        msg += f"{_camel_case_to_title(item):<22}{value:>8}\n"
+    msg += "```"
+    return msg
+
+
 def cmd_retrieve_covid_data(bot, update, args):
     """
     Retrieve COVID-19 (corona virus) data from from `_URL`
-
-    Response looks like:
-    HTTP/1.1 200 OK
-    ...
-    {
-        "country": "Brazil",
-        "cases": 1021,
-        "todayCases": 51,
-        "deaths": 18,
-        "todayDeaths": 7,
-        "recovered": 2,
-        "active": 1001,
-        "critical": 18,
-        "casesPerOneMillion": 5
-    }
     """
+    if not args:
+        update.message.reply_text("Esqueceu o país doidao?")
+        return
 
     try:
         # Extra headers are required by Cloudflare
@@ -44,23 +44,19 @@ def cmd_retrieve_covid_data(bot, update, args):
             "User-Agent": user_agent,
             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
         }
-        country = args[0]
-        req = request.Request(_URL.format(country), None, headers)
+        country = " ".join(args)
+        req = request.Request(_URL.format(quote(country)), None, headers)
         response = request.urlopen(req)
         response_body = json.loads(response.read())
 
-        msg = ""
-        for item, value in response_body.items():
-            msg += f"{_camel_case_to_title(item):<21}{value:>8}\n"
-        update.message.reply_text(msg)
+        msg = _format_message(response_body)
+        update.message.reply_markdown(msg)
 
     except json.decoder.JSONDecodeError:
         # Unfortunately the API doesn't return meaningful http status code (always 200)
         update.message.reply_text(
             f"{country} é país agora? \n Faz assim: /corona Brazil"
         )
-    except IndexError:
-        update.message.reply_text("Esqueceu o país doidao?")
 
 
 @bot_handler

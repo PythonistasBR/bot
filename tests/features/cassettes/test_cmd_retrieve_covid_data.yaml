@@ -9,37 +9,37 @@ interactions:
       Host:
       - corona.lmao.ninja
       User-Agent:
-      - Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910
+      - Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7)Gecko/2009021910
         Firefox/3.0.7
     method: GET
     uri: https://corona.lmao.ninja/countries/ireland
   response:
     body:
-      string: '{"country":"Ireland","cases":785,"todayCases":0,"deaths":3,"todayDeaths":0,"recovered":5,"active":777,"critical":13,"casesPerOneMillion":159}'
+      string: '{"country":"Ireland","countryInfo":{"iso2":"IE","iso3":"IRL","_id":372,"lat":53,"long":-8,"flag":"https://raw.githubusercontent.com/NovelCOVID/API/master/assets/flags/ie.png"},"cases":1329,"todayCases":204,"deaths":7,"todayDeaths":1,"recovered":5,"active":1317,"critical":29,"casesPerOneMillion":269,"deathsPerOneMillion":1}'
     headers:
       Access-Control-Allow-Origin:
       - '*'
       CF-Cache-Status:
       - DYNAMIC
       CF-RAY:
-      - 577ffd8a48a0296d-DUB
+      - 57947e59780ba717-DUB
       Connection:
       - close
       Content-Length:
-      - '141'
+      - '324'
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Sun, 22 Mar 2020 12:42:03 GMT
+      - Wed, 25 Mar 2020 00:25:14 GMT
       ETag:
-      - W/"8d-4brXOm8K3pPAEmA9Tl3LZ9AOdBA"
+      - W/"144-jCONEHdVtQEwXmDAtrek7BLji7Q"
       Expect-CT:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Server:
       - cloudflare
       Set-Cookie:
-      - __cfduid=da1db6806df1dce71022c7134ccd3e0641584880923; expires=Tue, 21-Apr-20
-        12:42:03 GMT; path=/; domain=.lmao.ninja; HttpOnly; SameSite=Lax; Secure
+      - __cfduid=ddead711dd5667c35d85862ae0596c5231585095914; expires=Fri, 24-Apr-20
+        00:25:14 GMT; path=/; domain=.lmao.ninja; HttpOnly; SameSite=Lax; Secure
       X-Powered-By:
       - Express
     status:

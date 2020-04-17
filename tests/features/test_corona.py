@@ -43,6 +43,14 @@ def test_cmd_retrieve_covid_data_no_country_passed(bot, update):
         m.assert_called_with("Esqueceu o país doidao?")
 
 
+@patch.object(corona, "get_covid_data", side_effect=ValueError("Random Error"))
+def test_cmd_retrieve_covid_raise_random_exception(bot, update):
+    with patch.object(update.message, "reply_text") as m:
+        with pytest.raises(ValueError):
+            corona.cmd_retrieve_covid_data(bot, update, args=["ie"])
+        m.assert_called_with("Deu ruim! Morri, mas passo bem")
+
+
 def test_corona_factory():
     handler = corona.corona_factory()
     assert isinstance(handler, CommandHandler)

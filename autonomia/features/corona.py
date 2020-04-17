@@ -11,6 +11,10 @@ from autonomia.core import bot_handler
 _URL = "https://corona.lmao.ninja/v2/countries/{}"
 
 
+class CountryNotFound(Exception):
+    """Raise when the country does not exists on the API"""
+
+
 def _camel_case_to_title(key):
     key = "".join(map(lambda x: x if x.islower() else " " + x, key))
     return key.title()
@@ -27,15 +31,7 @@ def _format_message(response_body):
     return msg
 
 
-def cmd_retrieve_covid_data(bot, update, args):
-    """
-    Retrieve COVID-19 (corona virus) data from from `_URL`
-    """
-    if not args:
-        update.message.reply_text("Esqueceu o país doidao?")
-        return
-
-    country = " ".join(args)
+def get_covid_data(country):
     try:
         # Extra headers are required by Cloudflare
         user_agent = (
@@ -49,16 +45,30 @@ def cmd_retrieve_covid_data(bot, update, args):
         req = request.Request(_URL.format(quote(country)), None, headers)
         response = request.urlopen(req)
         response_body = json.loads(response.read())
-
-        msg = _format_message(response_body)
-        update.message.reply_markdown(msg)
+        return response_body
     except HTTPError as e:
-        if e.code == 404:
-            update.message.reply_text(
-                f"{country} é país agora? \n Faz assim: /corona Brazil"
-            )
-        else:
+        if e.code != 404:
             raise e
+        raise CountryNotFound()
+
+
+def cmd_retrieve_covid_data(bot, update, args):
+    """
+    Retrieve COVID-19 (corona virus) data from from `_URL`
+    """
+    if not args:
+        update.message.reply_text("Esqueceu o país doidao?")
+        return
+
+    country = " ".join(args)
+    try:
+        covid_data = get_covid_data(country)
+        msg = _format_message(covid_data)
+        update.message.reply_markdown(msg)
+    except CountryNotFound:
+        update.message.reply_text(
+            f"{country} é país agora? \n Faz assim: /corona Brazil"
+        )
     except Exception as e:
         update.message.reply_text("Deu ruim! Morri, mas passo bem")
         raise e

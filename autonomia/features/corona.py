@@ -1,5 +1,6 @@
 import json
 from urllib import request
+from urllib.error import HTTPError
 from urllib.parse import quote
 
 from telegram.ext import CommandHandler
@@ -7,7 +8,11 @@ from telegram.ext import CommandHandler
 from autonomia.core import bot_handler
 
 # Source: https://github.com/NovelCOVID/API
-_URL = "https://corona.lmao.ninja/countries/{}"
+_URL = "https://corona.lmao.ninja/v2/countries/{}"
+
+
+class CountryNotFound(Exception):
+    """Raise when the country does not exists on the API"""
 
 
 def _camel_case_to_title(key):
@@ -26,14 +31,7 @@ def _format_message(response_body):
     return msg
 
 
-def cmd_retrieve_covid_data(bot, update, args):
-    """
-    Retrieve COVID-19 (corona virus) data from from `_URL`
-    """
-    if not args:
-        update.message.reply_text("Esqueceu o país doidao?")
-        return
-
+def get_covid_data(country):
     try:
         # Extra headers are required by Cloudflare
         user_agent = (
@@ -44,19 +42,36 @@ def cmd_retrieve_covid_data(bot, update, args):
             "User-Agent": user_agent,
             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
         }
-        country = " ".join(args)
         req = request.Request(_URL.format(quote(country)), None, headers)
         response = request.urlopen(req)
         response_body = json.loads(response.read())
+        return response_body
+    except HTTPError as e:
+        if e.code != 404:
+            raise e
+        raise CountryNotFound()
 
-        msg = _format_message(response_body)
+
+def cmd_retrieve_covid_data(bot, update, args):
+    """
+    Retrieve COVID-19 (corona virus) data from from `_URL`
+    """
+    if not args:
+        update.message.reply_text("Esqueceu o país doidao?")
+        return
+
+    country = " ".join(args)
+    try:
+        covid_data = get_covid_data(country)
+        msg = _format_message(covid_data)
         update.message.reply_markdown(msg)
-
-    except json.decoder.JSONDecodeError:
-        # Unfortunately the API doesn't return meaningful http status code (always 200)
+    except CountryNotFound:
         update.message.reply_text(
             f"{country} é país agora? \n Faz assim: /corona Brazil"
         )
+    except Exception as e:
+        update.message.reply_text("Deu ruim! Morri, mas passo bem")
+        raise e
 
 
 @bot_handler

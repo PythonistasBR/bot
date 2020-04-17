@@ -12,36 +12,40 @@ interactions:
       - Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7)Gecko/2009021910
         Firefox/3.0.7
     method: GET
-    uri: https://corona.lmao.ninja/countries/ireland
+    uri: https://corona.lmao.ninja/v2/countries/ireland
   response:
     body:
-      string: '{"country":"Ireland","countryInfo":{"iso2":"IE","iso3":"IRL","_id":372,"lat":53,"long":-8,"flag":"https://raw.githubusercontent.com/NovelCOVID/API/master/assets/flags/ie.png"},"cases":1329,"todayCases":204,"deaths":7,"todayDeaths":1,"recovered":5,"active":1317,"critical":29,"casesPerOneMillion":269,"deathsPerOneMillion":1}'
+      string: '{"updated":1587151959537,"country":"Ireland","countryInfo":{"_id":372,"iso2":"IE","iso3":"IRL","lat":53,"long":-8,"flag":"https://raw.githubusercontent.com/NovelCOVID/API/master/assets/flags/ie.png"},"cases":13980,"todayCases":709,"deaths":530,"todayDeaths":44,"recovered":77,"active":13373,"critical":156,"casesPerOneMillion":2831,"deathsPerOneMillion":107,"tests":90646,"testsPerOneMillion":18358,"continent":"Europe"}'
     headers:
       Access-Control-Allow-Origin:
       - '*'
       CF-Cache-Status:
       - DYNAMIC
       CF-RAY:
-      - 57947e59780ba717-DUB
+      - 58589e4f2bbcfa88-AMS
       Connection:
       - close
       Content-Length:
-      - '324'
+      - '420'
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 25 Mar 2020 00:25:14 GMT
+      - Fri, 17 Apr 2020 19:40:32 GMT
       ETag:
-      - W/"144-jCONEHdVtQEwXmDAtrek7BLji7Q"
+      - W/"1a4-pUZDY2TyKISspNoZBiKh+ZC4+PQ"
       Expect-CT:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      NG-Cache-Status:
+      - HIT
       Server:
       - cloudflare
       Set-Cookie:
-      - __cfduid=ddead711dd5667c35d85862ae0596c5231585095914; expires=Fri, 24-Apr-20
-        00:25:14 GMT; path=/; domain=.lmao.ninja; HttpOnly; SameSite=Lax; Secure
+      - __cfduid=d33e94f31f8c90adf238a28be72ef00891587152432; expires=Sun, 17-May-20
+        19:40:32 GMT; path=/; domain=.lmao.ninja; HttpOnly; SameSite=Lax; Secure
       X-Powered-By:
       - Express
+      cf-request-id:
+      - 022b41457d0000fa88c89c1200000001
     status:
       code: 200
       message: OK

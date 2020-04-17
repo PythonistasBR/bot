@@ -12,22 +12,26 @@ def test_cmd_retrieve_covid_data(bot, update):
         corona.cmd_retrieve_covid_data(bot, update, args=["ireland"])
         m.assert_called_with(
             "```\n"
+            "Updated               1587151959537\n"
             "Country                Ireland\n"
-            "Cases                     1329\n"
-            "Today Cases                204\n"
-            "Deaths                       7\n"
-            "Today Deaths                 1\n"
-            "Recovered                    5\n"
-            "Active                    1317\n"
-            "Critical                    29\n"
-            "Cases Per One Million      269\n"
-            "Deaths Per One Million       1\n"
+            "Cases                    13980\n"
+            "Today Cases                709\n"
+            "Deaths                     530\n"
+            "Today Deaths                44\n"
+            "Recovered                   77\n"
+            "Active                   13373\n"
+            "Critical                   156\n"
+            "Cases Per One Million     2831\n"
+            "Deaths Per One Million     107\n"
+            "Tests                    90646\n"
+            "Tests Per One Million    18358\n"
+            "Continent               Europe\n"
             "```"
         )
 
 
 @pytest.mark.vcr
-def testcmd_retrieve_covid_data_not_found(bot, update):
+def test_cmd_retrieve_covid_data_not_found(bot, update):
     with patch.object(update.message, "reply_text") as m:
         corona.cmd_retrieve_covid_data(bot, update, args=["omg-ponneys"])
         m.assert_called_with("omg-ponneys é país agora? \n Faz assim: /corona Brazil")

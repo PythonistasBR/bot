@@ -1,5 +1,6 @@
 import json
 from urllib import request
+from urllib.error import HTTPError
 from urllib.parse import quote
 
 from telegram.ext import CommandHandler
@@ -7,7 +8,7 @@ from telegram.ext import CommandHandler
 from autonomia.core import bot_handler
 
 # Source: https://github.com/NovelCOVID/API
-_URL = "https://corona.lmao.ninja/countries/{}"
+_URL = "https://corona.lmao.ninja/v2/countries/{}"
 
 
 def _camel_case_to_title(key):
@@ -34,6 +35,7 @@ def cmd_retrieve_covid_data(bot, update, args):
         update.message.reply_text("Esqueceu o país doidao?")
         return
 
+    country = " ".join(args)
     try:
         # Extra headers are required by Cloudflare
         user_agent = (
@@ -44,19 +46,22 @@ def cmd_retrieve_covid_data(bot, update, args):
             "User-Agent": user_agent,
             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
         }
-        country = " ".join(args)
         req = request.Request(_URL.format(quote(country)), None, headers)
         response = request.urlopen(req)
         response_body = json.loads(response.read())
 
         msg = _format_message(response_body)
         update.message.reply_markdown(msg)
-
-    except json.decoder.JSONDecodeError:
-        # Unfortunately the API doesn't return meaningful http status code (always 200)
-        update.message.reply_text(
-            f"{country} é país agora? \n Faz assim: /corona Brazil"
-        )
+    except HTTPError as e:
+        if e.code == 404:
+            update.message.reply_text(
+                f"{country} é país agora? \n Faz assim: /corona Brazil"
+            )
+        else:
+            raise e
+    except Exception as e:
+        update.message.reply_text("Deu ruim! Morri, mas passo bem")
+        raise e
 
 
 @bot_handler

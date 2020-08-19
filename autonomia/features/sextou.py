@@ -47,7 +47,7 @@ def cmd_countdown(bot, update, args):
         return
 
     #  Any other day return the countdown
-    url = f'{BASE_URL}?iso={target_date}&p0=78&font=cursive&csz=1&msg={urllib.parse.quote(msg)}' # noqa
+    url = f'{BASE_URL}?iso={target_date}&p0=78&font=cursive&csz=1&msg={urllib.parse.quote(msg)}'  # noqa
     update.message.reply_text(url)
 
 

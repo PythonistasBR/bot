@@ -33,4 +33,5 @@ APPS = [
     "dublin_bike",
     "fuck_off",
     "corona",
+    "sextou",
 ]

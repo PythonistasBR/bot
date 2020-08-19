@@ -11,7 +11,7 @@ MESSAGES = {
     'monday': 'Ta longe ainda!',
     'tuesday': 'Ta mais perto, mas ainda eh antevespera da vespera da sexta',
     'wednesday': 'Antevespera ta ai',
-    'thursday': 'A vespera de sexta, Ja veo o final de semana',
+    'thursday': 'A vespera de sexta, Ja vejo o final de semana',
     'friday': 'Ja sinto o cheiro do sextou!',
     'saturday': 'Nao enche, aproveita o fds',
     'sunday': 'Alegria de pobre dura pouco!'

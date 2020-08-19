@@ -19,13 +19,6 @@ MESSAGES = {
 
 
 def cmd_countdown(bot, update, args):
-    try:
-        if "@" in args[0]:
-            to = args[0]
-            update.message.reply_text(to)
-
-    except IndexError:
-        pass
 
     # Getting current day
     current_dt = datetime.datetime.now().replace(
@@ -41,8 +34,6 @@ def cmd_countdown(bot, update, args):
     # This is will be the countdown target
     target_date = next_friday.strftime("%Y%m%dT18")
 
-    user = update.message.from_user.first_name # noqa
-
     msg = MESSAGES[curent_week_day]
     if curent_week_day == 'saturday' or curent_week_day == 'sunday':
         # If sunday or Saturday just return a single message
@@ -55,7 +46,7 @@ def cmd_countdown(bot, update, args):
         update.message.reply_text(msg)
         return
 
-    # Any other day return the countdown
+    #  Any other day return the countdown
     url = f'{BASE_URL}?iso={target_date}&p0=78&font=cursive&csz=1&msg={urllib.parse.quote(msg)}' # noqa
     update.message.reply_text(url)
 

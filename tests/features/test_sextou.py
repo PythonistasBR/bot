@@ -28,7 +28,7 @@ def test_cmd_sextou_messages_friday(bot, update, monkeypatch):
         sextou.cmd_countdown(bot, update, args=[])
 
         assert sextou.MESSAGES[curent_week_day] == "Ja sinto o cheiro do sextou!"
-        m.assert_called_with(f"Sextou caraiii!")
+        m.assert_called_with("Sextou caraiii!")
 
 
 def test_cmd_sextou_messages_friday_countdown(bot, update, monkeypatch):
@@ -54,7 +54,7 @@ def test_cmd_sextou_messages_weekend_countdown(bot, update, monkeypatch):
         monkeypatch.setattr(datetime, "datetime", datetime_mock)
         assert sextou.MESSAGES[curent_week_day] == "Nao enche, aproveita o fds"
         sextou.cmd_countdown(bot, update, args=[])
-        m.assert_called_with(f"Nao enche, aproveita o fds")
+        m.assert_called_with("Nao enche, aproveita o fds")
 
         dt = datetime.datetime(2020, 8, 23, 14, 0, 0)
         datetime_mock.now.return_value = dt
@@ -63,7 +63,7 @@ def test_cmd_sextou_messages_weekend_countdown(bot, update, monkeypatch):
         sextou.cmd_countdown(bot, update, args=[])
 
         assert sextou.MESSAGES[curent_week_day] == "Alegria de pobre dura pouco!"
-        m.assert_called_with(f"Alegria de pobre dura pouco!")
+        m.assert_called_with("Alegria de pobre dura pouco!")
 
 
 def test_cmd_sextou_messages_week_countdown(bot, update, monkeypatch):

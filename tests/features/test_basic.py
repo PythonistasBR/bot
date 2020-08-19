@@ -12,7 +12,7 @@ def test_cmd_me(bot, update):
     text = "cracked the enigma code"
     with patch.object(update.message, "reply_markdown") as m:
         basic.cmd_me(bot, update, args=text.split())
-        m.assert_called_with(f"_Alan cracked the enigma code_")
+        m.assert_called_with("_Alan cracked the enigma code_")
 
 
 def test_me_factory():

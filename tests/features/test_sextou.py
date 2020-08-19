@@ -9,7 +9,6 @@ from telegram.ext import CommandHandler
 from autonomia.features import sextou
 
 
-@pytest.mark.vcr
 def test_cmd_sextou_no_arg(bot, update):
     with patch.object(update.message, "reply_text") as m:
         sextou.cmd_countdown(bot, update, args=[])
@@ -23,7 +22,6 @@ def test_cmd_sextou_no_arg(bot, update):
         )
 
 
-@pytest.mark.vcr
 def test_cmd_sextou_messages_friday(bot, update, monkeypatch):
     with patch.object(update.message, "reply_text") as m:
         datetime_mock = MagicMock(wraps=datetime.datetime)
@@ -37,7 +35,6 @@ def test_cmd_sextou_messages_friday(bot, update, monkeypatch):
         m.assert_called_with(f'Sextou caraiii!')
 
 
-@pytest.mark.vcr
 def test_cmd_sextou_messages_friday_countdown(bot, update, monkeypatch):
     with patch.object(update.message, "reply_text") as m:
         datetime_mock = MagicMock(wraps=datetime.datetime)
@@ -52,7 +49,6 @@ def test_cmd_sextou_messages_friday_countdown(bot, update, monkeypatch):
         )
 
 
-@pytest.mark.vcr
 def test_cmd_sextou_messages_weekend_countdown(bot, update, monkeypatch):
     with patch.object(update.message, "reply_text") as m:
         datetime_mock = MagicMock(wraps=datetime.datetime)
@@ -74,7 +70,6 @@ def test_cmd_sextou_messages_weekend_countdown(bot, update, monkeypatch):
         m.assert_called_with(f'Alegria de pobre dura pouco!')
 
 
-@pytest.mark.vcr
 def test_cmd_sextou_messages_week_countdown(bot, update, monkeypatch):
     with patch.object(update.message, "reply_text") as m:
         datetime_mock = MagicMock(wraps=datetime.datetime)
@@ -89,7 +84,6 @@ def test_cmd_sextou_messages_week_countdown(bot, update, monkeypatch):
         )
 
 
-@pytest.mark.vcr
 def test_cmd_sextou_messages_monday_countdown(bot, update, monkeypatch):
     with patch.object(update.message, "reply_text") as m:
         datetime_mock = MagicMock(wraps=datetime.datetime)

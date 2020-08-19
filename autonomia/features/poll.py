@@ -27,7 +27,7 @@ class Poll:
 
     def vote(self, user, choice):
         if choice < 0 or choice >= len(self.choices):
-            raise ValueError(f"Invalid choice")
+            raise ValueError("Invalid choice")
 
         if user in self.votes:
             if choice == self.votes[user]:
@@ -115,7 +115,7 @@ def poll_choice(bot, update, args):
 
 def poll_start_voting(bot, update):
     if len(bot.poll.choices) < 2:
-        update.message.reply_text(f"Please, add at least 2 choices")
+        update.message.reply_text("Please, add at least 2 choices")
         return CHOICES
 
     update.message.reply_text(f"{bot.poll}\nChoose an option: /v <choice_id>")

@@ -7,8 +7,13 @@ from telegram.ext import CommandHandler
 from autonomia.features import sextou
 
 
-def test_cmd_sextou_no_arg(bot, update):
+def test_cmd_sextou_no_arg(bot, update, monkeypatch):
     with patch.object(update.message, "reply_text") as m:
+        datetime_mock = MagicMock(wraps=datetime.datetime)
+        dt = datetime.datetime(2020, 8, 20, 18, 0, 0)
+        datetime_mock.now.return_value = dt
+        datetime_mock.now.return_value = dt
+        monkeypatch.setattr(datetime, "datetime", datetime_mock)
         sextou.cmd_countdown(bot, update, args=[])
         current_dt = datetime.datetime.now().replace(tzinfo=datetime.timezone.utc)
         curent_week_day = current_dt.strftime("%A").lower()
@@ -41,7 +46,7 @@ def test_cmd_sextou_messages_friday_countdown(bot, update, monkeypatch):
         sextou.cmd_countdown(bot, update, args=[])
         assert sextou.MESSAGES[curent_week_day] == "Ja sinto o cheiro do sextou!"
         m.assert_called_with(
-            f"https://www.timeanddate.com/countdown/weekend?iso=20200828T18&p0=78&font=cursive&csz=1&msg=Ja%20sinto%20o%20cheiro%20do%20sextou%21"  # noqa
+            f"https://www.timeanddate.com/countdown/weekend?iso=20200821T18&p0=78&font=cursive&csz=1&msg=Ja%20sinto%20o%20cheiro%20do%20sextou%21"  # noqa
         )
 
 

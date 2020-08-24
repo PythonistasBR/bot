@@ -14,8 +14,8 @@ MESSAGES = {
     "wednesday": "Antevespera ta ai",
     "thursday": "A vespera de sexta, Ja vejo o final de semana",
     "friday": "Ja sinto o cheiro do sextou!",
-    "saturday": "Nao enche, aproveita o fds",
-    "sunday": "Alegria de pobre dura pouco!",
+    "saturday": "Nao me enche, aproveita o fds",
+    "sunday": "Fim de samana acabando, alegria de pobre dura pouco!",
 }
 
 
@@ -26,7 +26,10 @@ def cmd_countdown(bot, update, args):
     curent_week_day = current_dt.strftime("%A").lower()
 
     # Getting next friday of the week
-    friday_rl = relativedelta.relativedelta(days=1, weekday=relativedelta.FR)
+    friday_rl = relativedelta.relativedelta(
+        days=0 if curent_week_day == "friday" else 1,
+        weekday=relativedelta.FR
+    )
     next_friday = current_dt + friday_rl
 
     # Every friday of the current week at 18

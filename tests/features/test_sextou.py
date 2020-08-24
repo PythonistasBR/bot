@@ -67,7 +67,7 @@ def test_cmd_sextou_messages_weekend_countdown(bot, update, monkeypatch):
         monkeypatch.setattr(datetime, "datetime", datetime_mock)
         sextou.cmd_countdown(bot, update, args=[])
 
-        assert sextou.MESSAGES[curent_week_day] == "Fim de samana acabando, alegria de pobre dura pouco!"
+        assert sextou.MESSAGES[curent_week_day] == "Fim de samana acabando, alegria de pobre dura pouco!"  # noqa
         m.assert_called_with("Fim de samana acabando, alegria de pobre dura pouco!")
 
 

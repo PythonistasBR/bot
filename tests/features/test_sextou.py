@@ -7,8 +7,13 @@ from telegram.ext import CommandHandler
 from autonomia.features import sextou
 
 
-def test_cmd_sextou_no_arg(bot, update):
+def test_cmd_sextou_no_arg(bot, update, monkeypatch):
     with patch.object(update.message, "reply_text") as m:
+        datetime_mock = MagicMock(wraps=datetime.datetime)
+        dt = datetime.datetime(2020, 8, 20, 18, 0, 0)
+        datetime_mock.now.return_value = dt
+        datetime_mock.now.return_value = dt
+        monkeypatch.setattr(datetime, "datetime", datetime_mock)
         sextou.cmd_countdown(bot, update, args=[])
         current_dt = datetime.datetime.now().replace(tzinfo=datetime.timezone.utc)
         curent_week_day = current_dt.strftime("%A").lower()
@@ -41,7 +46,7 @@ def test_cmd_sextou_messages_friday_countdown(bot, update, monkeypatch):
         sextou.cmd_countdown(bot, update, args=[])
         assert sextou.MESSAGES[curent_week_day] == "Ja sinto o cheiro do sextou!"
         m.assert_called_with(
-            f"https://www.timeanddate.com/countdown/weekend?iso=20200828T18&p0=78&font=cursive&csz=1&msg=Ja%20sinto%20o%20cheiro%20do%20sextou%21"  # noqa
+            f"https://www.timeanddate.com/countdown/weekend?iso=20200821T18&p0=78&font=cursive&csz=1&msg=Ja%20sinto%20o%20cheiro%20do%20sextou%21"  # noqa
         )
 
 
@@ -52,9 +57,9 @@ def test_cmd_sextou_messages_weekend_countdown(bot, update, monkeypatch):
         datetime_mock.now.return_value = dt
         curent_week_day = dt.strftime("%A").lower()
         monkeypatch.setattr(datetime, "datetime", datetime_mock)
-        assert sextou.MESSAGES[curent_week_day] == "Nao enche, aproveita o fds"
+        assert sextou.MESSAGES[curent_week_day] == "Nao me enche, aproveita o fds"
         sextou.cmd_countdown(bot, update, args=[])
-        m.assert_called_with("Nao enche, aproveita o fds")
+        m.assert_called_with("Nao me enche, aproveita o fds")
 
         dt = datetime.datetime(2020, 8, 23, 14, 0, 0)
         datetime_mock.now.return_value = dt
@@ -62,8 +67,8 @@ def test_cmd_sextou_messages_weekend_countdown(bot, update, monkeypatch):
         monkeypatch.setattr(datetime, "datetime", datetime_mock)
         sextou.cmd_countdown(bot, update, args=[])
 
-        assert sextou.MESSAGES[curent_week_day] == "Alegria de pobre dura pouco!"
-        m.assert_called_with("Alegria de pobre dura pouco!")
+        assert sextou.MESSAGES[curent_week_day] == "Fim de samana acabando, alegria de pobre dura pouco!"  # noqa
+        m.assert_called_with("Fim de samana acabando, alegria de pobre dura pouco!")
 
 
 def test_cmd_sextou_messages_week_countdown(bot, update, monkeypatch):

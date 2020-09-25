@@ -7,9 +7,10 @@ from autonomia.features import corona
 
 
 @pytest.mark.vcr
-def test_cmd_retrieve_covid_data(bot, update):
+def test_cmd_retrieve_covid_data(update, context):
     with patch.object(update.message, "reply_markdown") as m:
-        corona.cmd_retrieve_covid_data(bot, update, args=["ireland"])
+        context.args = ["ireland"]
+        corona.cmd_retrieve_covid_data(update, context)
         m.assert_called_with(
             "```\n"
             "Updated               1587151959537\n"
@@ -31,23 +32,26 @@ def test_cmd_retrieve_covid_data(bot, update):
 
 
 @pytest.mark.vcr
-def test_cmd_retrieve_covid_data_not_found(bot, update):
+def test_cmd_retrieve_covid_data_not_found(update, context):
     with patch.object(update.message, "reply_text") as m:
-        corona.cmd_retrieve_covid_data(bot, update, args=["omg-ponneys"])
+        context.args = ["omg-ponneys"]
+        corona.cmd_retrieve_covid_data(update, context)
         m.assert_called_with("omg-ponneys é país agora? \n Faz assim: /corona Brazil")
 
 
-def test_cmd_retrieve_covid_data_no_country_passed(bot, update):
+def test_cmd_retrieve_covid_data_no_country_passed(update, context):
     with patch.object(update.message, "reply_text") as m:
-        corona.cmd_retrieve_covid_data(bot, update, args=[])
+        context.args = []
+        corona.cmd_retrieve_covid_data(update, context)
         m.assert_called_with("Esqueceu o país doidao?")
 
 
 @patch.object(corona, "get_covid_data", side_effect=ValueError("Random Error"))
-def test_cmd_retrieve_covid_raise_random_exception(bot, update):
+def test_cmd_retrieve_covid_raise_random_exception(update, context):
     with patch.object(update.message, "reply_text") as m:
         with pytest.raises(ValueError):
-            corona.cmd_retrieve_covid_data(bot, update, args=["ie"])
+            context.args = ["ie"]
+            corona.cmd_retrieve_covid_data(update, context)
         m.assert_called_with("Deu ruim! Morri, mas passo bem")
 
 

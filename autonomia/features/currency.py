@@ -1,7 +1,8 @@
 import json
 from urllib import request
 
-from telegram.ext import CommandHandler
+from telegram.ext import CallbackContext, CommandHandler
+from telegram.update import Update
 
 from autonomia.core import bot_handler
 from autonomia.settings import FIXER_IO_API_TOKEN as token
@@ -9,10 +10,10 @@ from autonomia.settings import FIXER_IO_API_TOKEN as token
 FIXER_IO_API_ENDPOINT = f"http://data.fixer.io/api/latest?access_key={token}"
 
 
-def cmd_convert(bot, update, args):
+def cmd_convert(update: Update, context: CallbackContext):
     try:
         # laziest ever
-        amount, source, target = args
+        amount, source, target = context.args
         amount = float(amount)
         source = source.upper()
         target = target.upper()

@@ -18,7 +18,7 @@ coverage: ## Run test and create HTML coverage report
 	@pipenv run py.test --cov=autonomia --cov-report html tests/
 
 fmt: ## Format code using iSort and Black
-	@pipenv run isort -rc --atomic .
+	@pipenv run isort --atomic .
 	@pipenv run black .
 
 lint: ## Run flake8

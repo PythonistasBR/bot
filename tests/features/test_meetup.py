@@ -9,9 +9,9 @@ from autonomia.features import meetup
 
 @freeze_time("2018-04-12")
 @pytest.mark.vcr(filter_query_parameters=["key", "sig_id", "sig"])
-def test_cmd_meetup(bot, update):
-    with patch.object(bot, "send_message") as s:
-        meetup.cmd_meetup(bot, update)
+def test_cmd_meetup(update, context):
+    with patch.object(context.bot, "send_message") as s:
+        meetup.cmd_meetup(update, context)
         s.assert_called_with(
             update.message.from_user.id,
             "Next meetups available:\n"
@@ -25,10 +25,10 @@ def test_cmd_meetup(bot, update):
 
 
 @patch("urllib.request.urlopen")
-def test_cmd_meetup_on_error(urlopen_mock, bot, update):
+def test_cmd_meetup_on_error(urlopen_mock, update, context):
     urlopen_mock.site_effect = ValueError()
     with patch.object(update.message, "reply_text") as m:
-        meetup.cmd_meetup(bot, update)
+        meetup.cmd_meetup(update, context)
         m.assert_called_with("To sem saco!")
 
 

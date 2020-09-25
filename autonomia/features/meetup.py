@@ -3,7 +3,8 @@ import logging
 from datetime import datetime
 from urllib import parse, request
 
-from telegram.ext import CommandHandler
+from telegram.ext import CallbackContext, CommandHandler
+from telegram.update import Update
 
 from autonomia.core import bot_handler
 from autonomia.settings import MEETUP_API_KEY
@@ -56,12 +57,12 @@ def _format_events(data):
     return "\n".join(out)
 
 
-def cmd_meetup(bot, update):
+def cmd_meetup(update: Update, context: CallbackContext):
     try:
         data = _get_calendar_data()
         text = _format_events(data)
         user = update.message.from_user
-        bot.send_message(user.id, text, disable_web_page_preview=True)
+        context.bot.send_message(user.id, text, disable_web_page_preview=True)
     except Exception:
         logger.error("To sem saco!", exc_info=1)
         update.message.reply_text("To sem saco!")

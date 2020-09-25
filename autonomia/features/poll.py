@@ -1,7 +1,8 @@
 import operator
 from collections import Counter, defaultdict
 
-from telegram.ext import CommandHandler, ConversationHandler
+from telegram.ext import CallbackContext, CommandHandler, ConversationHandler
+from telegram.update import Update
 
 from autonomia.core import bot_handler
 
@@ -84,13 +85,13 @@ class Poll:
         return out
 
 
-def poll_new(bot, update, args):
-    question = " ".join(args)
+def poll_new(update: Update, context: CallbackContext):
+    question = " ".join(context.args)
     if not question:
         update.message.reply_text("Use: /poll <text>")
         return
 
-    bot.poll = Poll(question)
+    context.bot.poll = Poll(question)
     update.message.reply_text(
         f"Starting new poll.\n"
         f"Question: {question}\n"
@@ -100,54 +101,54 @@ def poll_new(bot, update, args):
     return CHOICES
 
 
-def poll_choice(bot, update, args):
-    choice = " ".join(args)
+def poll_choice(update: Update, context: CallbackContext):
+    choice = " ".join(context.args)
     if not choice:
         update.message.reply_text("Use: /choice <text>")
         return CHOICES
 
     try:
-        bot.poll.add_choice(choice)
+        context.bot.poll.add_choice(choice)
     except ValueError as e:
         update.message.reply_text(str(e))
     return CHOICES
 
 
-def poll_start_voting(bot, update):
-    if len(bot.poll.choices) < 2:
+def poll_start_voting(update: Update, context: CallbackContext):
+    if len(context.bot.poll.choices) < 2:
         update.message.reply_text("Please, add at least 2 choices")
         return CHOICES
 
-    update.message.reply_text(f"{bot.poll}\nChoose an option: /v <choice_id>")
+    update.message.reply_text(f"{context.bot.poll}\nChoose an option: /v <choice_id>")
     return VOTING
 
 
-def poll_vote(bot, update, args):
+def poll_vote(update: Update, context: CallbackContext):
     try:
-        choice = int(" ".join(args))
-        bot.poll.vote(update.message.from_user, choice)
+        choice = int(" ".join(context.args))
+        context.bot.poll.vote(update.message.from_user, choice)
     except ValueError:
-        choices = bot.poll.choices_as_str()
+        choices = context.bot.poll.choices_as_str()
         update.message.reply_text(f"Invalid option, please choose:\n{choices}")
     except AlreadyVotedError as e:
         update.message.reply_text(str(e))
     return VOTING
 
 
-def poll_result(bot, update):
-    update.message.reply_text(str(bot.poll))
+def poll_result(update: Update, context: CallbackContext):
+    update.message.reply_text(str(context.bot.poll))
     return VOTING
 
 
-def poll_finish(bot, update):
-    update.message.reply_text(f"Poll finished!\n{bot.poll}")
-    bot.poll = None
+def poll_finish(update: Update, context: CallbackContext):
+    update.message.reply_text(f"Poll finished!\n{context.bot.poll}")
+    context.bot.poll = None
     return ConversationHandler.END
 
 
-def poll_cancel(bot, update):
+def poll_cancel(update: Update, context: CallbackContext):
     update.message.reply_text("Poll cancelled!")
-    bot.poll = None
+    context.bot.poll = None
     return ConversationHandler.END
 
 

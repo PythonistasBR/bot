@@ -1,11 +1,13 @@
-from telegram.ext import CommandHandler
+from telegram.ext import CallbackContext, CommandHandler
+from telegram.update import Update
 
 from autonomia.core import bot_handler
 
 FAAS_BASE_URL = "http://foaas.com/off"
 
 
-def cmd_faas(bot, update, args):
+def cmd_faas(update: Update, context: CallbackContext):
+    args = context.args
     if not args:
         update.message.reply_text("Use: /fuck <who> - To send someone fuck off")
         return

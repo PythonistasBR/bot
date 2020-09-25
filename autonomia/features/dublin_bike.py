@@ -2,7 +2,8 @@ import json
 import logging
 from urllib import request
 
-from telegram.ext import CommandHandler
+from telegram.ext import CallbackContext, CommandHandler
+from telegram.update import Update
 
 from autonomia.core import bot_handler
 
@@ -26,9 +27,9 @@ def _get_bike_station_info(bike_station):
     return "deu merda!"
 
 
-def cmd_dublin_bike(bot, update, args):
+def cmd_dublin_bike(update: Update, context: CallbackContext):
     try:
-        bike_station = " ".join(args)
+        bike_station = " ".join(context.args)
         if not bike_station:
             update.message.reply_text("Use: /bike <bike station number>")
             return

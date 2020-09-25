@@ -7,9 +7,10 @@ from autonomia.features import dublin_bus
 
 
 @pytest.mark.vcr
-def test_cmd_dublin_bus(bot, update):
+def test_cmd_dublin_bus(update, context):
     with patch.object(update.message, "reply_text") as m:
-        dublin_bus.cmd_dublin_bus(bot, update, args=["1020"])
+        context.args = ["1020"]
+        dublin_bus.cmd_dublin_bus(update, context)
         m.assert_called_with(
             "Bus stop 1020:\n"
             "    15B - duetime: Due\n"
@@ -20,17 +21,19 @@ def test_cmd_dublin_bus(bot, update):
         )
 
 
-def test_cmd_dublin_bus_without_bus_stop(bot, update):
+def test_cmd_dublin_bus_without_bus_stop(update, context):
     with patch.object(update.message, "reply_text") as m:
-        dublin_bus.cmd_dublin_bus(bot, update, args=[])
+        context.args = []
+        dublin_bus.cmd_dublin_bus(update, context)
         m.assert_called_with("Use: /bus <bus stop number>")
 
 
 @patch("urllib.request.urlopen")
-def test_cmd_dublin_bus_on_error(urlopen_mock, bot, update):
+def test_cmd_dublin_bus_on_error(urlopen_mock, update, context):
     urlopen_mock.site_effect = ValueError()
     with patch.object(update.message, "reply_text") as m:
-        dublin_bus.cmd_dublin_bus(bot, update, args=["1020"])
+        context.args = ["1020"]
+        dublin_bus.cmd_dublin_bus(update, context)
         m.assert_called_with("To sem saco!")
 
 

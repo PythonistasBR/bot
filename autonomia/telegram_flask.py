@@ -51,9 +51,8 @@ class TelegramFlask:
         return True, f"Change webhook to the new url: {webhook_url}"
 
     @staticmethod
-    def error(bot, update, error):
-        """Log Errors caused by Updates."""
-        logger.warning('Update "%s" caused error "%s"', update, error)
+    def error(update, context):
+        logger.warning('Update "%s" caused error "%s"', update, context.error)
 
 
 # This instance should be used to access bot features directly.

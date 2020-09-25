@@ -69,7 +69,8 @@ def test_setup_webhook_call_on_failure_to_set_webhook(telegram_flask_bot, flask_
         assert ret == "Unable to set telegram webhook, return: False"
 
 
-def test_error_handler(telegram_flask_bot, bot, update):
+def test_error_handler(telegram_flask_bot, update, context):
     with patch.object(telegram_flask.logger, "warning") as log_mock:
-        telegram_flask_bot.error(bot, update, ValueError("bug bug bug!"))
+        context.error = ValueError("bug bug bug!")
+        telegram_flask_bot.error(update, context)
         log_mock.assert_called_once()

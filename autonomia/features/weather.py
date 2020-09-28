@@ -1,7 +1,8 @@
 import json
 from urllib import parse, request
 
-from telegram.ext import CommandHandler
+from telegram.ext import CallbackContext, CommandHandler
+from telegram.update import Update
 
 from autonomia.core import bot_handler
 
@@ -19,7 +20,8 @@ def _get_weather_info(location):
         return result["query"]["results"]
 
 
-def cmd_weather(bot, update, args):
+def cmd_weather(update: Update, context: CallbackContext):
+    args = context.args
     if not args:
         args = ["dublin"]
 

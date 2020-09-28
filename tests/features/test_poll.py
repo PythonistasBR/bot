@@ -138,17 +138,19 @@ class TestFormatPoll:
         assert str(p) == expected
 
 
-def test_poll_new_without_question(bot, update):
+def test_poll_new_without_question(update, context):
     with patch.object(update.message, "reply_text") as m:
-        poll.poll_new(bot, update, args=[])
+        context.args = []
+        poll.poll_new(update, context)
         m.assert_called_with("Use: /poll <text>")
 
 
-def test_poll_new(bot, update):
+def test_poll_new(update, context):
     with patch.object(update.message, "reply_text") as m:
-        next_state = poll.poll_new(bot, update, args=["Vai", "ter", "dojo?"])
+        context.args = ["Vai", "ter", "dojo?"]
+        next_state = poll.poll_new(update, context)
         assert next_state == poll.CHOICES
-        assert bot.poll.question == "Vai ter dojo?"
+        assert context.bot.poll.question == "Vai ter dojo?"
         m.assert_called_with(
             "Starting new poll.\n"
             "Question: Vai ter dojo?\n"
@@ -157,39 +159,43 @@ def test_poll_new(bot, update):
         )
 
 
-def test_poll_choice_without_text(bot, update):
-    bot.poll = poll.Poll("Vai ter dojo?")
+def test_poll_choice_without_text(update, context):
+    context.bot.poll = poll.Poll("Vai ter dojo?")
     with patch.object(update.message, "reply_text") as m:
-        next_state = poll.poll_choice(bot, update, args=[])
+        context.args = []
+        next_state = poll.poll_choice(update, context)
         m.assert_called_with("Use: /choice <text>")
         assert next_state == poll.CHOICES
 
 
-def test_poll_choice_with_text(bot, update):
-    bot.poll = poll.Poll("Vai ter dojo?")
-    next_state = poll.poll_choice(bot, update, args=["Sim"])
-    assert bot.poll.choices == ["Sim"]
+def test_poll_choice_with_text(update, context):
+    context.bot.poll = poll.Poll("Vai ter dojo?")
+    context.args = ["Sim"]
+    next_state = poll.poll_choice(update, context)
+    assert context.bot.poll.choices == ["Sim"]
     assert next_state == poll.CHOICES
 
 
-def test_poll_choice_with_existing_choice(bot, update):
-    bot.poll = poll.Poll("Vai ter dojo?")
-    next_state = poll.poll_choice(bot, update, args=["Sim"])
+def test_poll_choice_with_existing_choice(update, context):
+    context.bot.poll = poll.Poll("Vai ter dojo?")
+    context.args = ["Sim"]
+    next_state = poll.poll_choice(update, context)
     assert next_state == poll.CHOICES
-    assert bot.poll.choices == ["Sim"]
+    assert context.bot.poll.choices == ["Sim"]
     with patch.object(update.message, "reply_text") as m:
-        next_state = poll.poll_choice(bot, update, args=["Sim"])
+        context.args = ["Sim"]
+        next_state = poll.poll_choice(update, context)
         assert next_state == poll.CHOICES
-        assert bot.poll.choices == ["Sim"]
+        assert context.bot.poll.choices == ["Sim"]
         m.assert_called_with("Sim was already added")
 
 
-def test_start_voting_poll(bot, update):
-    bot.poll = poll.Poll("Vai ter dojo?")
-    bot.poll.add_choice("Sim")
-    bot.poll.add_choice("Não")
+def test_start_voting_poll(update, context):
+    context.bot.poll = poll.Poll("Vai ter dojo?")
+    context.bot.poll.add_choice("Sim")
+    context.bot.poll.add_choice("Não")
     with patch.object(update.message, "reply_text") as m:
-        next_state = poll.poll_start_voting(bot, update)
+        next_state = poll.poll_start_voting(update, context)
         assert next_state == poll.VOTING
         expected = (
             "Question: Vai ter dojo?\n"
@@ -200,53 +206,57 @@ def test_start_voting_poll(bot, update):
         m.assert_called_with(expected)
 
 
-def test_start_voting_poll_without_enough_choices(bot, update):
-    bot.poll = poll.Poll("Vai ter dojo?")
-    bot.poll.add_choice("Sim")
+def test_start_voting_poll_without_enough_choices(update, context):
+    context.bot.poll = poll.Poll("Vai ter dojo?")
+    context.bot.poll.add_choice("Sim")
     with patch.object(update.message, "reply_text") as m:
-        next_state = poll.poll_start_voting(bot, update)
+        next_state = poll.poll_start_voting(update, context)
         assert next_state == poll.CHOICES
         m.assert_called_with("Please, add at least 2 choices")
 
 
-def test_voting_correct_choice(bot, update):
-    bot.poll = poll.Poll("Vai ter dojo?")
-    bot.poll.add_choice("Sim")
-    bot.poll.add_choice("Não")
-    next_state = poll.poll_vote(bot, update, args=["1"])
+def test_voting_correct_choice(update, context):
+    context.bot.poll = poll.Poll("Vai ter dojo?")
+    context.bot.poll.add_choice("Sim")
+    context.bot.poll.add_choice("Não")
+    context.args = ["1"]
+    next_state = poll.poll_vote(update, context)
     assert next_state == poll.VOTING
-    assert bot.poll.votes[update.message.from_user] == 1
+    assert context.bot.poll.votes[update.message.from_user] == 1
 
 
-def test_voting_wrong_choice(bot, update):
-    bot.poll = poll.Poll("Vai ter dojo?")
-    bot.poll.add_choice("Sim")
-    bot.poll.add_choice("Não")
+def test_voting_wrong_choice(update, context):
+    context.bot.poll = poll.Poll("Vai ter dojo?")
+    context.bot.poll.add_choice("Sim")
+    context.bot.poll.add_choice("Não")
     with patch.object(update.message, "reply_text") as m:
-        next_state = poll.poll_vote(bot, update, args=["3"])
+        context.args = ["3"]
+        next_state = poll.poll_vote(update, context)
         assert next_state == poll.VOTING
         m.assert_called_with("Invalid option, please choose:\n0. Sim (0)\n1. Não (0)\n")
 
 
-def test_voting_same_choice(bot, update):
-    bot.poll = poll.Poll("Vai ter dojo?")
-    bot.poll.add_choice("Sim")
-    bot.poll.add_choice("Não")
-    next_state = poll.poll_vote(bot, update, args=["1"])
+def test_voting_same_choice(update, context):
+    context.bot.poll = poll.Poll("Vai ter dojo?")
+    context.bot.poll.add_choice("Sim")
+    context.bot.poll.add_choice("Não")
+    context.args = ["1"]
+    next_state = poll.poll_vote(update, context)
     assert next_state == poll.VOTING
     with patch.object(update.message, "reply_text") as m:
-        next_state = poll.poll_vote(bot, update, args=["1"])
+        context.args = ["1"]
+        next_state = poll.poll_vote(update, context)
         assert next_state == poll.VOTING
         m.assert_called_with("You already voted on this choice")
 
 
-def test_result(bot, update, user):
-    bot.poll = poll.Poll("Vai ter dojo?")
-    bot.poll.add_choice("Sim")
-    bot.poll.add_choice("Não")
-    bot.poll.vote(user, 0)
+def test_result(update, context, user):
+    context.bot.poll = poll.Poll("Vai ter dojo?")
+    context.bot.poll.add_choice("Sim")
+    context.bot.poll.add_choice("Não")
+    context.bot.poll.vote(user, 0)
     with patch.object(update.message, "reply_text") as m:
-        next_state = poll.poll_result(bot, update)
+        next_state = poll.poll_result(update, context)
         assert next_state == poll.VOTING
         expected = (
             "Question: Vai ter dojo?\n"
@@ -258,14 +268,14 @@ def test_result(bot, update, user):
         m.assert_called_with(expected)
 
 
-def test_finish(bot, update, user):
-    bot.poll = poll.Poll("Vai ter dojo?")
-    bot.poll.add_choice("Sim")
-    bot.poll.add_choice("Não")
-    bot.poll.vote(user, 0)
+def test_finish(update, context, user):
+    context.bot.poll = poll.Poll("Vai ter dojo?")
+    context.bot.poll.add_choice("Sim")
+    context.bot.poll.add_choice("Não")
+    context.bot.poll.vote(user, 0)
     with patch.object(update.message, "reply_text") as m:
-        next_state = poll.poll_finish(bot, update)
-        assert bot.poll is None
+        next_state = poll.poll_finish(update, context)
+        assert context.bot.poll is None
         assert next_state == ConversationHandler.END
         expected = (
             "Poll finished!\n"
@@ -278,11 +288,11 @@ def test_finish(bot, update, user):
         m.assert_called_with(expected)
 
 
-def test_poll_cancel(bot, update):
-    bot.poll = poll.Poll("Vai ter dojo?")
+def test_poll_cancel(update, context):
+    context.bot.poll = poll.Poll("Vai ter dojo?")
     with patch.object(update.message, "reply_text") as m:
-        next_state = poll.poll_cancel(bot, update)
-        assert bot.poll is None
+        next_state = poll.poll_cancel(update, context)
+        assert context.bot.poll is None
         assert next_state == ConversationHandler.END
         m.assert_called_with("Poll cancelled!")
 

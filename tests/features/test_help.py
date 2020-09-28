@@ -6,7 +6,7 @@ from autonomia.features import help
 
 
 @patch("autonomia.features.help.get_lazy_handlers")
-def test_cmd_meetup(mock_get_lazy_handler, bot, update):
+def test_cmd_help(mock_get_lazy_handler, update, context):
     def example_factory():
         """/example - testing the help command"""
 
@@ -15,8 +15,8 @@ def test_cmd_meetup(mock_get_lazy_handler, bot, update):
 
     mock_get_lazy_handler.return_value = [example_factory, other_factory]
 
-    with patch.object(bot, "send_message") as s:
-        help.cmd_help(bot, update)
+    with patch.object(context.bot, "send_message") as s:
+        help.cmd_help(update, context)
         s.assert_called_with(
             update.message.from_user.id,
             "Autonomia Bot commands:\n"
@@ -25,7 +25,7 @@ def test_cmd_meetup(mock_get_lazy_handler, bot, update):
         )
 
 
-def test_meetup_factory():
+def test_help_factory():
     handler = help.help_factory()
     assert isinstance(handler, CommandHandler)
     assert handler.callback == help.cmd_help

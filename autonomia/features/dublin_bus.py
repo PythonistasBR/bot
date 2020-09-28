@@ -2,7 +2,8 @@ import json
 import logging
 from urllib import parse, request
 
-from telegram.ext import CommandHandler
+from telegram.ext import CallbackContext, CommandHandler
+from telegram.update import Update
 
 from autonomia.core import bot_handler
 
@@ -28,9 +29,9 @@ def _format_timetable(bus_stop, data):
     return msg
 
 
-def cmd_dublin_bus(bot, update, args):
+def cmd_dublin_bus(update: Update, context: CallbackContext):
     try:
-        bus_stop = " ".join(args)
+        bus_stop = " ".join(context.args)
         if not bus_stop:
             update.message.reply_text("Use: /bus <bus stop number>")
             return

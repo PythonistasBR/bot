@@ -7,9 +7,10 @@ from autonomia.features import dublin_bike
 
 
 @pytest.mark.vcr
-def test_cmd_dublin_bike(bot, update):
+def test_cmd_dublin_bike(update, context):
     with patch.object(update.message, "reply_text") as m:
-        dublin_bike.cmd_dublin_bike(bot, update, args=["89"])
+        context.args = ["89"]
+        dublin_bike.cmd_dublin_bike(update, context)
         m.assert_called_with(
             "Dublin bike station 89:\n"
             "    Bikes 4\n"
@@ -23,17 +24,19 @@ def test_get_bike_station_info_with_invalid_station():
     assert msg == "deu merda!"
 
 
-def test_cmd_dublin_bike_without_bike_stop(bot, update):
+def test_cmd_dublin_bike_without_bike_stop(update, context):
     with patch.object(update.message, "reply_text") as m:
-        dublin_bike.cmd_dublin_bike(bot, update, args=[])
+        context.args = []
+        dublin_bike.cmd_dublin_bike(update, context)
         m.assert_called_with("Use: /bike <bike station number>")
 
 
 @patch("urllib.request.urlopen")
-def test_cmd_dublin_bike_on_error(urlopen_mock, bot, update):
+def test_cmd_dublin_bike_on_error(urlopen_mock, update, context):
     urlopen_mock.site_effect = ValueError()
     with patch.object(update.message, "reply_text") as m:
-        dublin_bike.cmd_dublin_bike(bot, update, args=["200"])
+        context.args = ["200"]
+        dublin_bike.cmd_dublin_bike(update, context)
         m.assert_called_with("Oops deu merda!")
 
 

@@ -3,7 +3,8 @@ from urllib import request
 from urllib.error import HTTPError
 from urllib.parse import quote
 
-from telegram.ext import CommandHandler
+from telegram.ext import CallbackContext, CommandHandler
+from telegram.update import Update
 
 from autonomia.core import bot_handler
 
@@ -52,10 +53,11 @@ def get_covid_data(country):
         raise CountryNotFound()
 
 
-def cmd_retrieve_covid_data(bot, update, args):
+def cmd_retrieve_covid_data(update: Update, context: CallbackContext):
     """
     Retrieve COVID-19 (corona virus) data from from `_URL`
     """
+    args = context.args
     if not args:
         update.message.reply_text("Esqueceu o país doidao?")
         return

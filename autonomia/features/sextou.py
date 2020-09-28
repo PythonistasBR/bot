@@ -2,7 +2,8 @@ import datetime
 import urllib.parse
 
 from dateutil import relativedelta
-from telegram.ext import CommandHandler
+from telegram.ext import CallbackContext, CommandHandler
+from telegram.update import Update
 
 from autonomia.core import bot_handler
 
@@ -19,7 +20,7 @@ MESSAGES = {
 }
 
 
-def cmd_countdown(bot, update, args):
+def cmd_countdown(update: Update, context: CallbackContext):
 
     # Getting current day
     current_dt = datetime.datetime.now().replace(tzinfo=datetime.timezone.utc)
@@ -27,8 +28,7 @@ def cmd_countdown(bot, update, args):
 
     # Getting next friday of the week
     friday_rl = relativedelta.relativedelta(
-        days=0 if curent_week_day == "friday" else 1,
-        weekday=relativedelta.FR
+        days=0 if curent_week_day == "friday" else 1, weekday=relativedelta.FR
     )
     next_friday = current_dt + friday_rl
 
@@ -58,4 +58,4 @@ def sexout_factory():
     """
     /sextou? - countdown to friday
     """
-    return CommandHandler("sextou", cmd_countdown, pass_args=True)
+    return CommandHandler("sextou", cmd_countdown)

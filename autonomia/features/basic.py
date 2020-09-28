@@ -1,12 +1,13 @@
 import json
 from urllib import parse, request
 
-from telegram.ext import CommandHandler, Filters, MessageHandler
+from telegram.ext import CallbackContext, CommandHandler, Filters, MessageHandler
+from telegram.update import Update
 
 from autonomia.core import bot_handler
 
 
-def cmd_all(bot, update):
+def cmd_all(update: Update, context: CallbackContext):
     """
     tag all users in the room at once
     params bot: instance of bot
@@ -15,7 +16,7 @@ def cmd_all(bot, update):
     rtype:
     """
     chat_id = update.message.chat_id
-    admins = bot.get_chat_administrators(chat_id)
+    admins = context.bot.get_chat_administrators(chat_id)
     admins = [item.user.mention_markdown() for item in admins]
     update.message.reply_markdown(" ".join(admins))
 
@@ -28,13 +29,13 @@ def all_factory():
     return CommandHandler("all", cmd_all)
 
 
-def cmd_me(bot, update, args):
+def cmd_me(update: Update, context: CallbackContext):
     """
     get the first_name of the user and create a /me IRC style
     the object is from, but as it's a python reserved word
     we must use from_user instead
     """
-    message = " ".join(args)
+    message = " ".join(context.args)
     name = update.message.from_user.first_name
     update.message.reply_markdown(f"_{name} {message}_")
 
@@ -56,17 +57,17 @@ def au_factory():
     return MessageHandler(Filters.regex(r".*\b([aA][uU])\b.*"), cmd_au)
 
 
-def cmd_au(bot, update):
+def cmd_au(update: Update, context: CallbackContext):
     """
     send sticker au
     """
     chat = update.message.chat
-    bot.send_sticker(chat.id, "CAADAQAD0gIAAhwh_Q0qq24fquUvQRYE")
+    context.bot.send_sticker(chat.id, "CAADAQAD0gIAAhwh_Q0qq24fquUvQRYE")
 
 
-def cmd_larissa(bot, update):
+def cmd_larissa(update: Update, context: CallbackContext):
     chat = update.message.chat
-    bot.send_sticker(chat.id, "CAADAQADCwADgGntCPaKda9GXFZ3Ag")
+    context.bot.send_sticker(chat.id, "CAADAQADCwADgGntCPaKda9GXFZ3Ag")
 
 
 @bot_handler
@@ -76,11 +77,11 @@ def larissa_factory():
     )
 
 
-def cmd_aurelio(bot, update, args):
+def cmd_aurelio(update: Update, context: CallbackContext):
     """
     Teach you how to find something on the internet
     """
-    message = parse.quote(" ".join(args))
+    message = parse.quote(" ".join(context.args))
     update.message.reply_markdown(f"Tenta ai, http://lmgtfy.com/?q={message}")
 
 
@@ -92,7 +93,7 @@ def aurelio_factory():
     return CommandHandler("aurelio", cmd_aurelio, pass_args=True)
 
 
-def cmd_joke(bot, update):
+def cmd_joke(update: Update, context: CallbackContext):
     """
     Tell a random joke
     """
@@ -112,7 +113,7 @@ def joke_factory():
     return CommandHandler("joke", cmd_joke)
 
 
-def cmd_clear(bot, update):
+def cmd_clear(update: Update, context: CallbackContext):
     update.message.reply_text(".\n" * 50)
 
 

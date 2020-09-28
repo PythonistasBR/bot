@@ -1,16 +1,17 @@
-from telegram.ext import CommandHandler
+from telegram.ext import CallbackContext, CommandHandler
+from telegram.update import Update
 
 from autonomia.core import bot_handler, get_lazy_handlers
 
 
-def cmd_help(bot, update):
+def cmd_help(update: Update, context: CallbackContext):
     out = "Autonomia Bot commands:\n"
     for handler in get_lazy_handlers():
         doc = handler.__doc__
         if doc:
             out += f"{doc.strip()}\n"
     user = update.message.from_user
-    bot.send_message(user.id, out)
+    context.bot.send_message(user.id, out)
 
 
 @bot_handler

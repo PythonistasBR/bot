@@ -7,30 +7,34 @@ from autonomia.features import fuck_off
 
 
 @pytest.mark.vcr
-def test_cmd_fuck_off_normal_arg(bot, update):
+def test_cmd_fuck_off_normal_arg(update, context):
     with patch.object(update.message, "reply_text") as m:
-        fuck_off.cmd_faas(bot, update, args=["Rondi"])
+        context.args = ["Rondi"]
+        fuck_off.cmd_faas(update, context)
         m.assert_called_with("http://foaas.com/off/Rondi/Alan")
 
 
 @pytest.mark.vcr
-def test_cmd_fuck_off_username(bot, update):
+def test_cmd_fuck_off_username(update, context):
     with patch.object(update.message, "reply_text") as m:
-        fuck_off.cmd_faas(bot, update, args=["@rondi"])
+        context.args = ["@rondi"]
+        fuck_off.cmd_faas(update, context)
         m.assert_called_with("http://foaas.com/off/@rondi/Alan")
 
 
 @pytest.mark.vcr
-def test_cmd_fuck_off_multi_args(bot, update):
+def test_cmd_fuck_off_multi_args(update, context):
     with patch.object(update.message, "reply_text") as m:
-        fuck_off.cmd_faas(bot, update, args=["the", "rules"])
+        context.args = ["the", "rules"]
+        fuck_off.cmd_faas(update, context)
         m.assert_called_with("http://foaas.com/off/the%20rules/Alan")
 
 
 @pytest.mark.vcr
-def test_fuck_off_empty_args(bot, update):
+def test_fuck_off_empty_args(update, context):
     with patch.object(update.message, "reply_text") as m:
-        fuck_off.cmd_faas(bot, update, args=[])
+        context.args = []
+        fuck_off.cmd_faas(update, context)
         m.assert_called_with("Use: /fuck <who> - To send someone fuck off")
 
 

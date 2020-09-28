@@ -22,7 +22,7 @@ class TelegramFlask:
         token = app.config.get("API_TOKEN")
         autodiscovery(app.config.get("APPS", []))
         self.bot = telegram.Bot(token=token)
-        self.dispatcher = Dispatcher(self.bot, None, workers=0)
+        self.dispatcher = Dispatcher(self.bot, None, workers=0, use_context=True)
         for handler in get_handlers():
             self.dispatcher.add_handler(handler)
         # log all errors
@@ -51,9 +51,8 @@ class TelegramFlask:
         return True, f"Change webhook to the new url: {webhook_url}"
 
     @staticmethod
-    def error(bot, update, error):
-        """Log Errors caused by Updates."""
-        logger.warning('Update "%s" caused error "%s"', update, error)
+    def error(update, context):
+        logger.warning('Update "%s" caused error "%s"', update, context.error)
 
 
 # This instance should be used to access bot features directly.

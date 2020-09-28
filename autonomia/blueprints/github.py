@@ -1,8 +1,6 @@
 import logging
 
-from flask import Blueprint, abort
-from flask import current_app as app
-from flask import request
+from flask import Blueprint, abort, current_app as app, request
 
 from autonomia.telegram_flask import telegram_flask
 

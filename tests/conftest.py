@@ -2,6 +2,7 @@ import os
 
 import pytest
 from telegram import Bot, Chat, Message, Update, User
+from telegram.ext import CallbackContext, Dispatcher
 
 from .settings_test import API_TOKEN
 
@@ -9,6 +10,11 @@ TEST_PATH = os.path.dirname(os.path.realpath(__file__))
 if "FLASK_ENV" in os.environ:
     del os.environ["FLASK_ENV"]
 os.environ["SETTINGS_FILE"] = os.path.join(TEST_PATH, "settings_test.py")
+
+
+@pytest.fixture
+def context(bot):
+    return CallbackContext(Dispatcher(bot, None, workers=0, use_context=True))
 
 
 @pytest.fixture(scope="session")

@@ -9,20 +9,28 @@ logger = logging.getLogger(__name__)
 
 
 class TelegramFlask:
-    def __init__(self, app=None):
+    def __init__(self, app=None, persistence=None):
         self.app = app
+        self.persistence = persistence
+        self.bot = None
+        self.dispatcher = None
         if app is not None:
-            self.init_app(app)
+            self.init_app(app, persistence)
 
-    def init_app(self, app):
-        self.create_bot(app)
+    def init_app(self, app, persistence=None):
+        self.create_bot(app, persistence)
         app.extensions["telegram"] = self
 
-    def create_bot(self, app):
+    def create_bot(self, app, persistence):
+        self.app = app
+        self.persistence = persistence
+
         token = app.config.get("API_TOKEN")
         autodiscovery(app.config.get("APPS", []))
         self.bot = telegram.Bot(token=token)
-        self.dispatcher = Dispatcher(self.bot, None, workers=0, use_context=True)
+        self.dispatcher = Dispatcher(
+            self.bot, None, workers=0, use_context=True, persistence=self.persistence
+        )
         for handler in get_handlers():
             self.dispatcher.add_handler(handler)
         # log all errors
@@ -52,7 +60,7 @@ class TelegramFlask:
 
     @staticmethod
     def error(update, context):
-        logger.warning('Update "%s" caused error "%s"', update, context.error)
+        raise context.error
 
 
 # This instance should be used to access bot features directly.

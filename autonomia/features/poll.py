@@ -19,6 +19,7 @@ class Poll:
         self.total = 0
         self.choices = []
         self.votes = {}
+        self.users = {}
 
     def add_choice(self, text):
         if text in self.choices:
@@ -30,13 +31,15 @@ class Poll:
         if choice < 0 or choice >= len(self.choices):
             raise ValueError("Invalid choice")
 
-        if user in self.votes:
-            if choice == self.votes[user]:
+        user_id = str(user.id)
+        self.users[user_id] = user.username
+        if user_id in self.votes:
+            if choice == self.votes[user_id]:
                 raise AlreadyVotedError("You already voted on this choice")
 
-            self.votes[user] = choice
+            self.votes[user_id] = choice
         else:
-            self.votes[user] = choice
+            self.votes[user_id] = choice
             self.total += 1
 
     @property
@@ -64,8 +67,8 @@ class Poll:
 
     def choices_as_str(self):
         who_votes = defaultdict(list)
-        for user, choice_id in self.votes.items():
-            who_votes[choice_id].append(user.username)
+        for user_id, choice_id in self.votes.items():
+            who_votes[choice_id].append(self.users[user_id])
         out = ""
         for choice_id, choice in enumerate(self.choices):
             out += f"{choice_id}. {choice} ({self.votes_count[choice_id]})\n"
@@ -84,6 +87,24 @@ class Poll:
             out += f"\n{result}: {winners} - {number_of_votes}({percentage:.2f}%)"
         return out
 
+    def to_dict(self):
+        return {
+            "question": self.question,
+            "total": self.total,
+            "choices": self.choices,
+            "votes": self.votes,
+            "users": self.users,
+        }
+
+    @classmethod
+    def from_dict(cls, data):
+        poll = cls(data["question"])
+        poll.total = data["total"]
+        poll.choices = data["choices"]
+        poll.votes = data["votes"]
+        poll.users = data["users"]
+        return poll
+
 
 def poll_new(update: Update, context: CallbackContext):
     question = " ".join(context.args)
@@ -91,7 +112,7 @@ def poll_new(update: Update, context: CallbackContext):
         update.message.reply_text("Use: /poll <text>")
         return
 
-    context.bot.poll = Poll(question)
+    context.chat_data["poll"] = Poll(question).to_dict()
     update.message.reply_text(
         f"Starting new poll.\n"
         f"Question: {question}\n"
@@ -107,28 +128,35 @@ def poll_choice(update: Update, context: CallbackContext):
         update.message.reply_text("Use: /choice <text>")
         return CHOICES
 
+    poll = Poll.from_dict(context.chat_data["poll"])
+
     try:
-        context.bot.poll.add_choice(choice)
+        poll.add_choice(choice)
     except ValueError as e:
         update.message.reply_text(str(e))
+
+    context.chat_data["poll"] = poll.to_dict()
     return CHOICES
 
 
 def poll_start_voting(update: Update, context: CallbackContext):
-    if len(context.bot.poll.choices) < 2:
+    poll = Poll.from_dict(context.chat_data["poll"])
+    if len(poll.choices) < 2:
         update.message.reply_text("Please, add at least 2 choices")
         return CHOICES
 
-    update.message.reply_text(f"{context.bot.poll}\nChoose an option: /v <choice_id>")
+    update.message.reply_text(f"{poll}\nChoose an option: /v <choice_id>")
     return VOTING
 
 
 def poll_vote(update: Update, context: CallbackContext):
+    poll = Poll.from_dict(context.chat_data["poll"])
     try:
         choice = int(" ".join(context.args))
-        context.bot.poll.vote(update.message.from_user, choice)
+        poll.vote(update.message.from_user, choice)
+        context.chat_data["poll"] = poll.to_dict()
     except ValueError:
-        choices = context.bot.poll.choices_as_str()
+        choices = poll.choices_as_str()
         update.message.reply_text(f"Invalid option, please choose:\n{choices}")
     except AlreadyVotedError as e:
         update.message.reply_text(str(e))
@@ -136,19 +164,21 @@ def poll_vote(update: Update, context: CallbackContext):
 
 
 def poll_result(update: Update, context: CallbackContext):
-    update.message.reply_text(str(context.bot.poll))
+    poll = Poll.from_dict(context.chat_data["poll"])
+    update.message.reply_text(str(poll))
     return VOTING
 
 
 def poll_finish(update: Update, context: CallbackContext):
-    update.message.reply_text(f"Poll finished!\n{context.bot.poll}")
-    context.bot.poll = None
+    poll = Poll.from_dict(context.chat_data["poll"])
+    update.message.reply_text(f"Poll finished!\n{poll}")
+    del context.chat_data["poll"]
     return ConversationHandler.END
 
 
 def poll_cancel(update: Update, context: CallbackContext):
     update.message.reply_text("Poll cancelled!")
-    context.bot.poll = None
+    del context.chat_data["poll"]
     return ConversationHandler.END
 
 
@@ -170,4 +200,6 @@ def poll_factory():
         ],
     }
     fallbacks = [CommandHandler("poll_cancel", poll_cancel)]
-    return ConversationHandler(entry_points, states, fallbacks, per_user=False)
+    return ConversationHandler(
+        entry_points, states, fallbacks, per_user=False, persistent=True, name="poll"
+    )

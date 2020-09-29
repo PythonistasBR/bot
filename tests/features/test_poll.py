@@ -14,6 +14,7 @@ class TestBuildPoll:
         assert p.total == 0
         assert p.choices == []
         assert p.votes == {}
+        assert p.users == {}
 
     def test_add_choice(self):
         p = poll.Poll("Vai ter dojo?")
@@ -32,14 +33,17 @@ class TestBuildPoll:
 
 class TestVotingPoll:
     def test_vote(self, user):
+        user_id = str(user.id)
         p = poll.Poll("Vai ter dojo?")
         p.add_choice("Sim")
         p.add_choice("Não")
         p.vote(user, 0)
         assert len(p.votes) == p.total == 1
-        assert p.votes[user] == 0
+        assert p.votes[user_id] == 0
+        assert p.users[user_id] == "alanturing"
 
     def test_vote_in_the_same_choice(self, user):
+        user_id = str(user.id)
         p = poll.Poll("Vai ter dojo?")
         p.add_choice("Sim")
         p.add_choice("Não")
@@ -48,16 +52,17 @@ class TestVotingPoll:
             p.vote(user, 0)
         assert str(excinfo.value) == "You already voted on this choice"
         assert len(p.votes) == p.total == 1
-        assert p.votes[user] == 0
+        assert p.votes[user_id] == 0
 
     def test_vote_changing_vote(self, user):
+        user_id = str(user.id)
         p = poll.Poll("Vai ter dojo?")
         p.add_choice("Sim")
         p.add_choice("Não")
         p.vote(user, 0)
         p.vote(user, 1)
         assert len(p.votes) == p.total == 1
-        assert p.votes[user] == 1
+        assert p.votes[user_id] == 1
 
     def test_vote_invalid_option(self, user):
         p = poll.Poll("Vai ter dojo?")
@@ -145,12 +150,12 @@ def test_poll_new_without_question(update, context):
         m.assert_called_with("Use: /poll <text>")
 
 
-def test_poll_new(update, context):
-    with patch.object(update.message, "reply_text") as m:
-        context.args = ["Vai", "ter", "dojo?"]
-        next_state = poll.poll_new(update, context)
+def test_poll_new(chat_update, chat_context):
+    with patch.object(chat_update.message, "reply_text") as m:
+        chat_context.args = ["Vai", "ter", "dojo?"]
+        next_state = poll.poll_new(chat_update, chat_context)
         assert next_state == poll.CHOICES
-        assert context.bot.poll.question == "Vai ter dojo?"
+        assert chat_context.chat_data["poll"]["question"] == "Vai ter dojo?"
         m.assert_called_with(
             "Starting new poll.\n"
             "Question: Vai ter dojo?\n"
@@ -159,43 +164,44 @@ def test_poll_new(update, context):
         )
 
 
-def test_poll_choice_without_text(update, context):
-    context.bot.poll = poll.Poll("Vai ter dojo?")
-    with patch.object(update.message, "reply_text") as m:
-        context.args = []
-        next_state = poll.poll_choice(update, context)
+def test_poll_choice_without_text(chat_update, chat_context):
+    chat_context.chat_data["poll"] = poll.Poll("Vai ter dojo?").to_dict()
+    with patch.object(chat_update.message, "reply_text") as m:
+        chat_context.args = []
+        next_state = poll.poll_choice(chat_update, chat_context)
         m.assert_called_with("Use: /choice <text>")
         assert next_state == poll.CHOICES
 
 
-def test_poll_choice_with_text(update, context):
-    context.bot.poll = poll.Poll("Vai ter dojo?")
-    context.args = ["Sim"]
-    next_state = poll.poll_choice(update, context)
-    assert context.bot.poll.choices == ["Sim"]
+def test_poll_choice_with_text(chat_update, chat_context):
+    chat_context.chat_data["poll"] = poll.Poll("Vai ter dojo?").to_dict()
+    chat_context.args = ["Sim"]
+    next_state = poll.poll_choice(chat_update, chat_context)
+    assert chat_context.chat_data["poll"]["choices"] == ["Sim"]
     assert next_state == poll.CHOICES
 
 
-def test_poll_choice_with_existing_choice(update, context):
-    context.bot.poll = poll.Poll("Vai ter dojo?")
-    context.args = ["Sim"]
-    next_state = poll.poll_choice(update, context)
+def test_poll_choice_with_existing_choice(chat_update, chat_context):
+    chat_context.chat_data["poll"] = poll.Poll("Vai ter dojo?").to_dict()
+    chat_context.args = ["Sim"]
+    next_state = poll.poll_choice(chat_update, chat_context)
     assert next_state == poll.CHOICES
-    assert context.bot.poll.choices == ["Sim"]
-    with patch.object(update.message, "reply_text") as m:
-        context.args = ["Sim"]
-        next_state = poll.poll_choice(update, context)
+    assert chat_context.chat_data["poll"]["choices"] == ["Sim"]
+    with patch.object(chat_update.message, "reply_text") as m:
+        chat_context.args = ["Sim"]
+        next_state = poll.poll_choice(chat_update, chat_context)
         assert next_state == poll.CHOICES
-        assert context.bot.poll.choices == ["Sim"]
+        assert chat_context.chat_data["poll"]["choices"] == ["Sim"]
         m.assert_called_with("Sim was already added")
 
 
-def test_start_voting_poll(update, context):
-    context.bot.poll = poll.Poll("Vai ter dojo?")
-    context.bot.poll.add_choice("Sim")
-    context.bot.poll.add_choice("Não")
-    with patch.object(update.message, "reply_text") as m:
-        next_state = poll.poll_start_voting(update, context)
+def test_start_voting_poll(chat_update, chat_context):
+    p = poll.Poll("Vai ter dojo?")
+    p.add_choice("Sim")
+    p.add_choice("Não")
+    chat_context.chat_data["poll"] = p.to_dict()
+    with patch.object(chat_update.message, "reply_text") as m:
+        next_state = poll.poll_start_voting(chat_update, chat_context)
         assert next_state == poll.VOTING
         expected = (
             "Question: Vai ter dojo?\n"
@@ -206,57 +212,65 @@ def test_start_voting_poll(update, context):
         m.assert_called_with(expected)
 
 
-def test_start_voting_poll_without_enough_choices(update, context):
-    context.bot.poll = poll.Poll("Vai ter dojo?")
-    context.bot.poll.add_choice("Sim")
-    with patch.object(update.message, "reply_text") as m:
-        next_state = poll.poll_start_voting(update, context)
+def test_start_voting_poll_without_enough_choices(chat_update, chat_context):
+    p = poll.Poll("Vai ter dojo?")
+    p.add_choice("Sim")
+    chat_context.chat_data["poll"] = p.to_dict()
+    with patch.object(chat_update.message, "reply_text") as m:
+        next_state = poll.poll_start_voting(chat_update, chat_context)
         assert next_state == poll.CHOICES
         m.assert_called_with("Please, add at least 2 choices")
 
 
-def test_voting_correct_choice(update, context):
-    context.bot.poll = poll.Poll("Vai ter dojo?")
-    context.bot.poll.add_choice("Sim")
-    context.bot.poll.add_choice("Não")
-    context.args = ["1"]
-    next_state = poll.poll_vote(update, context)
+def test_voting_correct_choice(chat_update, chat_context):
+    p = poll.Poll("Vai ter dojo?")
+    p.add_choice("Sim")
+    p.add_choice("Não")
+    chat_context.args = ["1"]
+    chat_context.chat_data["poll"] = p.to_dict()
+    next_state = poll.poll_vote(chat_update, chat_context)
     assert next_state == poll.VOTING
-    assert context.bot.poll.votes[update.message.from_user] == 1
+    chat_poll = chat_context.chat_data["poll"]
+    assert chat_poll["votes"][str(chat_update.message.from_user.id)] == 1
 
 
-def test_voting_wrong_choice(update, context):
-    context.bot.poll = poll.Poll("Vai ter dojo?")
-    context.bot.poll.add_choice("Sim")
-    context.bot.poll.add_choice("Não")
-    with patch.object(update.message, "reply_text") as m:
-        context.args = ["3"]
-        next_state = poll.poll_vote(update, context)
+def test_voting_wrong_choice(chat_update, chat_context):
+    p = poll.Poll("Vai ter dojo?")
+    p.add_choice("Sim")
+    p.add_choice("Não")
+    chat_context.chat_data["poll"] = p.to_dict()
+    with patch.object(chat_update.message, "reply_text") as m:
+        chat_context.args = ["3"]
+        next_state = poll.poll_vote(chat_update, chat_context)
         assert next_state == poll.VOTING
         m.assert_called_with("Invalid option, please choose:\n0. Sim (0)\n1. Não (0)\n")
 
 
-def test_voting_same_choice(update, context):
-    context.bot.poll = poll.Poll("Vai ter dojo?")
-    context.bot.poll.add_choice("Sim")
-    context.bot.poll.add_choice("Não")
-    context.args = ["1"]
-    next_state = poll.poll_vote(update, context)
+def test_voting_same_choice(chat_update, chat_context):
+    p = poll.Poll("Vai ter dojo?")
+    p.add_choice("Sim")
+    p.add_choice("Não")
+    chat_context.args = ["1"]
+    chat_context.chat_data["poll"] = p.to_dict()
+
+    next_state = poll.poll_vote(chat_update, chat_context)
     assert next_state == poll.VOTING
-    with patch.object(update.message, "reply_text") as m:
-        context.args = ["1"]
-        next_state = poll.poll_vote(update, context)
+    with patch.object(chat_update.message, "reply_text") as m:
+        chat_context.args = ["1"]
+        next_state = poll.poll_vote(chat_update, chat_context)
         assert next_state == poll.VOTING
         m.assert_called_with("You already voted on this choice")
 
 
-def test_result(update, context, user):
-    context.bot.poll = poll.Poll("Vai ter dojo?")
-    context.bot.poll.add_choice("Sim")
-    context.bot.poll.add_choice("Não")
-    context.bot.poll.vote(user, 0)
-    with patch.object(update.message, "reply_text") as m:
-        next_state = poll.poll_result(update, context)
+def test_result(chat_update, chat_context, user):
+    p = poll.Poll("Vai ter dojo?")
+    p.add_choice("Sim")
+    p.add_choice("Não")
+    p.vote(user, 0)
+    chat_context.chat_data["poll"] = p.to_dict()
+
+    with patch.object(chat_update.message, "reply_text") as m:
+        next_state = poll.poll_result(chat_update, chat_context)
         assert next_state == poll.VOTING
         expected = (
             "Question: Vai ter dojo?\n"
@@ -268,14 +282,16 @@ def test_result(update, context, user):
         m.assert_called_with(expected)
 
 
-def test_finish(update, context, user):
-    context.bot.poll = poll.Poll("Vai ter dojo?")
-    context.bot.poll.add_choice("Sim")
-    context.bot.poll.add_choice("Não")
-    context.bot.poll.vote(user, 0)
-    with patch.object(update.message, "reply_text") as m:
-        next_state = poll.poll_finish(update, context)
-        assert context.bot.poll is None
+def test_finish(chat_update, chat_context, user):
+    p = poll.Poll("Vai ter dojo?")
+    p.add_choice("Sim")
+    p.add_choice("Não")
+    p.vote(user, 0)
+    chat_context.chat_data["poll"] = p.to_dict()
+
+    with patch.object(chat_update.message, "reply_text") as m:
+        next_state = poll.poll_finish(chat_update, chat_context)
+        assert chat_context.chat_data.get("poll") is None
         assert next_state == ConversationHandler.END
         expected = (
             "Poll finished!\n"
@@ -288,11 +304,12 @@ def test_finish(update, context, user):
         m.assert_called_with(expected)
 
 
-def test_poll_cancel(update, context):
-    context.bot.poll = poll.Poll("Vai ter dojo?")
-    with patch.object(update.message, "reply_text") as m:
-        next_state = poll.poll_cancel(update, context)
-        assert context.bot.poll is None
+def test_poll_cancel(chat_update, chat_context):
+    p = poll.Poll("Vai ter dojo?")
+    chat_context.chat_data["poll"] = p.to_dict()
+    with patch.object(chat_update.message, "reply_text") as m:
+        next_state = poll.poll_cancel(chat_update, chat_context)
+        assert chat_context.chat_data.get("poll") is None
         assert next_state == ConversationHandler.END
         m.assert_called_with("Poll cancelled!")
 

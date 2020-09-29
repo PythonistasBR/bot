@@ -1,8 +1,8 @@
 from unittest.mock import Mock, patch
 
+import pytest
 from telegram.ext import CommandHandler
 
-from autonomia import telegram_flask
 from autonomia.telegram_flask import TelegramFlask
 
 
@@ -70,7 +70,9 @@ def test_setup_webhook_call_on_failure_to_set_webhook(telegram_flask_bot, flask_
 
 
 def test_error_handler(telegram_flask_bot, update, context):
-    with patch.object(telegram_flask.logger, "warning") as log_mock:
-        context.error = ValueError("bug bug bug!")
+    try:
+        raise ValueError("bug bug bug!")
+    except Exception as e:
+        context.error = e
+    with pytest.raises(ValueError):
         telegram_flask_bot.error(update, context)
-        log_mock.assert_called_once()

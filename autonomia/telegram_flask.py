@@ -52,7 +52,7 @@ class TelegramFlask:
 
     @staticmethod
     def error(update, context):
-        logger.warning('Update "%s" caused error "%s"', update, context.error)
+        raise context.error
 
 
 # This instance should be used to access bot features directly.

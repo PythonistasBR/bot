@@ -2,7 +2,7 @@ import os
 
 import pytest
 from telegram import Bot, Chat, Message, Update, User
-from telegram.ext import CallbackContext, Dispatcher
+from telegram.ext import CallbackContext, DictPersistence, Dispatcher
 
 from .settings_test import API_TOKEN
 
@@ -13,8 +13,15 @@ os.environ["SETTINGS_FILE"] = os.path.join(TEST_PATH, "settings_test.py")
 
 
 @pytest.fixture
-def context(bot):
-    return CallbackContext(Dispatcher(bot, None, workers=0, use_context=True))
+def dispatcher_mock(bot, persistence_mock):
+    return Dispatcher(
+        bot, None, workers=0, use_context=True, persistence=persistence_mock
+    )
+
+
+@pytest.fixture
+def persistence_mock():
+    return DictPersistence()
 
 
 @pytest.fixture(scope="session")
@@ -40,7 +47,7 @@ def update(message):
 
 
 @pytest.fixture
-def chat_message():
+def chat_message(user):
     chat = Chat(
         123993705, "Filhos do Henrique", "group", all_members_are_administrators=True
     )
@@ -50,6 +57,16 @@ def chat_message():
 @pytest.fixture
 def chat_update(chat_message):
     return Update(update_id=2, message=chat_message)
+
+
+@pytest.fixture
+def context(bot, update, dispatcher_mock):
+    return CallbackContext.from_update(update, dispatcher_mock)
+
+
+@pytest.fixture
+def chat_context(bot, chat_update, dispatcher_mock):
+    return CallbackContext.from_update(chat_update, dispatcher_mock)
 
 
 @pytest.fixture

@@ -73,7 +73,7 @@ def cmd_larissa(update: Update, context: CallbackContext):
 @bot_handler
 def larissa_factory():
     return MessageHandler(
-        Filters.regex(r".*\b([Hh][Bb]|[[hH].nr.qu.[\s]*[bB].st.s)\b.*"), cmd_larissa
+        Filters.regex(r".*\b([Hh][Bb]|[\[hH\].nr.qu.[\s]*[bB].st.s)\b.*"), cmd_larissa
     )
 
 

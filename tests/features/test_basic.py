@@ -100,7 +100,7 @@ def test_larissa_factory():
     handler = basic.larissa_factory()
     assert isinstance(handler, MessageHandler)
     assert handler.filters.base_filter.pattern == re.compile(
-        r".*\b([Hh][Bb]|[[hH].nr.qu.[\s]*[bB].st.s)\b.*"
+        r".*\b([Hh][Bb]|[\[hH\].nr.qu.[\s]*[bB].st.s)\b.*"
     )
     assert handler.callback == basic.cmd_larissa
 

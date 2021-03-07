@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock, patch
 
 from autonomia import core
 
@@ -59,7 +59,7 @@ def test_get_handlers():
 
     @dataclass
     class FakeHandler:
-        name: str = ''
+        name: str = ""
 
     @core.bot_handler
     def example_factory():

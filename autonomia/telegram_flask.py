@@ -51,7 +51,6 @@ class TelegramFlask:
                 raise ValueError("bot_data must be of type dict")
         for handler in get_handlers():
             if isinstance(handler, ConversationHandler) and handler.persistent:
-                a = self.persistence.get_conversations(handler.name)
                 if not self.persistence:
                     raise ValueError(
                         "Conversationhandler {} can not be persistent if dispatcher "

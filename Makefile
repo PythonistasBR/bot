@@ -15,11 +15,13 @@ coverage: ## Run test and create HTML coverage report
 	@pipenv run py.test --cov=autonomia --cov-report html tests/
 
 fmt: ## Format code using iSort and Black
-	@pipenv run isort --atomic .
+	@pipenv run isort .
 	@pipenv run black .
 
 lint: ## Run flake8
 	@pipenv run flake8 .
+	@pipenv run black --check .
+	@pipenv run isort --check-only .
 
 update_webhook: ## Update telegram webhook config from settings
 	@pipenv run flask update_webhook

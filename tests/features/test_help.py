@@ -5,15 +5,15 @@ from telegram.ext import CommandHandler
 from autonomia.features import help
 
 
-@patch("autonomia.features.help.get_lazy_handlers")
-def test_cmd_help(mock_get_lazy_handler, update, context):
+@patch("autonomia.features.help.get_handler_factories")
+def test_cmd_help(mock_get_handler_factories, update, context):
     def example_factory():
         """/example - testing the help command"""
 
     def other_factory():
         """/other - testing the help command"""
 
-    mock_get_lazy_handler.return_value = [example_factory, other_factory]
+    mock_get_handler_factories.return_value = [example_factory, other_factory]
 
     with patch.object(context.bot, "send_message") as s:
         help.cmd_help(update, context)

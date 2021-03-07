@@ -1,9 +1,10 @@
 import logging
+from collections import defaultdict
 
 import telegram
-from telegram.ext import Dispatcher
+from telegram.ext import ConversationHandler, Dispatcher
 
-from autonomia.core import autodiscovery, get_handlers
+from autonomia.core import autodiscovery, get_handlers, setup_handlers
 
 logger = logging.getLogger(__name__)
 
@@ -31,10 +32,33 @@ class TelegramFlask:
         self.dispatcher = Dispatcher(
             self.bot, None, workers=0, use_context=True, persistence=self.persistence
         )
-        for handler in get_handlers():
-            self.dispatcher.add_handler(handler)
+        setup_handlers(self.dispatcher)
         # log all errors
         self.dispatcher.add_error_handler(self.error)
+
+    def reload_state(self):
+        if self.persistence.store_user_data:
+            self.dispatcher.user_data = self.persistence.get_user_data()
+            if not isinstance(self.dispatcher.user_data, defaultdict):
+                raise ValueError("user_data must be of type defaultdict")
+        if self.persistence.store_chat_data:
+            self.dispatcher.chat_data = self.persistence.get_chat_data()
+            if not isinstance(self.dispatcher.chat_data, defaultdict):
+                raise ValueError("chat_data must be of type defaultdict")
+        if self.persistence.store_bot_data:
+            self.dispatcher.bot_data = self.persistence.get_bot_data()
+            if not isinstance(self.dispatcher.bot_data, dict):
+                raise ValueError("bot_data must be of type dict")
+        for handler in get_handlers():
+            if isinstance(handler, ConversationHandler) and handler.persistent:
+                a = self.persistence.get_conversations(handler.name)
+                if not self.persistence:
+                    raise ValueError(
+                        "Conversationhandler {} can not be persistent if dispatcher "
+                        "has no persistence".format(handler.name)
+                    )
+                handler.persistence = self.persistence
+                handler.conversations = self.persistence.get_conversations(handler.name)
 
     def setup_webhook(self, app):
         domain = app.config.get("WEBHOOK_DOMAIN")

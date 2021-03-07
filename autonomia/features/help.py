@@ -1,12 +1,12 @@
 from telegram.ext import CallbackContext, CommandHandler
 from telegram.update import Update
 
-from autonomia.core import bot_handler, get_lazy_handlers
+from autonomia.core import bot_handler, get_handler_factories
 
 
 def cmd_help(update: Update, context: CallbackContext):
     out = "Autonomia Bot commands:\n"
-    for handler in get_lazy_handlers():
+    for handler in get_handler_factories():
         doc = handler.__doc__
         if doc:
             out += f"{doc.strip()}\n"

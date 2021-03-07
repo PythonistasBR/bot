@@ -7,8 +7,9 @@ from autonomia.telegram_flask import TelegramFlask
 
 
 @patch("autonomia.telegram_flask.autodiscovery")
+@patch("autonomia.telegram_flask.setup_handlers")
 @patch("autonomia.telegram_flask.get_handlers")
-def test_main(mock_get_handler, autodiscovery_mock, flask_app):
+def test_main(mock_get_handler, mock_setup_handlers, autodiscovery_mock, flask_app):
     def example_cmd():
         print("ok")
 
@@ -18,6 +19,7 @@ def test_main(mock_get_handler, autodiscovery_mock, flask_app):
     assert hasattr(new_telegram_flask, "bot")
     assert hasattr(new_telegram_flask, "dispatcher")
     autodiscovery_mock.assert_called_once()
+    mock_setup_handlers.assert_called_once_with(new_telegram_flask.dispatcher)
 
 
 def test_setup_webhook_call_when_has_no_change(telegram_flask_bot, flask_app):

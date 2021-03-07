@@ -22,6 +22,7 @@ flask-redis = "*"
 jinja2 = "*"
 pyyaml = "*"
 sentry-sdk = {extras = ["flask"],version = "*"}
+newrelic = "*"
 
 [requires]
 python_version = "3.9"

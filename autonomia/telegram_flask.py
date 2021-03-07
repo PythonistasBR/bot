@@ -25,7 +25,7 @@ class TelegramFlask:
 
     def create_bot(self, app, persistence):
         self.app = app
-        self.persistence = persistence
+        self.persistence = persistence or DictPersistence()
 
         token = app.config.get("API_TOKEN")
         autodiscovery(app.config.get("APPS", []))

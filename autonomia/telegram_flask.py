@@ -2,7 +2,8 @@ import logging
 from collections import defaultdict
 
 import telegram
-from telegram.ext import ConversationHandler, Dispatcher
+from telegram import Update
+from telegram.ext import ConversationHandler, DictPersistence, Dispatcher
 
 from autonomia.core import autodiscovery, get_handlers, setup_handlers
 
@@ -12,7 +13,7 @@ logger = logging.getLogger(__name__)
 class TelegramFlask:
     def __init__(self, app=None, persistence=None):
         self.app = app
-        self.persistence = persistence
+        self.persistence = persistence or DictPersistence()
         self.bot = None
         self.dispatcher = None
         if app is not None:
@@ -35,6 +36,12 @@ class TelegramFlask:
         setup_handlers(self.dispatcher)
         # log all errors
         self.dispatcher.add_error_handler(self.error)
+
+    def process_update(self, request):
+        self.reload_state()
+        update = Update.de_json(request.get_json(force=True), self.bot)
+        logger.debug("Received Update with ID %d on Webhook" % update.update_id)
+        self.dispatcher.process_update(update)
 
     def reload_state(self):
         if self.persistence.store_user_data:
@@ -66,6 +73,7 @@ class TelegramFlask:
         try:
             response = self.bot.get_webhook_info()
         except Exception:
+            logger.error("Unable to get telegram webhook", exc_info=True)
             return False, "Unable to get telegram webhook"
 
         if response.url == webhook_url:
@@ -74,6 +82,7 @@ class TelegramFlask:
         try:
             success = self.bot.set_webhook(webhook_url)
         except Exception:
+            logger.error("Unable to get telegram webhook", exc_info=True)
             return False, "Unable to set telegram webhook"
 
         if not success:

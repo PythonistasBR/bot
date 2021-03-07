@@ -1,19 +1,28 @@
+from dataclasses import dataclass
 from unittest.mock import patch
 
 from telegram.ext import CommandHandler
 
+from autonomia import core
 from autonomia.features import help
 
 
-@patch("autonomia.features.help.get_handler_factories")
-def test_cmd_help(mock_get_handler_factories, update, context):
+def test_cmd_help(update, context):
+    core.BotRouter.clean()
+
+    @dataclass
+    class FakeHandler:
+        name: str = ""
+
+    @core.bot_handler
     def example_factory():
         """/example - testing the help command"""
+        return FakeHandler("example_factory")
 
-    def other_factory():
+    @core.bot_handler
+    def example_factory2():
         """/other - testing the help command"""
-
-    mock_get_handler_factories.return_value = [example_factory, other_factory]
+        return FakeHandler("example_factory2")
 
     with patch.object(context.bot, "send_message") as s:
         help.cmd_help(update, context)

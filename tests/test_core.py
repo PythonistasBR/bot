@@ -35,11 +35,13 @@ def test_bot_handler_decorator():
     def example_factory2():
         pass
 
-    assert example_factory in core.get_handler_factories()
-    assert example_factory2 in core.get_handler_factories()
+    routes = [r.handler_factory for r in core.get_routes()]
+
+    assert example_factory in routes
+    assert example_factory2 in routes
 
 
-def test_get_lazy_handlers():
+def test_get_routes():
     core.BotRouter.clean()
 
     @core.bot_handler
@@ -50,8 +52,11 @@ def test_get_lazy_handlers():
     def example_factory2():
         pass
 
-    handlers = list(core.get_handler_factories())
-    assert handlers == [example_factory, example_factory2]
+    handlers = list(core.get_routes())
+    assert handlers == [
+        core.BotRoute(handler_factory=example_factory, docs=None),
+        core.BotRoute(handler_factory=example_factory2, docs=None),
+    ]
 
 
 def test_get_handlers():
@@ -61,14 +66,25 @@ def test_get_handlers():
     class FakeHandler:
         name: str = ""
 
+    example1_instance = None
+
     @core.bot_handler
     def example_factory():
-        return FakeHandler("example_factory")
+        nonlocal example1_instance
+        example1_instance = FakeHandler("example_factory")
+        return example1_instance
+
+    example2_instance = None
 
     @core.bot_handler
     def example_factory2():
-        return FakeHandler("example_factory2")
+        nonlocal example2_instance
+        example2_instance = FakeHandler("example_factory2")
+        return example2_instance
 
-    core.BotRouter.setup_handlers(MagicMock())
+    dispatcher_mock = MagicMock()
+    core.BotRouter.setup_handlers(dispatcher_mock)
     handlers = list(core.get_handlers())
-    assert handlers == [FakeHandler("example_factory"), FakeHandler("example_factory2")]
+    assert handlers == [example1_instance, example2_instance]
+    assert [id(h) for h in handlers] == [id(example1_instance), id(example2_instance)]
+    assert dispatcher_mock.add_handler.call_count == 2

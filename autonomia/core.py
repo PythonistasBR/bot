@@ -1,39 +1,48 @@
 import logging
+from dataclasses import dataclass
 from importlib import import_module
+from typing import Callable, List, Optional
+
+from telegram.ext import Handler
 
 logger = logging.getLogger(__name__)
 
 
+@dataclass
+class BotRoute:
+    handler_factory: Callable
+    docs: Optional[str] = None
+    handler_instance: Optional[Handler] = None
+
+
 class BotRouter:
-    _HANDLERS = []
-    _HANDLER_FACTORIES = []
+    _HANDLERS: List[BotRoute] = []
 
     @classmethod
     def clean(cls):
         cls._HANDLERS = []
-        cls._HANDLER_FACTORIES = []
 
     @classmethod
     def bot_handler(cls, handler_factory):
-        cls._HANDLER_FACTORIES.append(handler_factory)
+        route = BotRoute(handler_factory=handler_factory, docs=handler_factory.__doc__)
+        cls._HANDLERS.append(route)
         return handler_factory
 
     @classmethod
     def setup_handlers(cls, dispatcher):
-        for handler_factory in cls._HANDLER_FACTORIES:
-            handler = handler_factory()
-            dispatcher.add_handler(handler)
-            cls._HANDLERS.append(handler)
+        for route in cls._HANDLERS:
+            route.handler_instance = route.handler_factory()
+            dispatcher.add_handler(route.handler_instance)
 
     @classmethod
     def get_handlers(cls):
-        for handler in cls._HANDLERS:
-            yield handler
+        for route in cls._HANDLERS:
+            yield route.handler_instance
 
     @classmethod
-    def get_handler_factories(cls):
-        for handler_factory in cls._HANDLER_FACTORIES:
-            yield handler_factory
+    def get_routes(cls):
+        for route in cls._HANDLERS:
+            yield route
 
 
 def autodiscovery(apps):
@@ -47,5 +56,5 @@ def autodiscovery(apps):
 
 bot_handler = BotRouter.bot_handler
 get_handlers = BotRouter.get_handlers
-get_handler_factories = BotRouter.get_handler_factories
+get_routes = BotRouter.get_routes
 setup_handlers = BotRouter.setup_handlers

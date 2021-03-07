@@ -1,14 +1,13 @@
 from telegram.ext import CallbackContext, CommandHandler
 from telegram.update import Update
 
-from autonomia.core import bot_handler, get_handler_factories
+from autonomia.core import bot_handler, get_routes
 
 
 def cmd_help(update: Update, context: CallbackContext):
     out = "Autonomia Bot commands:\n"
-    for handler in get_handler_factories():
-        doc = handler.__doc__
-        if doc:
+    for route in get_routes():
+        if doc := route.docs:
             out += f"{doc.strip()}\n"
     user = update.message.from_user
     context.bot.send_message(user.id, out)

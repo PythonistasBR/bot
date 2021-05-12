@@ -23,7 +23,7 @@ def create_app():  # pragma: no cover
         sentry_sdk.init(sentry_dsn, integrations=[FlaskIntegration()])
 
     persistence = None
-    if os.environ.get("REDIS_URL"):
+    if app.config["REDIS_URL"]:
         redis_store.init_app(app)
         persistence = TelegramRedisPersistence(
             redis_store, key_prefix=os.environ.get("PERSISTENCE_KEY_PREFIX", "")

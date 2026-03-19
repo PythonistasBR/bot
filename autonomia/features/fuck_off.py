@@ -3,7 +3,7 @@ from telegram.update import Update
 
 from autonomia.core import bot_handler
 
-FAAS_BASE_URL = "http://foaas.com/off"
+FAAS_BASE_URL = "http://foaas.io/off"
 
 
 def cmd_faas(update: Update, context: CallbackContext):

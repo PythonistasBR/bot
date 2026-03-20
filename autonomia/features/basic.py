@@ -98,8 +98,9 @@ def cmd_joke(update: Update, context: CallbackContext):
     Tell a random joke
     """
     try:
-        req = request.urlopen("http://api.icndb.com/jokes/random")
-        joke = parse.unquote(json.loads(req.read())["value"]["joke"])
+        req = request.Request(url="https://api.chucknorris.io/jokes/random", headers={'User-Agent': 'Mozilla/5.0'})
+        resp = request.urlopen(req).read()
+        joke = json.loads(parse.unquote(resp))["value"]
         update.message.reply_text(joke)
     except Exception:
         update.message.reply_text("To sem saco!")
